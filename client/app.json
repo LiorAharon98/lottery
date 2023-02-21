@@ -1,39 +1,56 @@
 {
   "expo": {
     "name": "lottery",
-    "slug": "lottery",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/lotorr-icon.jpg",
-    "userInterfaceStyle": "light",
-    "splash": {
-    "image" : "./assets/lottry-icon3.jpg",
-    "plugins": [
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "The app accesses your photos to let you share them with your friends."
-        }
-      ]
-    ]
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/292e68aa-3480-4c01-b697-6672a8d899fc"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "slug": "lottery",
+    "version": "1.0.2",
+    "orientation": "portrait",
+    "icon": "./assets/lottery-icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/lottery-background.png",
+      "plugins": [
+        [
+          "expo-build-properties",
+          {
+            "android": {
+              "enableProguardInReleaseBuilds": true
+            }
+          }
+        ],
+        [
+          "expo-image-picker",
+          {
+            "photosPermission": "The app accesses your photos to let you share them with your friends."
+          }
+        ]
+      ]
+    },
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "package": "com.liors.lottery.first.project",
+      "versionCode": 3,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/lottery-background.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "292e68aa-3480-4c01-b697-6672a8d899fc"
+      }
     }
   }
 }

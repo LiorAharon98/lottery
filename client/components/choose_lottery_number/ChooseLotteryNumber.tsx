@@ -2,53 +2,64 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
 interface props {
-  number: number;
+  numbers: number[];
   onSelectNumbers: (number: number) => void;
   selectedNumbers: { number: number }[];
 }
-const ChooseLotteryNumber = ({ number, onSelectNumbers, selectedNumbers }: props) => {
+const ChooseLotteryNumber = ({ numbers, onSelectNumbers, selectedNumbers }: props) => {
+
+
   return (
     <View style={styles.container}>
-
-    <Text
-      style={
-        selectedNumbers.filter((currentNumber) => currentNumber.number === number).length > 0
-        ? styles.selected_number
-        : styles.un_selected_number
-      }
-      onPress={onSelectNumbers.bind(this, number)}
-      >
-      {number}
-    </Text>
-      </View>
+      {numbers.map((number, index) => {
+        return (
+          <Text
+            key={index}
+            style={
+              selectedNumbers.filter((currentNumber) => currentNumber.number === number).length > 0
+                ? styles.selected_number
+                : styles.un_selected_number
+            }
+            onPress={onSelectNumbers.bind(this, number)}
+          >
+            {number}
+          </Text>
+        );
+      })}
+    </View>
   );
 };
 
 export default ChooseLotteryNumber;
 
 const styles = StyleSheet.create({
-  container : {
+  container: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    borderRadius: 10,
   },
   un_selected_number: {
-    textAlign : 'center',
+    
+    textAlign: "center",
     fontSize: 24,
     margin: 6,
-    padding: 4,
+    paddingTop: 7,
     borderWidth: 1,
     borderRadius: 20,
-    height :40,
-    width: 40,
+    height: 44,
+    width: 47,
   },
   selected_number: {
-    textAlign : 'center',
-    backgroundColor:'rgb(21, 165, 241)',
+    textAlign: "center",
+    backgroundColor: "rgb(21, 165, 241)",
     fontSize: 24,
+    paddingTop: 7,
     margin: 6,
-    padding: 4,
     borderWidth: 0,
-    color : 'white',
-    borderRadius : 20,
-    height : 40,
-    width: 40,
+    color: "white",
+    borderRadius: 20,
+    height: 44,
+    width: 47,
   },
 });

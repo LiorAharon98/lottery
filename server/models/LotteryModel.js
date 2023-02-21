@@ -1,8 +1,9 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose")
 const lotteryNumbers = new mongoose.Schema({
   lotteryNumbers: Array,
-  lotteryDate : String
+  lotteryDate : String,
+  id : Number
 });
 
 const LotteryModel = mongoose.model("lottery", lotteryNumbers);
-export = LotteryModel;
+module.exports = LotteryModel;

@@ -4,28 +4,31 @@ import Card from "../../components/card/Card";
 import { useDataProvider } from "../../context/Data";
 import SquareBox from "../../components/square_box/SquareBox";
 import UserProfileDetails from "../../components/user_profile_details/UserProfileDetails";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { ParamListBase, useNavigation } from "@react-navigation/native";
 const UserPage = () => {
-  const { logOut } = useDataProvider();
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+  const { logOut, changeLanguage } = useDataProvider();
+  const handlePressLogOut = () => {
+    navigation.navigate("home");
+    logOut();
+  };
 
   return (
-    <View>
       <Card>
         <UserProfileDetails />
         <View style={styles.container_box}>
           <View style={styles.container_box2}>
-            <SquareBox to={"/setting-page"}>setting</SquareBox>
-            <SquareBox to={"/lottery-page"}>lottery</SquareBox>
+            <SquareBox to={"/setting-page"}>{changeLanguage("setting")}</SquareBox>
+            <SquareBox to={"/lottery-page"}>{changeLanguage("lottery")}</SquareBox>
           </View>
           <View style={styles.container_box2}>
-            <SquareBox to={"/info-page"}>info</SquareBox>
-            <SquareBox onPress={logOut} to={"/home"}>
-              log out
-            </SquareBox>
+            <SquareBox to={"/odds-page"}>{changeLanguage("odds")}</SquareBox>
+            <SquareBox onPress={handlePressLogOut}>{changeLanguage("log out")}</SquareBox>
           </View>
         </View>
         <View></View>
       </Card>
-    </View>
   );
 };
 

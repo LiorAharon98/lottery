@@ -1,8 +1,8 @@
-import express = require("express");
-import LotteryModel = require("../models/LotteryModel");
+const express = require("express");
+const LotteryModel = require("../models/LotteryModel");
 const router = express.Router();
 const createNumbers = () => {
-  let tempArr: { number: number; special: boolean }[] = [];
+  let tempArr = [];
   let randomNumber;
   let specialNum = { number: Math.floor(Math.random() * 7) + 1, special: true };
   if (specialNum.number === 0) specialNum = { number: Math.floor(Math.random() * 7) + 1, special: true };
@@ -31,25 +31,27 @@ const currentDate = () => {
   const year = date.getFullYear();
   return `${day}-${month}-${year}`;
 };
-const createTime = async()=>{
+const createTime = async () => {
   const currentTime = currentDate();
   const currentDay = new Date().getDay();
   const findLottery = await LotteryModel.findOne({ lotteryDate: currentTime });
-  if (currentDay === 0 || (currentDay === 3 && !findLottery)) {
-    const lotteryNumbers = { lotteryNumbers: createNumbers(), lotteryDate: currentTime };
+
+  if (findLottery) return;
+  const allLottery = await LotteryModel.find({});
+  if (currentDay === 0 || currentDay === 3) {
+    const lotteryNumbers = { lotteryNumbers: createNumbers(), lotteryDate: currentTime, id: allLottery.length };
     await LotteryModel.create(lotteryNumbers);
   }
-
-}
-createTime()
+};
+createTime();
 router.get("/lottery-page", async (req, res) => {
   const lastLottery = await LotteryModel.findOne({}).sort({ _id: -1 });
 
   res.json(lastLottery);
 });
-router.get("/latest-lottery", async(req,res)=>{
-  const allLottery = await LotteryModel.find()
-res.json(allLottery)
-})
+router.get("/latest-lottery", async (req, res) => {
+  const allLottery = await LotteryModel.find({});
+  res.json(allLottery);
+});
 
-export default router;
+module.exports = router;

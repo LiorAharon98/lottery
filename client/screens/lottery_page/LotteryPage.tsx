@@ -1,27 +1,56 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useState, useCallback } from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState, useMemo } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import Number from "../../components/number/Number";
 import { useDataProvider } from "../../context/Data";
 import Button from "../../components/button/Button";
-import Modal from "../../components/modal/Modal";
-
+import ModalLottery from "../../components/modal_lottery/ModalLottery";
+import UserLotteryNumbers from "../../components/user_lottery_numbers/UserLotteryNumbers";
+import Timestamp from "../../components/timestamp/Timestamp";
 const LotteryPage = () => {
-  const { randomLotteryNumbers, compareNumbers, user, fetchLotteryNumbers } = useDataProvider();
-
-  let counter = compareNumbers(user.lotteryNumbers[0]).cnt;
-  let prize = compareNumbers(user.lotteryNumbers[0]).prize;
-
+  const { randomLotteryNumbers, compareNumbers, user, fetchLotteryNumbers, changeLanguage, userEarnedLottery } =
+    useDataProvider();
+  const [isWon, setIsWon] = useState<boolean>(false);
+  const countGuessAndPrizes: { counter: number; prize: number }[] = useMemo(() => {
+    let temp = [
+      {
+        counter: compareNumbers(user.lotteryNumbers[0][0]).cnt,
+        prize: compareNumbers(user.lotteryNumbers[0][0]).prize,
+      },
+      {
+        counter: compareNumbers(user.lotteryNumbers[0][1]).cnt,
+        prize: compareNumbers(user.lotteryNumbers[0][1]).prize,
+      },
+    ];
+    return temp;
+  }, [randomLotteryNumbers]);
   useEffect(() => {
     fetchLotteryNumbers();
   }, []);
+  useEffect(() => {
+    if (countGuessAndPrizes[0].counter !== 0 || countGuessAndPrizes[1].counter !== 0) {
+      setIsWon(true);
+      userEarnedLottery(user.username, countGuessAndPrizes[0].prize + countGuessAndPrizes[1].prize);
+    }
+  }, [randomLotteryNumbers]);
 
-  const handlePress = () => {};
+  const onModalToggle = (value: boolean) => {
+    setIsWon(value);
+  };
+
   return (
-    <View>
-      <Modal counter={counter} guessNumber={prize} />
-      <Text style={styles.number}>winning numbers!</Text>
-      <Text style={styles.number}>lottery date : {randomLotteryNumbers?.lotteryDate}</Text>
+    <ScrollView>
+      <ModalLottery
+        closeModal={onModalToggle.bind(this, false)}
+        isWon={isWon}
+        countGuessAndPrizes={countGuessAndPrizes}
+      />
+      <Timestamp />
+
+      <Text style={styles.number}>{changeLanguage("winning numbers")}!</Text>
+      <Text style={styles.number}>
+        {changeLanguage("lottery date")} : {randomLotteryNumbers?.lotteryDate}
+      </Text>
       <View style={styles.random_lottery_numbers_container}>
         {randomLotteryNumbers?.lotteryNumbers?.map((number: { number: number; special: boolean }, index: number) => (
           <Number isSpecial={number.special} key={index}>
@@ -31,24 +60,22 @@ const LotteryPage = () => {
       </View>
       <LinearGradient style={styles.main} colors={["lightblue", "rgb(68, 138, 255)"]}>
         <View style={styles.user_number_container}>
-          <Text style={styles.number}>your numbers!</Text>
-          <View style={styles.user_number}>
-            {user.lotteryNumbers[0].map((number: { number: number; special: boolean }, index: number) => {
-              return (
-                <Number isSpecial={number.special} key={index}>
-                  {number.number}
-                </Number>
-              );
-            })}
-          </View>
+          <Text style={styles.number}>{changeLanguage("your numbers")}!</Text>
+          <UserLotteryNumbers column={0} />
+
+          <UserLotteryNumbers column={1} />
         </View>
         <View style={styles.button_container}>
-          <Button onPress={handlePress}>compare</Button>
-          <Button onPress={handlePress}>info</Button>
+          <Button width={170} onPress={onModalToggle.bind(this, true)}>
+            {changeLanguage("compare")}
+          </Button>
+          <Button width={170} onPress={onModalToggle.bind(this, true)}>
+            {changeLanguage("info")}
+          </Button>
         </View>
         <View></View>
       </LinearGradient>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -63,7 +90,7 @@ const styles = StyleSheet.create({
     height: 120,
   },
   main: {
-    height: 650,
+    height: 500,
     alignItems: "center",
     justifyContent: "space-around",
   },
@@ -76,18 +103,12 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignItems: "center",
     justifyContent: "space-around",
-    height: 150,
+    height: 250,
     backgroundColor: "white",
     width: "100%",
   },
   number: {
     textAlign: "center",
     fontSize: 20,
-  },
-  user_number: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-    width: "90%",
   },
 });

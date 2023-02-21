@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View,Pressable } from "react-native";
 import Modal from "react-native-modal";
-import React,{useState,useEffect} from "react";
 import { GestureResponderEvent } from "react-native-modal/dist/types";
 import  Icon  from "react-native-vector-icons/AntDesign";
+import { useDataProvider } from "../../context/Data";
 
 interface props {
   prizeNumber: number;
@@ -11,7 +11,7 @@ interface props {
   closeModal: (e: GestureResponderEvent) => void;
 }
 const CreateModal = ({ prizeNumber, guessNumber, activateModal, closeModal }: props) => {
-
+const {changeLanguage} = useDataProvider()
   
   return (
     <Modal isVisible={activateModal}>
@@ -20,11 +20,10 @@ const CreateModal = ({ prizeNumber, guessNumber, activateModal, closeModal }: pr
       <View  style={styles.page_container}>
         <View style={styles.container}>
           <View style={styles.header}>
-            <Icon onPress={closeModal} name="close" size={25}/>
           </View>
-          <Text>congratulations</Text>
-          <Text>you guess {guessNumber} numbers</Text>
-          <Text>you won {prizeNumber}₪</Text>
+          <Text>{changeLanguage('congratulations')} !</Text>
+          <Text>{changeLanguage("you guess")} {guessNumber} {changeLanguage('numbers')}</Text>
+          <Text>{changeLanguage('you won')} {prizeNumber}₪</Text>
         </View>
       </View>
       </Pressable>
@@ -52,7 +51,6 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   header: {
-    borderRadius : 5,
     paddingTop: 8,
     paddingLeft: 5,
     backgroundColor: "rgb(66, 159, 255)",

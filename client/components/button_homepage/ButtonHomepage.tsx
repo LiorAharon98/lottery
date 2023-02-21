@@ -5,20 +5,19 @@ import { useDataProvider } from "../../context/Data";
 interface props {
   children: ReactNode;
   onPress: (event: GestureResponderEvent) => void;
-  width? : number
 }
-const Button = ({ children, onPress,width }: props) => {
+const ButtonHomepage = ({ children, onPress }: props) => {
   const {changeLanguage} = useDataProvider()
   return (
     <Pressable onPress={onPress}>
-      <LinearGradient style={[styles.container,{width : width ? width : 220}]} colors={["white", "white"]}>
+      <LinearGradient style={styles.container} colors={["lightblue", "rgb(68, 138, 255)"]}>
         <Text style={styles.text}>{changeLanguage(children)}</Text>
       </LinearGradient>
     </Pressable>
   );
 };
 
-export default Button;
+export default ButtonHomepage;
 
 const styles = StyleSheet.create({
   container: {
@@ -26,11 +25,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
 
     height: 50,
-    width: 220,
-    borderRadius: 15,
+    width: 180,
+    borderRadius: 10,
   },
   text: {
-    fontSize: 20,
-    color: "rgb(21, 165, 241)",
+    fontSize: 18,
+    color: "white",
   },
 });

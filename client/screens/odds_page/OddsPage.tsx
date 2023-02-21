@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const UserPage_menu = () => {
+const OddsPage = () => {
   return (
     <View>
-      <Text>UserPage_menu</Text>
+      <Text>OddsPage</Text>
     </View>
   )
 }
 
-export default UserPage_menu
+export default OddsPage
 
 const styles = StyleSheet.create({})

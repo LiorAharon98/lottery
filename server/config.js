@@ -1,9 +1,10 @@
-import cors = require('cors');
+const cors = require("cors")
+
 require("dotenv").config();
 
-const setServerConfiguration = (app: any, express: any) => {
+const setServerConfiguration = (app, express) => {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   app.use(cors());
 };
-export = setServerConfiguration;
+module.exports = setServerConfiguration;

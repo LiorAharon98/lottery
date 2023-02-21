@@ -1,40 +1,61 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect } from "react";
-import Card from "../../components/card/Card";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
 import { useDataProvider } from "../../context/Data";
 import Number from "../../components/number/Number";
+import LoadingScreen from "../../components/loading_screen/LoadingScreen";
+
 const LatestLottery = () => {
   const { fetchAllLottery, allLottery } = useDataProvider();
+  const [toggleModal, setToggleModal] = useState<boolean>(false);
+
+  const handleFunc = async () => {
+    setToggleModal(true);
+    await fetchAllLottery();
+    setToggleModal(false);
+  };
   useEffect(() => {
-    fetchAllLottery();
+    handleFunc();
   }, []);
+  const allLotterySort = allLottery.sort((a: { id: number }, b: { id: number }) => {
+    return a.id > b.id ? -1 : 1;
+  });
   interface currentLottery {
     lotteryNumbers: { number: number; special: boolean }[];
     lotteryDate: string;
   }
   return (
-    <View>
-      <Card>
-        {allLottery?.map((currentLottery: currentLottery, index: number) => {
-          return (
-            <View key={index}>
-              <Text>{currentLottery.lotteryDate}</Text>
-              <View style={styles.number_container}>
-
-              {currentLottery.lotteryNumbers.map(currentNum =>  <Number  isSpecial={currentNum.special}>{currentNum.number}</Number>)}
-              </View>
+    <ScrollView>
+      <LoadingScreen onToggleModal={setToggleModal.bind(this, false)} toggle={toggleModal} />
+      {allLotterySort?.map((currentLottery: currentLottery, index: number) => {
+        return (
+          <View style={styles.container} key={index + 1}>
+            <Text>{currentLottery.lotteryDate}</Text>
+            <View style={styles.number_container}>
+              {currentLottery.lotteryNumbers.map((currentNum, index) => (
+                <Number key={index} isSpecial={currentNum.special}>
+                  {currentNum.number}
+                </Number>
+              ))}
             </View>
-          );
-        })}
-      </Card>
-    </View>
+          </View>
+        );
+      })}
+    </ScrollView>
   );
 };
 
 export default LatestLottery;
 
 const styles = StyleSheet.create({
-  number_container:{
-    flexDirection : 'row'
-  }
+  container: {
+    alignItems: "center",
+    justifyContent: "space-around",
+    height: 90,
+    marginTop: 20,
+  },
+  number_container: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "75%",
+  },
 });

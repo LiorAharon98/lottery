@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import UserProfileDetails from "../../components/user_profile_details/UserProfileDetails";
 import { useDataProvider } from "../../context/Data";
 const UserSetting = () => {
-  const [image,setImage] = useState()
-  const {localImageUpload,user} = useDataProvider()
+  const {localImageUpload,user,changeLanguage} = useDataProvider()
   return (
     <>
       <UserProfileDetails />
@@ -12,14 +11,14 @@ const UserSetting = () => {
         <View style={styles.text_container}>
           <Pressable onPress={localImageUpload}>
 
-          <Text style={styles.text}>{user.imgProfile ? 'change' : 'upload'} picture</Text>
+          <Text style={styles.text}>{user.profilePicture ? changeLanguage('change') : changeLanguage('upload')} {changeLanguage('picture')}</Text>
           </Pressable>
         </View>
         <View style={styles.text_container}>
-          <Text style={styles.text}>change numbers</Text>
+          <Text style={styles.text}>{changeLanguage('change numbers')}</Text>
         </View>
         <View style={styles.text_container}>
-          <Text style={styles.text}>change password</Text>
+          <Text style={styles.text}>{changeLanguage('change password')}</Text>
         </View>
       </View>
     </>
@@ -32,7 +31,6 @@ const styles = StyleSheet.create({
   container: {
     paddingLeft: 15,
     justifyContent: "space-around",
-    borderWidth: 1,
     height: 400,
     width: "100%",
   },

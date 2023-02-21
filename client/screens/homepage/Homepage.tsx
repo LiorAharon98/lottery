@@ -1,17 +1,18 @@
-import React , {useState} from "react";
-import { View, StyleSheet, Image } from "react-native";
-import Button from "../../components/button/Button";
+import React, { useState } from "react";
+import { View, StyleSheet, Text } from "react-native";
+import ButtonHomepage from "../../components/button_homepage/ButtonHomepage";
 import { LinearGradient } from "expo-linear-gradient";
 import SquareBox from "../../components/square_box/SquareBox";
+import { Picker } from "@react-native-picker/picker";
+import Timestamp from "../../components/timestamp/Timestamp";
 import { useDataProvider } from "../../context/Data";
 const Homepage = ({ navigation }: any) => {
- 
-  const {user,image,localImageUpload} = useDataProvider()
+  const { user, changeLanguage } = useDataProvider();
   const handlePress = (e: string) => {
-    if (e ==='sign-in' && Object.keys(user).length>0)return navigation.navigate("user-page")
+    if (e === "sign-in" && user) return navigation.navigate("user-page");
     navigation.navigate(e);
   };
- 
+
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -21,22 +22,20 @@ const Homepage = ({ navigation }: any) => {
         colors={["lightblue", "rgb(68, 138, 255)"]}
       ></LinearGradient>
       <View style={styles.button_container}>
-        <Button onPress={handlePress.bind(this, "sign-in")}>sign in</Button>
-        <Button onPress={handlePress.bind(this, "sign-up")}>sign up</Button>
+        <ButtonHomepage onPress={handlePress.bind(this, "sign-in")}>{user ? "personal" : "sign in"}</ButtonHomepage>
+        <ButtonHomepage onPress={handlePress.bind(this, "sign-up")}>sign up</ButtonHomepage>
       </View>
 
       <View style={styles.square_box_container}>
         <View style={styles.square_box_container2}>
-          <SquareBox to="/">info</SquareBox>
-          <SquareBox  to="/latest-lottery">latest</SquareBox>
+          <SquareBox to="/home">{changeLanguage("info")}</SquareBox>
+          <SquareBox to="/latest-lottery">{changeLanguage("latest")}</SquareBox>
         </View>
         <View style={styles.square_box_container2}>
-          <SquareBox to="/">news</SquareBox>
-          <SquareBox  to="/">test</SquareBox>
+          <SquareBox to="/home">{changeLanguage("news")}</SquareBox>
+          <SquareBox to="/about-page">{changeLanguage("about")}</SquareBox>
         </View>
-        <Button onPress={localImageUpload}>tdasdas</Button>
       </View>
-    
     </View>
   );
 };

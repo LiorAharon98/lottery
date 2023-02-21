@@ -1,13 +1,14 @@
-import express = require("express");
-import UserModal = require("../models/UserModel");
+const UserModal = require("../models/UserModel.js");
+const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-
 router.post("/sign-up", async (req, res) => {
-  const { username, password } = req.body;
-  const existUser = await UserModal.findOne({ username, password });
+  const { username } = req.body;
+
+  const existUser = await UserModal.findOne({ username });
   if (existUser) return res.json(false);
   const user = await UserModal.create(req.body);
+
   res.json(user);
 });
 
@@ -28,9 +29,18 @@ router.put("/create-user", async (req, res) => {
   res.json(user);
 });
 router.put("/lottery-page", async (req, res) => {
-  const { username, number } = req.body;
-  const user = await UserModal.findOneAndUpdate({ username }, { $inc: { earned: number } }, { new: true });
+  const { username, number, date } = req.body;
+  const user = await UserModal.findOneAndUpdate(
+    { username },
+    { $inc: { earned: number }, $set: { latestWin: { number, date } } },
+    { new: true }
+  );
+  res.json(user);
+});
+router.put("/user-setting", async (req, res) => {
+  const { username, profilePicture } = req.body;
+  const user = await UserModal.findOneAndUpdate({ username }, { profilePicture }, { new: true });
   res.json(user);
 });
 
-export default router;
+module.exports = router;

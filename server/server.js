@@ -1,9 +1,9 @@
-import express = require("express");
-import mongoose = require("mongoose");
-import UserRoute from "./routes/UserRoute"
-import LotteryRoute from "./routes/LotteryRoute"
+const express = require("express")
+const mongoose = require("mongoose")
+const UserRoute = require("./routes/UserRoute")
+const LotteryRoute = require("./routes/LotteryRoute.js")
 const app = express();
-const serverConfig = require("./config");
+const serverConfig = require("./config.js")
 mongoose.set("strictQuery", false);
 mongoose.connect(process.env.MONGODB_URI);
 serverConfig(app,express);

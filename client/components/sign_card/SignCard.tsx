@@ -1,22 +1,26 @@
-import { StyleSheet, ScrollView,Text } from "react-native";
+import { StyleSheet, ScrollView, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Input from "../input/Input";
 import React, { useState } from "react";
 import Button from "../button/Button";
+import { useDataProvider } from "../../context/Data";
+import { Link } from "@react-navigation/native";
 
 interface props {
   navigation: any;
   text: string;
   handleFunc: Function;
-  error : string
+  error: string;
 }
-const SignCard = ({ navigation, text, handleFunc,error }: props) => {
+const SignCard = ({ navigation, text, handleFunc, error }: props) => {
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const { changeLanguage } = useDataProvider();
   const handlePress = async () => {
+    if (!userName || !password) return alert("field cannot be empty");
     handleFunc(userName, password);
   };
-
   return (
     <ScrollView>
       <LinearGradient
@@ -25,10 +29,17 @@ const SignCard = ({ navigation, text, handleFunc,error }: props) => {
         end={{ x: 1, y: 1 }}
         colors={["lightblue", "rgb(68, 138, 255)"]}
       >
-        <Input  onChange={setUserName} label={"username"} />
+        <Input onChange={setUserName} label={"username"} />
         <Input onChange={setPassword} label={"password"} />
-        {error && <Text>{error}</Text>}
+        {text === "sign up" && <Input onChange={setConfirmPassword} label={"confirm password"} />}
+        {error && <Text style={styles.error_text}>{changeLanguage(error)} !</Text>}
         <Button onPress={handlePress}>{text}</Button>
+
+        <Link style={styles.transfer_link_container} to={text === "sign in" ? "/sign-up" : "/sign-in"}>
+          <Text style={styles.transfer_link}>
+            {text === "sign in" ? changeLanguage("dont have an account") : changeLanguage("already have an account")}?
+          </Text>
+        </Link>
       </LinearGradient>
     </ScrollView>
   );
@@ -42,5 +53,17 @@ const styles = StyleSheet.create({
     height: 710,
     justifyContent: "space-around",
     backgroundColor: "rgb(0, 144, 239)",
+  },
+  transfer_link: {
+    color: "white",
+    textDecorationLine: "underline",
+  },
+  transfer_link_container: {
+    padding: 10,
+  },
+  error_text: {
+    color: "rgb(255, 19, 56)",
+    fontSize: 22,
+    textDecorationLine: "underline",
   },
 });

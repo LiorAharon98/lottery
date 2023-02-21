@@ -1,16 +1,30 @@
 import { StyleSheet, Text, View, TextInput, NativeSyntheticEvent, TextInputChangeEventData } from "react-native";
-import React from "react";
-
+import React, { useState } from "react";
+import { useDataProvider } from "../../context/Data";
+import Icon from "react-native-vector-icons/MaterialIcons";
 interface props {
   label: string;
   onChange: (text: string) => void;
 }
 const Input = ({ label, onChange }: props) => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const { changeLanguage } = useDataProvider();
+  const pressHandler = () => {
+    setIsVisible(!isVisible);
+  };
   return (
-    <View style={styles.input_container}>
-      <Text style={styles.label}>{label}</Text>
-      <TextInput onChangeText={onChange} style={styles.input} />
+    <View style={styles.container}>
+      <Text style={styles.label}>{changeLanguage(label)}</Text>
 
+      <View style={styles.input_container}>
+        <TextInput style={styles.input} secureTextEntry={isVisible} onChangeText={onChange} />
+        {label !== "username" &&
+          (isVisible ? (
+            <Icon onPress={pressHandler} style={styles.visible_icon} name="visibility" />
+          ) : (
+            <Icon onPress={pressHandler} style={styles.visible_icon} name="visibility-off" />
+          ))}
+      </View>
     </View>
   );
 };
@@ -18,25 +32,31 @@ const Input = ({ label, onChange }: props) => {
 export default Input;
 
 const styles = StyleSheet.create({
-  input_container:{
-height :100,
-justifyContent : 'space-between'
-
+  container: {
+    height: 90,
+    justifyContent: "space-between",
   },
   input: {
-    flexDirection: "row",
-    borderBottomWidth : 3,
-    borderBottomColor : 'white',
-    marginTop: 10,
-    width: 200,
-    height: 40,
-    paddingLeft : 5,
-    fontSize : 20,
-    color : 'white'
+    width: "90%",
+    color: "white",
+    fontSize: 20,
   },
-  label:{
-    color : 'white',
-    fontSize : 19
-  }
+  input_container: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderBottomWidth: 2,
+    borderBottomColor: "white",
+    marginTop: 10,
+    width: 230,
+    height: 40,
+  },
+  label: {
+    color: "white",
+    fontSize: 19,
+  },
 
+  visible_icon: {
+    fontSize: 18,
+    padding: 5,
+  },
 });

@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { Text,View } from "react-native";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Homepage from "./screens/homepage/Homepage";
@@ -13,6 +13,10 @@ import UserPage from "./screens/user_page/UserPage";
 import CreateUserLotteryNumber from "./screens/create_user_lottery_number/CreateUserLotteryNumber ";
 import LatestLottery from "./screens/latest_lottery/LatestLottery";
 import UserSetting from "./screens/user_setting/UserSetting";
+import About from "./screens/about/About";
+import OddsPage from "./screens/odds_page/OddsPage";
+import  "./language/Data"
+
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
@@ -20,7 +24,8 @@ export default function App() {
       <StatusBar style="auto" />
 
       <NavigationContainer>
-        <Stack.Navigator>
+   
+        <Stack.Navigator screenOptions={{ headerStyle : {backgroundColor : 'white'} ,headerTitle : '' , headerBackVisible : false}}>
           <Stack.Screen name="home" component={Homepage} />
           <Stack.Screen name="sign-in" component={SignIn} />
           <Stack.Screen name="sign-up" component={SignUp} />
@@ -29,6 +34,8 @@ export default function App() {
           <Stack.Screen name="lottery-page" component={LotteryPage} />
           <Stack.Screen name="setting-page" component={UserSetting} />
           <Stack.Screen name="latest-lottery" component={LatestLottery} />
+          <Stack.Screen name="odds-page" component={OddsPage} />
+          <Stack.Screen name="about-page" component={About} />
         </Stack.Navigator>
       <Footer  />
       </NavigationContainer>
@@ -36,11 +43,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+

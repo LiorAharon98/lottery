@@ -5,15 +5,16 @@ import { GestureResponderEvent } from "react-native-modal";
 import { Link } from "@react-navigation/native";
 interface props {
   children: ReactNode;
-  onPress?:  (e : GestureResponderEvent)=>void
-  to: string ;
-
+  onPress?: (e: GestureResponderEvent) => void;
+  to?: string;
 }
-const SquareBox = ({ children, to,onPress }: props) => {
+const SquareBox = ({ children, to, onPress }: props) => {
   return (
-    <Link onPressIn={onPress} to={to}>
+    <Link onPressIn={onPress} to={to ? to : 'home'}>
       <LinearGradient colors={["lightblue", "rgb(68, 138, 255)"]} style={styles.container}>
-        <Text style={styles.text}>{children}</Text>
+     
+          <Text style={styles.text}>{children}</Text>
+
       </LinearGradient>
     </Link>
   );
