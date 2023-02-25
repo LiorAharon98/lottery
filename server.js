@@ -7,7 +7,7 @@ const app = express();
 const serverConfig = require("./config");
 console.log("sd")
 mongoose.set("strictQuery", false);
-mongoose.connect("mongodb+srv://liors-database:lior.ah980@cluster0.iybrzvm.mongodb.net/lottery?retryWrites=true&w=majority");
+mongoose.connect(process.env.MONGODB_URI ||"mongodb+srv://liors-database:lior.ah980@cluster0.iybrzvm.mongodb.net/lottery?retryWrites=true&w=majority");
 serverConfig(app, express);
 app.use("/lottery", UserRoute);
 app.use("/lottery", LotteryRoute);
@@ -15,4 +15,4 @@ app.use("/lottery", LotteryRoute);
 //   await createLottery();
 // };
 // handleCreateLottery();
-app.listen(8000);
+app.listen( process.env.PORT || 8000);
