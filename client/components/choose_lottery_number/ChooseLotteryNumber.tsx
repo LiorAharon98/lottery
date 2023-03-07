@@ -4,11 +4,10 @@ import React from "react";
 interface props {
   numbers: number[];
   onSelectNumbers: (number: number) => void;
-  selectedNumbers: { number: number }[];
+  selectedNumbers?: { number: number }[];
+  selectSpecialNumbers?: { number: number };
 }
-const ChooseLotteryNumber = ({ numbers, onSelectNumbers, selectedNumbers }: props) => {
-
-
+const ChooseLotteryNumber = ({ numbers, onSelectNumbers, selectedNumbers, selectSpecialNumbers }: props) => {
   return (
     <View style={styles.container}>
       {numbers.map((number, index) => {
@@ -16,7 +15,11 @@ const ChooseLotteryNumber = ({ numbers, onSelectNumbers, selectedNumbers }: prop
           <Text
             key={index}
             style={
-              selectedNumbers.filter((currentNumber) => currentNumber.number === number).length > 0
+              selectedNumbers
+                ? selectedNumbers.filter((currentNumber) => currentNumber.number === number).length > 0
+                  ? styles.selected_number
+                  : styles.un_selected_number
+                : selectSpecialNumbers?.number === number
                 ? styles.selected_number
                 : styles.un_selected_number
             }
@@ -40,11 +43,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   un_selected_number: {
-    
     textAlign: "center",
     fontSize: 24,
     margin: 6,
-    paddingTop: 7,
+    paddingTop: 4,
     borderWidth: 1,
     borderRadius: 20,
     height: 44,
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     backgroundColor: "rgb(21, 165, 241)",
     fontSize: 24,
-    paddingTop: 7,
+    paddingTop: 4,
     margin: 6,
     borderWidth: 0,
     color: "white",

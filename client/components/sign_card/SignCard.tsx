@@ -19,6 +19,7 @@ const SignCard = ({ navigation, text, handleFunc, error }: props) => {
   const { changeLanguage } = useDataProvider();
   const handlePress = async () => {
     if (!userName || !password) return alert("field cannot be empty");
+    if (text === "sign up" && confirmPassword !== password) return alert("password not match");
     handleFunc(userName, password);
   };
   return (
@@ -27,7 +28,7 @@ const SignCard = ({ navigation, text, handleFunc, error }: props) => {
         style={styles.container}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        colors={["lightblue", "rgb(68, 138, 255)"]}
+        colors={["rgb(41, 185, 254)", "rgb(156, 220, 254)"]}
       >
         <Input onChange={setUserName} label={"username"} />
         <Input onChange={setPassword} label={"password"} />

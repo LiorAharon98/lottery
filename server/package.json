@@ -10,12 +10,12 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-  
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
-    "node": "18.12.1"
+    "node": "18.14.2",
+    "npm": "9.5.1"
   },
   "keywords": [],
   "author": "",

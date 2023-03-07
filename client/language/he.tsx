@@ -57,5 +57,11 @@ const translation_hebrew = {
   first :'ראשון',
   second : 'שני',
   'latest win' : 'ניצחון אחרון ',
+  or : 'או',
+  'first column' : ' טור ראשון',
+  'second column' : 'טור שני',
+  'your final numbers are approve if you would like you can change the numbers in user setting' : 'המספרים שלך אושרו במידה ותרצה לשנות תוכל לעשות זאת בהגדרות',
+  'you choose the first column now you will select the second' : 'בחרת את הטור הראשון עכשיו בחר את הטור השני',
+  total : 'סך הכל'
 };
 export default translation_hebrew;

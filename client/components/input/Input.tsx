@@ -2,11 +2,13 @@ import { StyleSheet, Text, View, TextInput, NativeSyntheticEvent, TextInputChang
 import React, { useState } from "react";
 import { useDataProvider } from "../../context/Data";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { GestureResponderEvent } from "react-native-modal";
 interface props {
   label: string;
-  onChange: (text: string) => void;
+  onChange: (e : string) => void;
+  color?: string;
 }
-const Input = ({ label, onChange }: props) => {
+const Input = ({ label, onChange, color }: props) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const { changeLanguage } = useDataProvider();
   const pressHandler = () => {
@@ -14,15 +16,19 @@ const Input = ({ label, onChange }: props) => {
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{changeLanguage(label)}</Text>
+      <Text style={[styles.label, {color : color ? color : 'white'}]}>{changeLanguage(label)}</Text>
 
       <View style={styles.input_container}>
-        <TextInput style={styles.input} secureTextEntry={isVisible} onChangeText={onChange} />
+        <TextInput
+          style={styles.input}
+          secureTextEntry={label !== "username" && !isVisible}
+          onChangeText={onChange}
+        />
         {label !== "username" &&
           (isVisible ? (
-            <Icon onPress={pressHandler} style={styles.visible_icon} name="visibility" />
-          ) : (
             <Icon onPress={pressHandler} style={styles.visible_icon} name="visibility-off" />
+          ) : (
+            <Icon onPress={pressHandler} style={styles.visible_icon} name="visibility" />
           ))}
       </View>
     </View>
@@ -38,6 +44,7 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "90%",
+    
     color: "white",
     fontSize: 20,
   },
@@ -57,6 +64,6 @@ const styles = StyleSheet.create({
 
   visible_icon: {
     fontSize: 18,
-    padding: 5,
+    padding: 9,
   },
 });

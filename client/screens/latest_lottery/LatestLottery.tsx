@@ -26,10 +26,12 @@ const LatestLottery = () => {
   return (
     <ScrollView>
       <LoadingScreen onToggleModal={setToggleModal.bind(this, false)} toggle={toggleModal} />
+      <View style={{flex :1}}>
+
       {allLotterySort?.map((currentLottery: currentLottery, index: number) => {
         return (
           <View style={styles.container} key={index + 1}>
-            <Text>{currentLottery.lotteryDate}</Text>
+            <Text style={styles.lottery_date}>{currentLottery.lotteryDate}</Text>
             <View style={styles.number_container}>
               {currentLottery.lotteryNumbers.map((currentNum, index) => (
                 <Number key={index} isSpecial={currentNum.special}>
@@ -40,6 +42,7 @@ const LatestLottery = () => {
           </View>
         );
       })}
+      </View>
     </ScrollView>
   );
 };
@@ -50,12 +53,16 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "space-around",
-    height: 90,
+    height: 110,
     marginTop: 20,
   },
   number_container: {
     flexDirection: "row",
     justifyContent: "space-around",
-    width: "75%",
+    width: "85%",
   },
+  lottery_date:{
+    fontSize : 18,
+    
+  }
 });

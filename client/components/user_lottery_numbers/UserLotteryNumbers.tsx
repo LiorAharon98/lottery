@@ -8,20 +8,20 @@ interface columnProps {
 }
 
 const UserLotteryNumbers = ({ column }: columnProps) => {
-  const { user,changeLanguage } = useDataProvider();
+  const { user, changeLanguage } = useDataProvider();
   return (
     <>
-      <Text>{!column ? changeLanguage('first') : changeLanguage('second')}</Text>
-    <View style={styles.user_number}>
-      {user.lotteryNumbers[0][column].map((number: { number: number; special: boolean }, index: number) => {
-        return (
-          <Number isSpecial={number.special} key={index}>
-            {number.number}
-          </Number>
-        );
-      })}
-    </View>
-      </>
+      <Text>{!column ? changeLanguage("first") : changeLanguage("second")}</Text>
+      <View style={styles.user_number}>
+        {user.lotteryNumbers[0][column].map((number: { number: number; special: boolean }, index: number) => {
+          return (
+            <Number isSpecial={number.special} key={index}>
+              {number.number}
+            </Number>
+          );
+        })}
+      </View>
+    </>
   );
 };
 

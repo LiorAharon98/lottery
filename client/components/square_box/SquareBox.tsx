@@ -10,11 +10,9 @@ interface props {
 }
 const SquareBox = ({ children, to, onPress }: props) => {
   return (
-    <Link onPressIn={onPress} to={to ? to : 'home'}>
-      <LinearGradient colors={["lightblue", "rgb(68, 138, 255)"]} style={styles.container}>
-     
-          <Text style={styles.text}>{children}</Text>
-
+    <Link onPressIn={onPress} to={to ? to : "home"}>
+      <LinearGradient colors={["rgb(41, 185, 254)", "rgb(156, 220, 254)"]} style={styles.container}>
+        <Text style={styles.text}>{children}</Text>
       </LinearGradient>
     </Link>
   );
@@ -24,12 +22,11 @@ export default SquareBox;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 35,
-    height: 110,
-    width: 130,
+    height: 70,
+    width: 140,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 15,
+    borderRadius: 10,
   },
 
   text: {

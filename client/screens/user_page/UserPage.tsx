@@ -37,7 +37,7 @@ export default UserPage;
 const styles = StyleSheet.create({
   container_box: {
     height: 300,
-    width: "80%",
+    width: "90%",
     flexWrap: "wrap",
     justifyContent: "space-around",
   },

@@ -4,33 +4,33 @@
     "runtimeVersion": {
       "policy": "sdkVersion"
     },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "enableProguardInReleaseBuilds": true
+          }
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ]
+    ],
     "updates": {
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/292e68aa-3480-4c01-b697-6672a8d899fc"
     },
     "slug": "lottery",
-    "version": "1.0.2",
+    "version": "1.0.4",
     "orientation": "portrait",
-    "icon": "./assets/lottery-icon.png",
+    "icon": "./assets/lottery-background.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/lottery-background.png",
-      "plugins": [
-        [
-          "expo-build-properties",
-          {
-            "android": {
-              "enableProguardInReleaseBuilds": true
-            }
-          }
-        ],
-        [
-          "expo-image-picker",
-          {
-            "photosPermission": "The app accesses your photos to let you share them with your friends."
-          }
-        ]
-      ]
+      "image": "./assets/lottery-background.png"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -38,7 +38,7 @@
     },
     "android": {
       "package": "com.liors.lottery.first.project",
-      "versionCode": 3,
+      "versionCode": 5,
       "adaptiveIcon": {
         "foregroundImage": "./assets/lottery-background.png",
         "backgroundColor": "#FFFFFF"

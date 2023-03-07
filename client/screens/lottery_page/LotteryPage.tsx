@@ -1,6 +1,5 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState, useMemo } from "react";
-import { LinearGradient } from "expo-linear-gradient";
 import Number from "../../components/number/Number";
 import { useDataProvider } from "../../context/Data";
 import Button from "../../components/button/Button";
@@ -42,23 +41,27 @@ const LotteryPage = () => {
     <ScrollView>
       <ModalLottery
         closeModal={onModalToggle.bind(this, false)}
-        isWon={isWon}
+        activateModal={isWon}
         countGuessAndPrizes={countGuessAndPrizes}
       />
-      <Timestamp />
 
-      <Text style={styles.number}>{changeLanguage("winning numbers")}!</Text>
-      <Text style={styles.number}>
-        {changeLanguage("lottery date")} : {randomLotteryNumbers?.lotteryDate}
-      </Text>
-      <View style={styles.random_lottery_numbers_container}>
-        {randomLotteryNumbers?.lotteryNumbers?.map((number: { number: number; special: boolean }, index: number) => (
-          <Number isSpecial={number.special} key={index}>
-            {number.number}
-          </Number>
-        ))}
-      </View>
-      <LinearGradient style={styles.main} colors={["lightblue", "rgb(68, 138, 255)"]}>
+      <View style={styles.main}>
+        <Timestamp />
+
+        <Text style={styles.number}>
+          {changeLanguage("lottery date")} : {randomLotteryNumbers?.lotteryDate}
+        </Text>
+        <View style={styles.random_lottery_numbers_container}>
+          <View style={{ width: "90%", flexDirection: "row", justifyContent: "space-around" }}>
+            {randomLotteryNumbers?.lotteryNumbers?.map(
+              (number: { number: number; special: boolean }, index: number) => (
+                <Number isSpecial={number.special} key={index}>
+                  {number.number}
+                </Number>
+              )
+            )}
+          </View>
+        </View>
         <View style={styles.user_number_container}>
           <Text style={styles.number}>{changeLanguage("your numbers")}!</Text>
           <UserLotteryNumbers column={0} />
@@ -73,8 +76,7 @@ const LotteryPage = () => {
             {changeLanguage("info")}
           </Button>
         </View>
-        <View></View>
-      </LinearGradient>
+      </View>
     </ScrollView>
   );
 };
@@ -82,28 +84,26 @@ const LotteryPage = () => {
 export default LotteryPage;
 
 const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+  },
   random_lottery_numbers_container: {
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-around",
     borderRadius: 20,
-    height: 120,
-  },
-  main: {
-    height: 500,
-    alignItems: "center",
-    justifyContent: "space-around",
+    height: 140,
   },
   button_container: {
+    marginTop: 10,
     flexDirection: "row",
-    width: "100%",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
   },
   user_number_container: {
     borderRadius: 15,
     alignItems: "center",
     justifyContent: "space-around",
-    height: 250,
+    height: 300,
     backgroundColor: "white",
     width: "100%",
   },

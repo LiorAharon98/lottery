@@ -1,12 +1,16 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
-
+import dayjs from "dayjs";
+import weekday from "dayjs/plugin/weekday";
 const Timestamp = () => {
   const [helpState, setHelpState] = useState<number>(0);
-  const currentDate = new Date().getTime();
-  const compareDay = new Date("Feb 23 , 2023 00:00:00").getTime();
-  const test = new Date("Feb 23 , 2023 00:00:00");
-  const gap = compareDay - currentDate;
+  dayjs.extend(weekday);
+  const nextSunday = dayjs().weekday(7).set("hour", 0).set("minute", 0).set("second", 0).valueOf();
+  const nextWednesday = dayjs().weekday(3).set("hour", 0).set("minute", 0).set("second", 0).valueOf();
+  const currentM = dayjs().valueOf();
+
+  const finalDay = nextSunday > nextWednesday ? nextWednesday : nextSunday;
+  const gap = finalDay - currentM;
 
   const second = 1000;
   const minute = second * 60;
@@ -25,7 +29,6 @@ const Timestamp = () => {
   }, []);
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>next lottery will be in </Text>
       <View style={styles.timestamp_container}>
         <View style={styles.text_container}>
           <Text style={styles.text}>{dayTimestamp} </Text>
@@ -51,7 +54,7 @@ const styles = StyleSheet.create({
   },
   container: {
     justifyContent: "space-around",
-    height: 100,
+    height: 70,
     marginBottom: 25,
   },
   header: {
@@ -62,6 +65,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   text: {
-    fontSize: 20,
+    fontSize: 18,
   },
 });

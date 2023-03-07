@@ -4,12 +4,15 @@ import UserProfileDetails from "../../components/user_profile_details/UserProfil
 import { useDataProvider } from "../../context/Data";
 const UserSetting = () => {
   const {localImageUpload,user,changeLanguage} = useDataProvider()
+  const handlePress =async()=>{
+    await localImageUpload()
+  }
   return (
     <>
       <UserProfileDetails />
       <View style={styles.container}>
         <View style={styles.text_container}>
-          <Pressable onPress={localImageUpload}>
+          <Pressable onPress={handlePress}>
 
           <Text style={styles.text}>{user.profilePicture ? changeLanguage('change') : changeLanguage('upload')} {changeLanguage('picture')}</Text>
           </Pressable>

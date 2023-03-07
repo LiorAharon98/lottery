@@ -11,15 +11,15 @@
       }
     },
     "preview": {
-      "channel" : "preview",
+      "channel": "preview",
       "distribution": "internal",
       "ios": {
         "resourceClass": "m1-medium"
       }
     },
     "production": {
-      "channel" : "production",
-      
+      "channel": "production",
+
       "ios": {
         "resourceClass": "m1-medium"
       }
@@ -27,8 +27,8 @@
   },
   "submit": {
     "production": {
-      "android" :{
-        "serviceAccountKeyPath" : "./pc-api-6072545435332246251-983-234c780767a4.json"
+      "android": {
+        "serviceAccountKeyPath": "./pc-api-6072545435332246251-983-234c780767a4.json"
       }
     }
   }

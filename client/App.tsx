@@ -1,6 +1,5 @@
 import { StatusBar } from "expo-status-bar";
 import { Text,View } from "react-native";
-import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Homepage from "./screens/homepage/Homepage";
 import { NavigationContainer } from "@react-navigation/native";
@@ -19,13 +18,15 @@ import  "./language/Data"
 
 export default function App() {
   const Stack = createNativeStackNavigator();
+ 
+
   return (
     <DataProvider>
       <StatusBar style="auto" />
 
-      <NavigationContainer>
+      <NavigationContainer theme={{colors : {background  : 'white'}}}>
    
-        <Stack.Navigator screenOptions={{ headerStyle : {backgroundColor : 'white'} ,headerTitle : '' , headerBackVisible : false}}>
+        <Stack.Navigator   screenOptions={{ headerStyle : {backgroundColor : 'white'} ,headerTitle : '' , headerBackVisible : false,}}>
           <Stack.Screen name="home" component={Homepage} />
           <Stack.Screen name="sign-in" component={SignIn} />
           <Stack.Screen name="sign-up" component={SignUp} />

@@ -5,18 +5,17 @@ import ChooseLotteryNumber from "../../components/choose_lottery_number/ChooseLo
 import Button from "../../components/button/Button";
 import { useDataProvider } from "../../context/Data";
 import Modal from "react-native-modal";
+import ModalInfo from "../../components/modal_info/ModalInfo";
 interface lotteryType {
   number: number;
   special: boolean;
 }
 const CreateUserLotteryNumber = ({ navigation }: any) => {
-  const { user, changeLanguage } = useDataProvider();
+  const { user, changeLanguage, addLotteryNumbersToUser } = useDataProvider();
   const [selectedNumbers, setSelectedNumbers] = useState<lotteryType[]>([]);
-  const [selectedSpecialNum, setSelectedSpecialNum] = useState<lotteryType[]>([]);
+  const [selectedSpecialNum, setSelectedSpecialNum] = useState<lotteryType>({} as lotteryType);
   const [userLotteryNumArr, setUserLotteryNum] = useState<lotteryType[][]>([]);
   const [toggleModal, setToggleModal] = useState<boolean>(false);
-  const { addLotteryNumbersToUser } = useDataProvider();
-
   const specialNum: number[] = useMemo(() => {
     let specialNum: number[] = [];
     for (let i = 0; i < 7; i++) {
@@ -42,28 +41,26 @@ const CreateUserLotteryNumber = ({ navigation }: any) => {
   };
   const onSelectedSpecialNumber = (number: number) => {
     const currentNum = { number, special: true };
-    if (selectedSpecialNum.filter((current) => current.number === number).length > 0)
-      setSelectedNumbers((prev) => prev.filter((currentNum) => currentNum.number === number));
-    if (selectedSpecialNum.length > 0) return;
-
-    setSelectedSpecialNum((prev) => [...prev, currentNum]);
+    if (selectedSpecialNum.number === currentNum.number) {
+      return setSelectedNumbers((prev) => prev.filter((currentNum) => currentNum.number !== number));
+    }
+    return setSelectedSpecialNum(currentNum);
   };
   const pressHandler = async () => {
-    const numbers = [...selectedNumbers, selectedSpecialNum[0]];
+    const numbers = [...selectedNumbers, selectedSpecialNum];
     setUserLotteryNum((prev) => {
       return [...prev, numbers];
     });
 
     setToggleModal(false);
     setSelectedNumbers([]);
-    setSelectedSpecialNum([]);
+    setSelectedSpecialNum({} as lotteryType);
   };
 
   const onToggleModal = () => {
     setToggleModal(true);
   };
-
-  const test = async () => {
+  const fetchNumbersToUser = async () => {
     if (userLotteryNumArr.length === 2) {
       await addLotteryNumbersToUser(userLotteryNumArr, user.username);
       navigation.navigate("user-page");
@@ -71,25 +68,15 @@ const CreateUserLotteryNumber = ({ navigation }: any) => {
     }
   };
   useEffect(() => {
-    test();
+    fetchNumbersToUser();
   }, [userLotteryNumArr]);
   return (
-    <View>
-      <Modal isVisible={toggleModal}>
-        <View style={styles.modal_container}>
-          {userLotteryNumArr.length ===0 ? (
-            <Text style={styles.container_text}>you choose the first column now you will select the second</Text>
-          ) : (
-            <Text>your final numbers are approve if you would like you can change the numbers in user setting</Text>
-          )}
-
-          <Button onPress={pressHandler}>next</Button>
-        </View>
-      </Modal>
-      <Card height={810}>
+    <>
+      <ModalInfo userLotteryNumArr={userLotteryNumArr} pressHandler={pressHandler} toggle={toggleModal} />
+      <Card >
         <View>
           <View style={styles.header_container}>
-            <Text style={styles.header_text}>{userLotteryNumArr.length ===0 ? "first" : "second"} column!</Text>
+            <Text style={styles.header_text}>{userLotteryNumArr.length === 0 ? changeLanguage("first column") : changeLanguage("second column")}!</Text>
             <Text style={styles.header_text}>{changeLanguage("choose numbers")}!</Text>
           </View>
 
@@ -99,14 +86,14 @@ const CreateUserLotteryNumber = ({ navigation }: any) => {
             <Text style={styles.header_text}>{changeLanguage("choose numbers")}!</Text>
           </View>
           <ChooseLotteryNumber
-            selectedNumbers={selectedSpecialNum}
+            selectSpecialNumbers={selectedSpecialNum}
             onSelectNumbers={onSelectedSpecialNumber}
             numbers={specialNum}
           />
         </View>
         <Button onPress={onToggleModal}>{changeLanguage("next")}</Button>
       </Card>
-    </View>
+    </>
   );
 };
 
@@ -128,16 +115,5 @@ const styles = StyleSheet.create({
 
   selected_numbers: {
     fontSize: 24,
-  },
-  modal_container: {
-    justifyContent: "space-around",
-    alignItems: "center",
-    borderRadius: 10,
-    backgroundColor: "white",
-    height: 200,
-  },
-  container_text: {
-    fontSize: 20,
-    textAlign: "center",
   },
 });

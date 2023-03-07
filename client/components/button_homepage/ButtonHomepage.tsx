@@ -7,10 +7,10 @@ interface props {
   onPress: (event: GestureResponderEvent) => void;
 }
 const ButtonHomepage = ({ children, onPress }: props) => {
-  const {changeLanguage} = useDataProvider()
+  const { changeLanguage } = useDataProvider();
   return (
     <Pressable onPress={onPress}>
-      <LinearGradient style={styles.container} colors={["lightblue", "rgb(68, 138, 255)"]}>
+      <LinearGradient style={styles.container} colors={["rgb(41, 185, 254)", "rgb(156, 220, 254)"]}>
         <Text style={styles.text}>{changeLanguage(children)}</Text>
       </LinearGradient>
     </Pressable>
@@ -24,9 +24,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
 
-    height: 50,
-    width: 180,
-    borderRadius: 10,
+    height: 55,
+    width: "100%",
+
+    backgroundColor: "black",
+    borderRadius: 5,
   },
   text: {
     fontSize: 18,

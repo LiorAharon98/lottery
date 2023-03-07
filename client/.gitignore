@@ -1,3 +1,4 @@
+pc-api-6072545435332246251-983-234c780767a4.json
 node_modules/
 .expo/
 dist/
@@ -9,7 +10,6 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-pc-api-6072545435332246251-983-234c780767a4
 
 # macOS
 .DS_Store

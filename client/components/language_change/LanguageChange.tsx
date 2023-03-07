@@ -4,15 +4,18 @@ import { useTranslation } from "react-i18next";
 import FooterTag from "../footer_tag/FooterTag";
 import Modal from "react-native-modal";
 import Icon3 from "react-native-vector-icons/MaterialIcons";
+import CheckIcon from "react-native-vector-icons/AntDesign";
 import { useDataProvider } from "../../context/Data";
 import { useNavigation } from "@react-navigation/native";
 const LanguageChange = () => {
   const navigation = useNavigation();
   const [toggleModal, setToggleModal] = useState<boolean>(false);
+  const [currentLanguage, setCurrentLanguage] = useState<string>("english");
   const { i18n } = useTranslation();
   const { changeLanguage } = useDataProvider();
   const handleEvent = (e: string) => {
     i18n.changeLanguage(e);
+    setCurrentLanguage(e);
     setToggleModal(false);
   };
   const onToggleModal = () => {
@@ -29,7 +32,9 @@ const LanguageChange = () => {
               key={label.label}
               onPress={handleEvent.bind(this, label.label)}
             >
-              <Text>{changeLanguage(label.label)}</Text>
+              <Text>
+                {changeLanguage(label.label)} {currentLanguage === label.label && <CheckIcon name="check" size={16} />}
+              </Text>
             </Pressable>
           ))}
         </View>

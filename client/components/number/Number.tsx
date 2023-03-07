@@ -17,11 +17,12 @@ export default Number;
 const styles = StyleSheet.create({
   container: {},
   number: {
-    width : 35,
-    height : 30,
+    width : 40,
+    height : 40,
+    paddingTop : 2,
     textAlign : 'center',
     color : 'white',
-    fontSize: 20,
-    borderRadius : 20
+    fontSize: 23,
+    borderRadius : 20,
   },
 });
