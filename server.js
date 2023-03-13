@@ -10,8 +10,8 @@ mongoose.connect(process.env.MONGODB_URI);
 serverConfig(app, express);
 app.use("/lottery", UserRoute);
 app.use("/lottery", LotteryRoute);
-const handleCreateLottery = async () => {
-  await createLottery();
-};
-handleCreateLottery();
+
+createLottery();
+
 app.listen(process.env.PORT);
+

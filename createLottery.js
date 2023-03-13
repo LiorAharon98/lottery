@@ -29,11 +29,12 @@ const createNumbers = () => {
   tempArr.push(specialNum);
   return tempArr;
 };
+
 const createTime = async () => {
   const currentTime = currentDate();
+
   const currentDay = new Date().getDay();
   const findLottery = await LotteryModel.findOne({ lotteryDate: currentTime });
-
   if (findLottery) return;
   const allLottery = await LotteryModel.find({});
   if (currentDay === 0 || currentDay === 3) {
