@@ -2,16 +2,12 @@ import { Pressable, StyleSheet, Text, View, GestureResponderEvent } from "react-
 import React, { ReactNode } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { useDataProvider } from "../../context/Data";
-interface props {
-  children: ReactNode;
-  onPress: (event: GestureResponderEvent) => void;
-  width? : number
-}
-const Button = ({ children, onPress,width }: props) => {
-  const {changeLanguage} = useDataProvider()
+import { props } from "../../types/type";
+const Button = ({ children, onPress, width }: props) => {
+  const { changeLanguage } = useDataProvider();
   return (
     <Pressable onPress={onPress}>
-      <LinearGradient style={[styles.container,{width : width ? width : 220}]} colors={["white", "white"]}>
+      <LinearGradient style={[styles.container, { width: width ? width : 220 }]} colors={["white", "white"]}>
         <Text style={styles.text}>{changeLanguage(children)}</Text>
       </LinearGradient>
     </Pressable>

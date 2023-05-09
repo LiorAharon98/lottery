@@ -1,11 +1,7 @@
-import { Pressable, StyleSheet, Text, View, GestureResponderEvent } from "react-native";
-import React, { ReactNode } from "react";
+import { Pressable, StyleSheet, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useDataProvider } from "../../context/Data";
-interface props {
-  children: ReactNode;
-  onPress: (event: GestureResponderEvent) => void;
-}
+import { props } from "../../types/type";
 const ButtonHomepage = ({ children, onPress }: props) => {
   const { changeLanguage } = useDataProvider();
   return (

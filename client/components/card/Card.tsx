@@ -1,14 +1,13 @@
 import React, { ReactNode } from "react";
-import { StyleSheet, ScrollView, View } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-interface props {
-  children: ReactNode;
-  height?: number;
-}
-const Card = ({ children, height }: props) => {
+import { StyleSheet, ScrollView, View, Dimensions } from "react-native";
+import { card } from "../../types/type";
+
+const Card = ({ children, height }: card) => {
   return (
     <ScrollView>
-      <View style={[styles.container, { height: height ? height : 700 }]}>{children}</View>
+      <View style={[styles.container, { height: height ? Dimensions.get("window").height * 0.86 : "100%" }]}>
+        {children}
+      </View>
     </ScrollView>
   );
 };

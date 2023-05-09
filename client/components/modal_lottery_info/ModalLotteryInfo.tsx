@@ -1,0 +1,49 @@
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { useDataProvider } from "../../context/Data";
+
+interface props {
+  lotteryInfo: number[];
+}
+const ModalLotteryInfo = ({ lotteryInfo }: props) => {
+  const { changeLanguage } = useDataProvider();
+  return (
+    <View style={styles.modal_info_container}>
+      <View style={styles.header}></View>
+      <View style={styles.lottery_info_container}>
+        {lotteryInfo.map((info: number, index: number) => (
+          <Text key={index}>
+            {index + 1} {changeLanguage("matches is")} {""}
+            {info}₪
+          </Text>
+        ))}
+
+        <Text>{changeLanguage("special number will triple the prize")} </Text>
+        <Text>{changeLanguage("lotterys will be every sunday and wednesday")} </Text>
+      </View>
+    </View>
+  );
+};
+
+export default ModalLotteryInfo;
+
+const styles = StyleSheet.create({
+  lottery_info_container: {
+    justifyContent: "space-around",
+    height: "90%",
+  },
+  modal_info_container: {
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderRadius: 20,
+    backgroundColor: "white",
+    height: 380,
+  },
+  header: {
+    borderTopStartRadius: 15,
+    borderTopEndRadius: 15,
+    height: 40,
+    width: "100%",
+    backgroundColor: "rgb(66, 159, 255)",
+  },
+});

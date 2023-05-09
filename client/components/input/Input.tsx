@@ -1,14 +1,9 @@
-import { StyleSheet, Text, View, TextInput, NativeSyntheticEvent, TextInputChangeEventData } from "react-native";
+import { StyleSheet, Text, View, TextInput } from "react-native";
 import React, { useState } from "react";
 import { useDataProvider } from "../../context/Data";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { GestureResponderEvent } from "react-native-modal";
-interface props {
-  label: string;
-  onChange: (e : string) => void;
-  color?: string;
-}
-const Input = ({ label, onChange, color }: props) => {
+import { inputProps } from "../../types/type";
+const Input = ({ label, onChange, color }: inputProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const { changeLanguage } = useDataProvider();
   const pressHandler = () => {
@@ -16,14 +11,10 @@ const Input = ({ label, onChange, color }: props) => {
   };
   return (
     <View style={styles.container}>
-      <Text style={[styles.label, {color : color ? color : 'white'}]}>{changeLanguage(label)}</Text>
+      <Text style={[styles.label, { color: color ? color : "white" }]}>{changeLanguage(label)}</Text>
 
       <View style={styles.input_container}>
-        <TextInput
-          style={styles.input}
-          secureTextEntry={label !== "username" && !isVisible}
-          onChangeText={onChange}
-        />
+        <TextInput style={styles.input} secureTextEntry={label !== "username" && !isVisible} onChangeText={onChange} />
         {label !== "username" &&
           (isVisible ? (
             <Icon onPress={pressHandler} style={styles.visible_icon} name="visibility-off" />
@@ -39,12 +30,12 @@ export default Input;
 
 const styles = StyleSheet.create({
   container: {
-    height: 90,
+    height: 50,
     justifyContent: "space-between",
   },
   input: {
     width: "90%",
-    
+
     color: "white",
     fontSize: 20,
   },
@@ -59,7 +50,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: "white",
-    fontSize: 19,
+    fontSize: 17,
   },
 
   visible_icon: {

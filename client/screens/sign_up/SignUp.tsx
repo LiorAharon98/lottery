@@ -13,7 +13,7 @@ const SignUp = ({ navigation }: any) => {
     const user = await addUser(username,password)
     setToggleModal(false)
     if (!user)return setToggleError("user already exist")
-    navigation.navigate('create-user')
+    navigation.navigate('create-user-lottery-numbers')
   }
   return (
     <View>

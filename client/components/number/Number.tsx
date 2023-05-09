@@ -1,13 +1,16 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React, { ReactNode } from "react";
+import * as Animatable from "react-native-animatable";
 interface props {
   children: ReactNode;
-  isSpecial : boolean
+  isSpecial: boolean;
 }
-const Number = ({ children,isSpecial }: props) => {
+const Number = ({ children, isSpecial }: props) => {
   return (
-    <View style={styles.container}>
-      <Text style={[styles.number,{ backgroundColor : isSpecial ? 'rgb(255, 59, 59)' : 'rgb(21, 165, 241)'}]}>{children}</Text>
+    <View style={[styles.container, { backgroundColor: isSpecial ? "rgb(255, 59, 59)" : "rgb(21, 165, 241)" }]}>
+      <Animatable.Text style={styles.number} animation={"slideInDown"}>
+        {children}
+      </Animatable.Text>
     </View>
   );
 };
@@ -15,14 +18,15 @@ const Number = ({ children,isSpecial }: props) => {
 export default Number;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+    height: 41,
+    width: 41,
+    borderRadius: 20,
+  },
   number: {
-    width : 40,
-    height : 40,
-    paddingTop : 2,
-    textAlign : 'center',
-    color : 'white',
+    color: "white",
     fontSize: 23,
-    borderRadius : 20,
   },
 });

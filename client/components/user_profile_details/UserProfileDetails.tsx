@@ -5,28 +5,33 @@ import { useDataProvider } from "../../context/Data";
 
 const UserProfileDetails = () => {
   const { user, changeLanguage } = useDataProvider();
+
+  const userInfo = [
+    { label: "member since", info: user.memberSince },
+    { label: "you earn", info: `${user.earned}₪` },
+    { label: "latest win", info: `${user.latestWin.number}₪` },
+  ];
   return (
-    <LinearGradient  colors={["rgb(41, 185, 254)", "rgb(156, 220, 254)"]} style={styles.header_container}>
+    <LinearGradient colors={["rgb(41, 185, 254)", "rgb(156, 220, 254)"]} style={styles.header_container}>
       <View style={styles.user_picture_container}>
-        <Text style={styles.user_name}>
+        <Text style={[styles.text, { fontSize: 24 }]}>
           {changeLanguage("hello")} {user.username}
         </Text>
         {user.profilePicture && <Image style={styles.image} source={{ uri: user.profilePicture }}></Image>}
       </View>
       <View style={styles.user_info_container}>
-        <View style={styles.user_info}>
-          <Text style={styles.text}>{changeLanguage("member since")} </Text>
-          <Text style={styles.text}>{user.memberSince}</Text>
-        </View>
-        <View style={styles.user_info}>
-          <Text style={styles.text}>{changeLanguage("you earn")} </Text>
-          <Text style={styles.text}>{user.earned}₪</Text>
-        </View>
-        <View style={styles.user_info}>
-          <Text style={styles.text}>{changeLanguage("latest win")}</Text>
-          <Text style={styles.text}>{user.latestWin.number}₪</Text>
-        </View>
+        {userInfo.map((currentInfo, index) => (
+          <View key={index} style={styles.user_info}>
+            <Text style={styles.text}>{changeLanguage(currentInfo.label)}</Text>
+            <Text style={styles.text}>{currentInfo.info}</Text>
+          </View>
+        ))}
       </View>
+      {!user.lotteryNumbers && (
+        <Text style={{ textAlign: "center", color: "red", fontSize: 19 }}>
+          {changeLanguage('you didnt choose numbers for best experience please press on lottery')}
+        </Text>
+      )}
     </LinearGradient>
   );
 };
@@ -36,7 +41,7 @@ export default UserProfileDetails;
 const styles = StyleSheet.create({
   header_container: {
     justifyContent: "space-around",
-    height: 300,
+    height: 280,
     width: "100%",
     borderRadius: 10,
   },
@@ -48,10 +53,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
   },
-  user_name: {
-    fontSize: 24,
-    color: "white",
-  },
+
   text: {
     fontSize: 20,
     color: "white",

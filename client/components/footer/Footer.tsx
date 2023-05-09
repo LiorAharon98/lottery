@@ -1,25 +1,44 @@
-import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
-
 import FooterTag from "../footer_tag/FooterTag";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import Icons from "react-native-vector-icons/Entypo";
 
 import { useDataProvider } from "../../context/Data";
 import LanguageChange from "../language_change/LanguageChange";
+import { useState } from "react";
 
 const Footer = () => {
+  const [toggleFooter, setToggleFooter] = useState<string>("");
   const { user } = useDataProvider();
 
+  const onToggleFooter = (value: string) => {
+    setToggleFooter(value);
+  };
   return (
-      <View style={styles.container}>
-        <View style={styles.text_container}>
-          <FooterTag to={user ? "user-page" : "sign-in"} icon={<Icon name="account" size={25} />} />
-          <FooterTag to="latest-lottery" icon={<Icons name="info" size={25} />} />
-          <LanguageChange />
-          <FooterTag to="home" icon={<Icons name="home" size={25} />} />
-        </View>
+    <View style={styles.container}>
+      <View style={styles.text_container}>
+        <FooterTag
+          toggleFooter={toggleFooter}
+          onToggleFooter={onToggleFooter}
+          text={"account"}
+          to={user ? "user-page" : "sign-in"}
+          icon={"account"}
+        />
+        <FooterTag
+          toggleFooter={toggleFooter}
+          onToggleFooter={onToggleFooter}
+          text={"lotterys"}
+          to="latest-lottery"
+          icon={"history"}
+        />
+        <LanguageChange />
+        <FooterTag
+          toggleFooter={toggleFooter}
+          onToggleFooter={onToggleFooter}
+          text={"home"}
+          to="home"
+          icon={"home"}
+        />
       </View>
+    </View>
   );
 };
 const styles = StyleSheet.create({

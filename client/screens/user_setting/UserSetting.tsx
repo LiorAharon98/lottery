@@ -1,30 +1,47 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View, TextInput, ScrollView } from "react-native";
 import React, { useState } from "react";
 import UserProfileDetails from "../../components/user_profile_details/UserProfileDetails";
 import { useDataProvider } from "../../context/Data";
-const UserSetting = () => {
-  const {localImageUpload,user,changeLanguage} = useDataProvider()
-  const handlePress =async()=>{
-    await localImageUpload()
-  }
+import Button from "../../components/button/Button";
+const UserSetting = ({ navigation }: any) => {
+  const { localImageUpload, user, changeLanguage, changePassword } = useDataProvider();
+  const [togglePassword, setTogglePassword] = useState<boolean>(false);
+  const [inp, setInp] = useState<string>("");
+  const handlePress = async () => {
+    await localImageUpload();
+  };
+  const handleChangeNumbers = () => {
+    navigation.navigate("create-user-lottery-numbers");
+  };
+  const handlePasswordChange = () => {
+    changePassword(user.username, inp);
+  };
   return (
-    <>
+    <ScrollView>
       <UserProfileDetails />
       <View style={styles.container}>
-        <View style={styles.text_container}>
-          <Pressable onPress={handlePress}>
+        <Pressable style={styles.text_container} onPress={handlePress}>
+          <Text style={styles.text}>
+            {user.profilePicture ? changeLanguage("change") : changeLanguage("upload")} {changeLanguage("picture")}
+          </Text>
+        </Pressable>
 
-          <Text style={styles.text}>{user.profilePicture ? changeLanguage('change') : changeLanguage('upload')} {changeLanguage('picture')}</Text>
+        <Pressable onPress={handleChangeNumbers} style={styles.text_container}>
+          <Text style={styles.text}>{changeLanguage("change numbers")}</Text>
+        </Pressable>
+
+        {togglePassword ? (
+          <View style={{ height: 70, width: "100%", alignItems: "center" }}>
+            <TextInput onChangeText={setInp} style={{ width: 200, height: 25, borderBottomWidth: 1 }} />
+            <Button onPress={handlePasswordChange}>change</Button>
+          </View>
+        ) : (
+          <Pressable onPress={setTogglePassword.bind(this, true)} style={styles.text_container}>
+            <Text style={styles.text}>{changeLanguage("change password")}</Text>
           </Pressable>
-        </View>
-        <View style={styles.text_container}>
-          <Text style={styles.text}>{changeLanguage('change numbers')}</Text>
-        </View>
-        <View style={styles.text_container}>
-          <Text style={styles.text}>{changeLanguage('change password')}</Text>
-        </View>
+        )}
       </View>
-    </>
+    </ScrollView>
   );
 };
 

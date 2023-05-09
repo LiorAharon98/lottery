@@ -1,20 +1,19 @@
-import { StyleSheet, Text, View, Pressable, GestureResponderEvent } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import FooterTag from "../footer_tag/FooterTag";
 import Modal from "react-native-modal";
-import Icon3 from "react-native-vector-icons/MaterialIcons";
 import CheckIcon from "react-native-vector-icons/AntDesign";
 import { useDataProvider } from "../../context/Data";
-import { useNavigation } from "@react-navigation/native";
+import CountryFlag from "react-native-country-flag";
 const LanguageChange = () => {
-  const navigation = useNavigation();
   const [toggleModal, setToggleModal] = useState<boolean>(false);
-  const [currentLanguage, setCurrentLanguage] = useState<string>("english");
+  const [currentLanguage, setCurrentLanguage] = useState<string>("hebrew");
   const { i18n } = useTranslation();
   const { changeLanguage } = useDataProvider();
   const handleEvent = (e: string) => {
     i18n.changeLanguage(e);
+
     setCurrentLanguage(e);
     setToggleModal(false);
   };
@@ -34,12 +33,13 @@ const LanguageChange = () => {
             >
               <Text>
                 {changeLanguage(label.label)} {currentLanguage === label.label && <CheckIcon name="check" size={16} />}
+                <CountryFlag size={15} isoCode={label.label === "english" ? "us" : "il"} />
               </Text>
             </Pressable>
           ))}
         </View>
       </Modal>
-      <FooterTag onPress={onToggleModal} icon={<Icon3 name="language" size={25} />} />
+      <FooterTag text="language" onPress={onToggleModal} icon="language" />
     </>
   );
 };

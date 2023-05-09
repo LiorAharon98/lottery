@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   memberSince: String,
   profilePicture : String,
   latestWin : Object,
-  lotteryNumbers: Array,
+  lotteryNumbers: Object,
 
 });
 userSchema.pre("save", async function (next) {

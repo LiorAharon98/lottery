@@ -32,6 +32,7 @@ const createNumbers = () => {
 
 const createTime = async () => {
   const currentTime = currentDate();
+
   const currentDay = new Date().getDay();
   const findLottery = await LotteryModel.findOne({ lotteryDate: currentTime });
   if (findLottery) return;

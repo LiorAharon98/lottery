@@ -1,13 +1,14 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useDataProvider } from "../../context/Data";
 import Number from "../../components/number/Number";
 import LoadingScreen from "../../components/loading_screen/LoadingScreen";
-
+import LatestLotterySearch from "../../components/latest_lottery_search/LatestLotterySearch";
+import { currentLottery } from "../../types/type";
 const LatestLottery = () => {
-  const { fetchAllLottery, allLottery } = useDataProvider();
+  const { fetchAllLottery, allLottery, currentDate } = useDataProvider();
   const [toggleModal, setToggleModal] = useState<boolean>(false);
-
+  const [sortLotteryByDate, setSortLotteryByDate] = useState<currentLottery>({} as currentLottery);
   const handleFunc = async () => {
     setToggleModal(true);
     await fetchAllLottery();
@@ -16,34 +17,61 @@ const LatestLottery = () => {
   useEffect(() => {
     handleFunc();
   }, []);
-  const allLotterySort = allLottery.sort((a: { id: number }, b: { id: number }) => {
+
+  const allLotterySort : currentLottery[] = allLottery.sort((a: { id: number }, b: { id: number }) => {
     return a.id > b.id ? -1 : 1;
   });
-  interface currentLottery {
-    lotteryNumbers: { number: number; special: boolean }[];
-    lotteryDate: string;
-  }
-  return (
-    <ScrollView>
-      <LoadingScreen onToggleModal={setToggleModal.bind(this, false)} toggle={toggleModal} />
-      <View style={{flex :1}}>
 
-      {allLotterySort?.map((currentLottery: currentLottery, index: number) => {
-        return (
-          <View style={styles.container} key={index + 1}>
-            <Text style={styles.lottery_date}>{currentLottery.lotteryDate}</Text>
-            <View style={styles.number_container}>
-              {currentLottery.lotteryNumbers.map((currentNum, index) => (
-                <Number key={index} isSpecial={currentNum.special}>
-                  {currentNum.number}
-                </Number>
-              ))}
-            </View>
+  
+  const handleDate = (date: number) => {
+    let dateSelected = date;
+    let sort = allLottery.find((current: currentLottery) => current.lotteryDate === currentDate(dateSelected));
+    if (sort) {
+      setSortLotteryByDate(sort);
+    }
+    else if (!sort && Object.keys(sortLotteryByDate).length > 0) {
+      setSortLotteryByDate({} as currentLottery);
+    }
+  };
+  return (
+    <View style={{ height: "100%" }}>
+      <LoadingScreen onToggleModal={setToggleModal.bind(this, false)} toggle={toggleModal} />
+
+      <LatestLotterySearch allLotterySort={allLotterySort} handleDate={handleDate} />
+      {sortLotteryByDate && Object.keys(sortLotteryByDate).length > 0 && (
+        <View style={styles.container}>
+          <Text style={styles.lottery_date}>{sortLotteryByDate.lotteryDate}</Text>
+          <View style={styles.number_container}>
+            {sortLotteryByDate.lotteryNumbers.map((currentNum: { number: number; special: boolean }, index: number) => (
+              <Number key={index} isSpecial={currentNum.special}>
+                {currentNum.number}
+              </Number>
+            ))}
           </View>
-        );
-      })}
-      </View>
-    </ScrollView>
+        </View>
+      )}
+      {Object.keys(sortLotteryByDate).length === 0 && (
+        <FlatList
+          data={allLotterySort}
+          renderItem={(item) => {
+            return (
+              <View style={styles.container}>
+                <Text style={styles.lottery_date}>{item.item.lotteryDate}</Text>
+                <View style={styles.number_container}>
+                  {item.item.lotteryNumbers.map((currentNum: { number: number; special: boolean }, index: number) => (
+                    <Number key={index} isSpecial={currentNum.special}>
+                      {currentNum.number}
+                    </Number>
+                  ))}
+                </View>
+              </View>
+            );
+          }}
+        >
+          <View></View>
+        </FlatList>
+      )}
+    </View>
   );
 };
 
@@ -61,8 +89,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     width: "85%",
   },
-  lottery_date:{
-    fontSize : 18,
-    
-  }
+  lottery_date: {
+    fontSize: 18,
+  },
 });

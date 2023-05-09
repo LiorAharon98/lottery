@@ -23,9 +23,13 @@ router.post("/sign-in", async (req, res) => {
   }
   return res.json(null);
 });
-router.put("/create-user", async (req, res) => {
+router.put("/create-user-lottery-numbers", async (req, res) => {
   const { arr, username } = req.body;
-  const user = await UserModal.findOneAndUpdate({ username }, { $push: { lotteryNumbers: arr } }, { new: true });
+  const user = await UserModal.findOneAndUpdate(
+    { username },
+    { $set: { lotteryNumbers: { firstColumn: arr[0], secondColumn: arr[1] } } },
+    { new: true }
+  );
   res.json(user);
 });
 router.put("/lottery-page", async (req, res) => {
@@ -40,6 +44,15 @@ router.put("/lottery-page", async (req, res) => {
 router.put("/user-setting", async (req, res) => {
   const { username, profilePicture } = req.body;
   const user = await UserModal.findOneAndUpdate({ username }, { profilePicture }, { new: true });
+  res.json(user);
+});
+
+
+router.post("/user-setting", async (req, res) => {
+  const { username, passwordToChange } = req.body;
+  const salt = await bcrypt.genSalt();
+  const newPassword = await bcrypt.hash(passwordToChange, salt);
+  const user = await UserModal.findOneAndUpdate({ username }, {password : newPassword }, { new: true });
   res.json(user);
 });
 

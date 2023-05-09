@@ -3,18 +3,19 @@ import React, { ReactNode } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { GestureResponderEvent } from "react-native-modal";
 import { Link } from "@react-navigation/native";
+import { useDataProvider } from "../../context/Data";
 interface props {
   children: ReactNode;
   onPress?: (e: GestureResponderEvent) => void;
-  to?: string;
 }
-const SquareBox = ({ children, to, onPress }: props) => {
+const SquareBox = ({ children, onPress }: props) => {
+  const { changeLanguage } = useDataProvider();
   return (
-    <Link onPressIn={onPress} to={to ? to : "home"}>
+    <Pressable onPress={onPress}>
       <LinearGradient colors={["rgb(41, 185, 254)", "rgb(156, 220, 254)"]} style={styles.container}>
-        <Text style={styles.text}>{children}</Text>
+        <Text style={styles.text}>{changeLanguage(children)}</Text>
       </LinearGradient>
-    </Link>
+    </Pressable>
   );
 };
 

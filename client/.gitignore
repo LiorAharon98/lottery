@@ -1,5 +1,6 @@
 pc-api-6072545435332246251-983-234c780767a4.json
 node_modules/
+.env
 .expo/
 dist/
 npm-debug.*

@@ -1,4 +1,4 @@
-import { StyleSheet, ScrollView, Text } from "react-native";
+import { StyleSheet, ScrollView, Text, View, Dimensions } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Input from "../input/Input";
 import React, { useState } from "react";
@@ -7,12 +7,11 @@ import { useDataProvider } from "../../context/Data";
 import { Link } from "@react-navigation/native";
 
 interface props {
-  navigation: any;
   text: string;
   handleFunc: Function;
   error: string;
 }
-const SignCard = ({ navigation, text, handleFunc, error }: props) => {
+const SignCard = ({ text, handleFunc, error }: props) => {
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -20,7 +19,7 @@ const SignCard = ({ navigation, text, handleFunc, error }: props) => {
   const handlePress = async () => {
     if (!userName || !password) return alert("field cannot be empty");
     if (text === "sign up" && confirmPassword !== password) return alert("password not match");
-    handleFunc(userName, password);
+    handleFunc(userName.trim(), password);
   };
   return (
     <ScrollView>
@@ -34,13 +33,14 @@ const SignCard = ({ navigation, text, handleFunc, error }: props) => {
         <Input onChange={setPassword} label={"password"} />
         {text === "sign up" && <Input onChange={setConfirmPassword} label={"confirm password"} />}
         {error && <Text style={styles.error_text}>{changeLanguage(error)} !</Text>}
-        <Button onPress={handlePress}>{text}</Button>
-
-        <Link style={styles.transfer_link_container} to={text === "sign in" ? "/sign-up" : "/sign-in"}>
-          <Text style={styles.transfer_link}>
-            {text === "sign in" ? changeLanguage("dont have an account") : changeLanguage("already have an account")}?
-          </Text>
-        </Link>
+        <View style={{ height: 150, alignItems: "center" , justifyContent:'space-around' }}>
+          <Button onPress={handlePress}>{text}</Button>
+          <Link style={styles.transfer_link_container} to={text === "sign in" ? "/sign-up" : "/sign-in"}>
+            <Text style={styles.transfer_link}>
+              {text === "sign in" ? changeLanguage("dont have an account") : changeLanguage("already have an account")}?
+            </Text>
+          </Link>
+        </View>
       </LinearGradient>
     </ScrollView>
   );
@@ -51,7 +51,8 @@ export default SignCard;
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    height: 710,
+    height: Dimensions.get("window").height * 0.86,
+
     justifyContent: "space-around",
     backgroundColor: "rgb(0, 144, 239)",
   },
@@ -59,9 +60,7 @@ const styles = StyleSheet.create({
     color: "white",
     textDecorationLine: "underline",
   },
-  transfer_link_container: {
-    padding: 10,
-  },
+
   error_text: {
     color: "rgb(255, 19, 56)",
     fontSize: 22,

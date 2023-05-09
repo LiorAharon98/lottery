@@ -7,16 +7,15 @@ interface props {
 }
 
 const LoadingScreen = ({ toggle, onToggleModal }: props) => {
-  const {changeLanguage} = useDataProvider()
+  const { changeLanguage } = useDataProvider();
   return (
     <>
       <Modal isVisible={toggle}>
         <Pressable style={styles.pressable_container} onPress={onToggleModal}>
-
           <View style={styles.container}>
-            <Text style={styles.text}>{changeLanguage('Loading')}</Text>
+            <Text style={styles.text}>{changeLanguage("Loading")}</Text>
             <ActivityIndicator size={"large"} color="rgb(55, 185, 255)" />
-        </View>
+          </View>
         </Pressable>
       </Modal>
     </>
@@ -26,7 +25,6 @@ const LoadingScreen = ({ toggle, onToggleModal }: props) => {
 export default LoadingScreen;
 
 const styles = StyleSheet.create({
-
   pressable_container: {
     width: "100%",
     height: "100%",
@@ -35,15 +33,14 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 10,
     alignItems: "center",
-    flexDirection : 'row',
+    flexDirection: "row",
     justifyContent: "center",
-    height: 150,
+    height: 120,
     backgroundColor: "white",
   },
   text: {
-
-    color:"rgb(55, 185, 255)",
-    margin : 20,
+    color: "rgb(55, 185, 255)",
+    margin: 20,
     fontSize: 22,
   },
 });
