@@ -14,4 +14,3 @@ app.use("/lottery", LotteryRoute);
 createLottery();
 
 app.listen(process.env.PORT);
-
