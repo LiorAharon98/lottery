@@ -4,7 +4,6 @@ const router = express.Router();
 
 router.get("/lottery-page", async (req, res) => {
   const lastLottery = await LotteryModel.findOne({}).sort({ _id: -1 });
-
   res.json(lastLottery);
 });
 router.get("/latest-lottery", async (req, res) => {

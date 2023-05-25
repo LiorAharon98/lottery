@@ -47,7 +47,11 @@ router.put("/user-setting", async (req, res) => {
   res.json(user);
 });
 
-
+router.put("/user/bank" , async(req,res)=>{
+const {username} =req.body
+const user = await UserModal.findOneAndUpdate({username}, {$set : {bank : true}},{new : true})
+res.json(user)
+})
 router.post("/user-setting", async (req, res) => {
   const { username, passwordToChange } = req.body;
   const salt = await bcrypt.genSalt();
