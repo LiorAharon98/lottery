@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import Footer from "./components/footer/Footer";
 import Homepage from "./screens/homepage/Homepage";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import DataProvider from "./context/Data";
 import LotteryPage from "./screens/lottery_page/LotteryPage";
@@ -16,6 +16,10 @@ import OddsPage from "./screens/odds_page/OddsPage";
 import { useState, useEffect, useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { LogBox } from "react-native";
+import BankScreen from "./screens/bank_screen/BankScreen";
+import axios from "axios";
+import store from "./store/Index";
+import { Provider } from "react-redux";
 LogBox.ignoreLogs([" Invalid prop `textStyle` of type `array` supplied to `Cell`, expected `object`"]);
 import "./language/Data";
 export default function App() {
@@ -27,13 +31,11 @@ export default function App() {
     async function prepare() {
       try {
         // Pre-load fonts, make any API calls you need to do here
-        // await Font.loadAsync(Entypo.font);
-
+        await axios.get("https:lottery-node-js.herokuapp.com/lottery/lottery-page");
         await new Promise((resolve) => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e);
       } finally {
-        // Tell the application to render
         setAppIsReady(true);
       }
     }
@@ -43,11 +45,6 @@ export default function App() {
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
-      // This tells the splash screen to hide immediately! If we call this after
-      // `setAppIsReady`, then we may see a blank screen while the app is
-      // loading its initial state and rendering its first pixels. So instead,
-      // we hide the splash screen once we know the root view has already
-      // performed layout.
       await SplashScreen.hideAsync();
     }
   }, [appIsReady]);
@@ -55,27 +52,38 @@ export default function App() {
   if (!appIsReady) {
     return null;
   }
+  const MyTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: "white",
+      primary: "rgb(255, 255, 255)",
+    },
+  };
 
   return (
-    <DataProvider>
-      <StatusBar style="auto" />
-      <NavigationContainer theme={{ colors: { background: "white" } }}>
-        <Stack.Navigator
-          screenOptions={{ headerStyle: { backgroundColor: "white" }, headerTitle: "", headerBackVisible: false }}
-        >
-          <Stack.Screen name="home" component={Homepage} />
-          <Stack.Screen name="sign-in" component={SignIn} />
-          <Stack.Screen name="sign-up" component={SignUp} />
-          <Stack.Screen name="create-user-lottery-numbers" component={CreateUserLotteryNumber} />
-          <Stack.Screen name="user-page" component={UserPage} />
-          <Stack.Screen name="lottery-page" component={LotteryPage} />
-          <Stack.Screen name="setting-page" component={UserSetting} />
-          <Stack.Screen name="latest-lottery" component={LatestLottery} />
-          <Stack.Screen name="odds-page" component={OddsPage} />
-          <Stack.Screen name="about-page" component={About} />
-        </Stack.Navigator>
-        <Footer />
-      </NavigationContainer>
-    </DataProvider>
+    <Provider store={store}>
+      <DataProvider>
+        <StatusBar style="auto" />
+        <NavigationContainer theme={MyTheme}>
+          <Stack.Navigator
+            screenOptions={{ headerStyle: { backgroundColor: "white" }, headerTitle: "", headerBackVisible: false }}
+          >
+            <Stack.Screen name="home" component={Homepage} />
+            <Stack.Screen name="sign-in" component={SignIn} />
+            <Stack.Screen name="sign-up" component={SignUp} />
+            <Stack.Screen name="create-user-lottery-numbers" component={CreateUserLotteryNumber} />
+            <Stack.Screen name="user-page" component={UserPage} />
+            <Stack.Screen name="lottery-page" component={LotteryPage} />
+            <Stack.Screen name="setting-page" component={UserSetting} />
+            <Stack.Screen name="latest-lottery" component={LatestLottery} />
+            <Stack.Screen name="odds-page" component={OddsPage} />
+            <Stack.Screen name="bank-page" component={BankScreen} />
+            <Stack.Screen name="about-page" component={About} />
+          </Stack.Navigator>
+          <Footer />
+        </NavigationContainer>
+      </DataProvider>
+    </Provider>
   );
 }

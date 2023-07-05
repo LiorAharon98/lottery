@@ -27,15 +27,15 @@ const SignCard = ({ text, handleFunc, error }: props) => {
         style={styles.container}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        colors={["rgb(41, 185, 254)", "rgb(156, 220, 254)"]}
+        colors={["rgb(55, 103, 255)", "rgb(156, 220, 254)"]}
       >
         <Input onChange={setUserName} label={"username"} />
         <Input onChange={setPassword} label={"password"} />
         {text === "sign up" && <Input onChange={setConfirmPassword} label={"confirm password"} />}
         {error && <Text style={styles.error_text}>{changeLanguage(error)} !</Text>}
-        <View style={{ height: 150, alignItems: "center" , justifyContent:'space-around' }}>
+        <View style={{ height: 150, alignItems: "center", justifyContent: "space-around" }}>
           <Button onPress={handlePress}>{text}</Button>
-          <Link style={styles.transfer_link_container} to={text === "sign in" ? "/sign-up" : "/sign-in"}>
+          <Link to={text === "sign in" ? "/sign-up" : "/sign-in"}>
             <Text style={styles.transfer_link}>
               {text === "sign in" ? changeLanguage("dont have an account") : changeLanguage("already have an account")}?
             </Text>
@@ -51,7 +51,7 @@ export default SignCard;
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    height: Dimensions.get("window").height * 0.86,
+    height: Dimensions.get("window").height * 0.87,
 
     justifyContent: "space-around",
     backgroundColor: "rgb(0, 144, 239)",

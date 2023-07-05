@@ -2,14 +2,15 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { useDataProvider } from "../../context/Data";
 import Number from "../number/Number";
+import { useSelector } from "react-redux";
 
 interface columnProps {
   column: string;
 }
 
 const UserLotteryNumbers = ({ column }: columnProps) => {
-  const { user, changeLanguage } = useDataProvider();
-  
+  const {changeLanguage } = useDataProvider();
+  const user = useSelector(state=>state.user)
   return (
     <>
       <Text>{column === 'firstColumn' ? changeLanguage("first") : changeLanguage("second")}</Text>

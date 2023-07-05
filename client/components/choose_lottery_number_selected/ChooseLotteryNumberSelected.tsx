@@ -1,13 +1,13 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import * as Animatable from "react-native-animatable";
 interface props {
   number: number;
-  onPress: (e: number) => void;
+  onPress: (e: number) => boolean | void;
   numbers: number[];
   toggleModal: boolean;
 }
-const ChooseLotteryNumberSelected = ({ number, onPress, numbers, toggleModal }: props) => {
+const ChooseLotteryNumberSelected = ({ number, onPress, toggleModal }: props) => {
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const pressHandler = (number: number) => {
     const func = onPress(number);
@@ -19,11 +19,22 @@ const ChooseLotteryNumberSelected = ({ number, onPress, numbers, toggleModal }: 
   }, [toggleModal]);
 
   return (
-    <Pressable onPress={pressHandler.bind(this, number)} style={isSelected ? styles.number_container_selected : styles.number_container_unselected}>
+    <Pressable
+      onPress={pressHandler.bind(this, number)}
+      style={{ width: 50, height: 50, margin: 4, justifyContent: "center", alignItems: "center" }}
+    >
       <Animatable.Text
-        duration={500}
-        transition={"color"}
-        style={[styles.number, { color: isSelected ? "white" : "black" }]}
+        delay={400}
+        duration={400}
+        transition={["color", "backgroundColor"]}
+        style={[
+          styles.number_container,
+          {
+            color: isSelected ? "white" : "black",
+            backgroundColor: isSelected ? "rgb(21, 165, 241)" : "white",
+            borderWidth: isSelected ? undefined : 0.7,
+          },
+        ]}
       >
         {number}
       </Animatable.Text>
@@ -34,26 +45,12 @@ const ChooseLotteryNumberSelected = ({ number, onPress, numbers, toggleModal }: 
 export default ChooseLotteryNumberSelected;
 
 const styles = StyleSheet.create({
-  number_container_selected: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "rgb(21, 165, 241)",
+  number_container: {
     borderRadius: 20,
-    height: 50,
+    textAlign: "center",
+    padding: 5,
+
     width: 50,
-    margin: 4,
-  },
-  number_container_unselected: {
-    alignItems: "center",
-    justifyContent: "center",
-    height: 50,
-    width: 50,
-    margin: 4,
-    borderRadius: 20,
-    borderWidth: 0.7,
-  },
-  number: {
-    color: "white",
 
     fontSize: 24,
   },

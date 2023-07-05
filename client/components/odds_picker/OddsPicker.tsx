@@ -1,5 +1,4 @@
 import { StyleSheet, View, Text } from "react-native";
-import React from "react";
 import Modal from "react-native-modal";
 interface props {
   changeLoopNum: (e: number) => void;
@@ -13,6 +12,7 @@ const OddsPicker = ({ changeLoopNum, toggle, closeToggle }: props) => {
     closeToggle();
   };
   return (
+    <>
     <Modal isVisible={toggle}>
       <View style={styles.container}>
         {text.map((current) => (
@@ -22,6 +22,7 @@ const OddsPicker = ({ changeLoopNum, toggle, closeToggle }: props) => {
         ))}
       </View>
     </Modal>
+        </>
   );
 };
 

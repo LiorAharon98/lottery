@@ -1,15 +1,15 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
-import { useDataProvider } from "../../context/Data";
-import { lotteryType } from "../../types/type";
+import { lotteryType, currentLottery } from "../../types/type";
 import Number from "../number/Number";
-
-const RandomLotteryNumbers = () => {
-  const { randomLotteryNumbers } = useDataProvider();
+interface props {
+  arr: currentLottery;
+}
+const RandomLotteryNumbers = ({ arr }: props) => {
   return (
     <View style={styles.random_lottery_numbers_container}>
       <View style={styles.random_lottery_numbers_container2}>
-        {randomLotteryNumbers?.lotteryNumbers?.map((number: lotteryType, index: number) => (
+        {arr?.lotteryNumbers?.map((number: lotteryType, index: number) => (
           <Number isSpecial={number.special} key={index}>
             {number.number}
           </Number>

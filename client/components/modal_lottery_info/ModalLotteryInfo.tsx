@@ -1,13 +1,21 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import Modal from "react-native-modal"
 import { useDataProvider } from "../../context/Data";
 
 interface props {
   lotteryInfo: number[];
+  toggle : string;
+  onModalToggle : (string :string)=>void
 }
-const ModalLotteryInfo = ({ lotteryInfo }: props) => {
+const ModalLotteryInfo = ({toggle ,onModalToggle}: props) => {
   const { changeLanguage } = useDataProvider();
+  const lotteryInfo = [20, 200, 500, 5000, 100000, 1000000];
   return (
+
+ <Modal  isVisible={toggle ==='info'}>
+  <Pressable style={{height :'95%',width:'100%' , justifyContent:'center'}} onPress={onModalToggle.bind(this,'')}>
+
     <View style={styles.modal_info_container}>
       <View style={styles.header}></View>
       <View style={styles.lottery_info_container}>
@@ -22,6 +30,8 @@ const ModalLotteryInfo = ({ lotteryInfo }: props) => {
         <Text>{changeLanguage("lotterys will be every sunday and wednesday")} </Text>
       </View>
     </View>
+        </Pressable>
+        </Modal>
   );
 };
 
@@ -37,7 +47,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 20,
     backgroundColor: "white",
-    height: 380,
+    height: 400,
   },
   header: {
     borderTopStartRadius: 15,

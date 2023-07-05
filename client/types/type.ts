@@ -30,6 +30,7 @@ export interface userType {
   pictureUrl: string;
   earned: number;
   latestWin: { number: number; date: string };
+  bank : boolean
 }
 export interface props {
   children: ReactNode;
@@ -52,8 +53,8 @@ export interface columType {
 }
 export interface modalLotteryProps {
   countGuessAndPrizes: { firstColumn: columType; secondColumn: columType };
-  closeModal: (e: GestureResponderEvent) => void;
-  activateModal: boolean;
+  closeModal: () => void;
+  activateModal: string;
 }
 export interface foundsNumbersType {
   foundCnt: number;

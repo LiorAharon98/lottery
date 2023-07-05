@@ -1,16 +1,26 @@
-import { ActivityIndicator, GestureResponderEvent, Pressable, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Pressable, StyleSheet, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import { useDataProvider } from "../../context/Data";
-interface props {
-  toggle: boolean;
-  onToggleModal: (e: GestureResponderEvent) => void;
-}
+import { useState,useEffect } from "react";
 
-const LoadingScreen = ({ toggle, onToggleModal }: props) => {
-  const { changeLanguage } = useDataProvider();
+const LoadingScreen = () => {
+  const [toggleModal, setToggleModal] = useState<boolean>(false);
+  const { changeLanguage,fetchAllLottery } = useDataProvider();
+  const handleFunc = async()=>{
+ setToggleModal(true)
+ await fetchAllLottery()
+ setToggleModal(false)
+
+  }
+  useEffect(() => {
+    handleFunc();
+  }, []);
+  const onToggleModal= ()=>{
+    setToggleModal(true)
+  }
   return (
     <>
-      <Modal isVisible={toggle}>
+      <Modal isVisible={toggleModal}>
         <Pressable style={styles.pressable_container} onPress={onToggleModal}>
           <View style={styles.container}>
             <Text style={styles.text}>{changeLanguage("Loading")}</Text>

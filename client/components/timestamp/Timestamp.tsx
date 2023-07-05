@@ -81,7 +81,7 @@ export default Timestamp;
 const styles = StyleSheet.create({
   text_container: {
     alignItems: "center",
-    height: 65,
+    height: 55,
     marginTop: 10,
     marginBottom: 20,
     width: 60,

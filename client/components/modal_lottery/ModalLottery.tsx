@@ -2,10 +2,19 @@ import { StyleSheet, View, Pressable, Text } from "react-native";
 import Modal from "react-native-modal";
 import { Table, Row, Rows } from "react-native-table-component";
 import { useDataProvider } from "../../context/Data";
-import { modalLotteryProps } from "../../types/type";
+import { currentLottery, columType, userType } from "../../types/type";
+import { LinearGradient } from "expo-linear-gradient";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+interface props {
+  randomLotteryNumbers: currentLottery;
+  countGuessAndPrizes: { firstColumn: columType; secondColumn: columType };
+}
+const ModalLottery = ({ countGuessAndPrizes, randomLotteryNumbers }: props) => {
+  const { changeLanguage, userEarnedLottery } = useDataProvider();
+  const [isWon, setIsWon] = useState<boolean>(false);
+  const userSelector = useSelector<any>(state =>state.user)
 
-const ModalLottery = ({ closeModal, activateModal, countGuessAndPrizes }: modalLotteryProps) => {
-  const { changeLanguage } = useDataProvider();
   const rows = [changeLanguage("column"), changeLanguage("guess"), changeLanguage("prize"), changeLanguage("special")];
   const columns = [
     [
@@ -21,15 +30,35 @@ const ModalLottery = ({ closeModal, activateModal, countGuessAndPrizes }: modalL
       changeLanguage(countGuessAndPrizes.secondColumn.special ? "yes" : "no"),
     ],
   ];
-
+  const handleEffect = async () => {
+    if (countGuessAndPrizes.firstColumn.cnt || countGuessAndPrizes.secondColumn.cnt) {
+      await userEarnedLottery(
+        userSelector,
+        userSelector.username,
+        countGuessAndPrizes.firstColumn.prize + countGuessAndPrizes.secondColumn.prize
+      );
+      return setIsWon(true);
+    }
+  };
+  useEffect(() => {
+    handleEffect();
+  }, [randomLotteryNumbers]);
+  const closeModal = () => {
+    setIsWon(false);
+  };
   return (
-    <Modal isVisible={activateModal}>
+    <Modal isVisible={isWon}>
       <Pressable onPress={closeModal}>
         <View style={styles.page_container}>
           <View style={styles.container}>
             {countGuessAndPrizes.firstColumn.cnt || countGuessAndPrizes.secondColumn.cnt ? (
               <>
-                <View style={styles.header}></View>
+                <LinearGradient
+                  style={styles.header}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  colors={["rgb(55, 103, 255)", "rgb(156, 220, 254)"]}
+                ></LinearGradient>
                 <View style={styles.table_container}>
                   <Text style={{ textAlign: "center", marginBottom: 15 }}>{changeLanguage("congratulations")} !</Text>
                   <Table style={{ height: 150 }} borderStyle={{ borderWidth: 1, borderColor: "black" }}>
@@ -75,11 +104,10 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   header: {
-    borderTopEndRadius: 15,
-    borderTopStartRadius: 15,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
     paddingTop: 8,
     paddingLeft: 5,
-    backgroundColor: "rgb(66, 159, 255)",
     width: "100%",
     height: 40,
   },

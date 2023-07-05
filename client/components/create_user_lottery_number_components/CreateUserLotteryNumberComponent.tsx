@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, GestureResponderEvent } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { useState, useRef, useMemo, useEffect } from "react";
 import { useDataProvider } from "../../context/Data";
 import ModalInfo from "../modal_info/ModalInfo";
@@ -17,7 +17,7 @@ const CreateUserLotteryNumberComponent = ({
   onSelectNumbers,
   onSelectedSpecialNumber,
 }: propsCreateUserLottery) => {
-  const { user, changeLanguage, addLotteryNumbersToUser } = useDataProvider();
+  const { changeLanguage } = useDataProvider();
   const scrollRef = useRef<ScrollView>(null);
   const [toggleModal, setToggleModal] = useState<boolean>(false);
   const [toggleSpecialNum, setToggleSpecialNum] = useState<lotteryType>({} as lotteryType);
@@ -67,11 +67,11 @@ const CreateUserLotteryNumberComponent = ({
             <Text style={styles.header_text}>{changeLanguage("choose numbers")}!</Text>
           </View>
           <View style={styles.number_container}>
-            {numbers.numbers.map((current, index) => (
+            {numbers.numbers.map((current) => (
               <ChooseLotteryNumberSelected
                 toggleModal={toggleModal}
                 numbers={numbers.numbers}
-                key={index}
+                key={current}
                 number={current}
                 onPress={onSelectNumbers}
               />

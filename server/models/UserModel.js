@@ -5,9 +5,11 @@ const userSchema = new mongoose.Schema({
   password: String,
   earned: Number,
   memberSince: String,
+  bank : Boolean,
   profilePicture : String,
   latestWin : Object,
   lotteryNumbers: Object,
+
 
 });
 userSchema.pre("save", async function (next) {

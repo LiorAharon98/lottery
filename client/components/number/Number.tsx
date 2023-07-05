@@ -8,7 +8,7 @@ interface props {
 const Number = ({ children, isSpecial }: props) => {
   return (
     <View style={[styles.container, { backgroundColor: isSpecial ? "rgb(255, 59, 59)" : "rgb(21, 165, 241)" }]}>
-      <Animatable.Text style={styles.number} animation={"slideInDown"}>
+      <Animatable.Text style={styles.number} duration={500} delay={500} animation={"slideInDown"}>
         {children}
       </Animatable.Text>
     </View>

@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet,View } from "react-native";
 import React, { useState } from "react";
 import SignCard from "../../components/sign_card/SignCard";
 import { useDataProvider } from "../../context/Data";
-import LoadingScreen from "../../components/loading_screen/LoadingScreen";
+import SignCardModal from "../../components/sign_card_modal/SignCardModal";
 
 const SignUp = ({ navigation }: any) => {
   const [toggleError,setToggleError] = useState<string>('')
@@ -17,8 +17,8 @@ const SignUp = ({ navigation }: any) => {
   }
   return (
     <View>
-      <SignCard error={toggleError} handleFunc={handleFunc} text="sign up" navigation={navigation} />
-      <LoadingScreen  onToggleModal={setToggleModal.bind(this,false)} toggle={toggleModal}/>
+      <SignCard error={toggleError} handleFunc={handleFunc} text="sign up"/>
+      <SignCardModal toggle={toggleModal} onToggleModal={setToggleModal.bind(this,false)}/>
     </View>
   );
 };

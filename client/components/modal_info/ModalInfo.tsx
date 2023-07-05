@@ -38,7 +38,6 @@ const ModalInfo = ({ toggle, pressHandler, userLotteryNumArr, info, closeModal }
             <Button onPress={pressHandler}>{changeLanguage("next")}</Button>
           </View>
         )}
-        {info === "lottery-info" && <ModalLotteryInfo lotteryInfo={lotteryInfo} />}
       </Pressable>
     </Modal>
   );

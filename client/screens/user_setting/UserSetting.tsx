@@ -3,18 +3,24 @@ import React, { useState } from "react";
 import UserProfileDetails from "../../components/user_profile_details/UserProfileDetails";
 import { useDataProvider } from "../../context/Data";
 import Button from "../../components/button/Button";
+import { useSelector } from "react-redux";
 const UserSetting = ({ navigation }: any) => {
-  const { localImageUpload, user, changeLanguage, changePassword } = useDataProvider();
+  const { localImageUpload, changeLanguage, changePassword, hasBankAccount } = useDataProvider();
   const [togglePassword, setTogglePassword] = useState<boolean>(false);
+  const { username, profilePicture } = useSelector<any>((state) => state.user);
   const [inp, setInp] = useState<string>("");
   const handlePress = async () => {
-    await localImageUpload();
+    await localImageUpload(username);
   };
   const handleChangeNumbers = () => {
     navigation.navigate("create-user-lottery-numbers");
   };
   const handlePasswordChange = () => {
-    changePassword(user.username, inp);
+    changePassword(username, inp);
+    setTogglePassword(false);
+  };
+  const handleBank = async () => {
+    await hasBankAccount(username);
   };
   return (
     <ScrollView>
@@ -22,7 +28,7 @@ const UserSetting = ({ navigation }: any) => {
       <View style={styles.container}>
         <Pressable style={styles.text_container} onPress={handlePress}>
           <Text style={styles.text}>
-            {user.profilePicture ? changeLanguage("change") : changeLanguage("upload")} {changeLanguage("picture")}
+            {profilePicture ? changeLanguage("change") : changeLanguage("upload")} {changeLanguage("picture")}
           </Text>
         </Pressable>
 

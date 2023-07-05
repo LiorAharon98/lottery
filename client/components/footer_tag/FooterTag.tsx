@@ -35,18 +35,18 @@ const FooterTag = ({ icon, to, onPress, text, toggleFooter, onToggleFooter }: pr
     <Pressable onPress={pressHandler}>
       <View style={styles.container}>
         {text === "account" && (
-          <Icon color={toggleFooter === text ? "rgb(21, 165, 241)" : "black"} name={icon} size={25} />
+          <Icon style={toggleFooter === text ? styles.active : styles.inactive}  name={icon} size={25} />
         )}
         {text === "lotterys" && (
-          <Icon color={toggleFooter === text ? "rgb(21, 165, 241)" : "black"} name={icon} size={25} />
+          <Icon style={toggleFooter === text ? styles.active : styles.inactive} name={icon} size={25} />
         )}
         {text === "home" && (
-          <Icon color={toggleFooter === text ? "rgb(21, 165, 241)" : "black"} name={icon} size={25} />
+          <Icon style={toggleFooter === text ? styles.active : styles.inactive} name={icon} size={25} />
         )}
         {text === "language" && (
-          <Icon2 color={toggleFooter === text ? "rgb(21, 165, 241)" : "black"} name={icon} size={25} />
+          <Icon2 style={toggleFooter === text ? styles.active : styles.inactive} name={icon} size={25} />
         )}
-        <Text style={{ color: toggleFooter === text ? "rgb(21, 165, 241)" : "black" }}>{changeLanguage(text)}</Text>
+        <Text style={toggleFooter === text ? styles.active : styles.inactive}>{changeLanguage(text)}</Text>
       </View>
     </Pressable>
   );
@@ -55,6 +55,14 @@ const FooterTag = ({ icon, to, onPress, text, toggleFooter, onToggleFooter }: pr
 export default FooterTag;
 
 const styles = StyleSheet.create({
+  active:{
+    color:'rgb(2, 136, 209)'
+  },
+  inactive:{
+    color :'black',
+    opacity :0.4
+    
+  },
   container: {
     width: 70,
     alignItems: "center",

@@ -89,6 +89,13 @@ const translation_hebrew = {
     finish : 'סיים',
     account : 'חשבון',
     language : 'שפה',
-    lotterys : 'הגרלות'
+    lotterys : 'הגרלות',
+    'bank connected' : 'בנק מחובר',
+    bank : 'בנק',
+    'would you like to connect' : 'האם תרצה להתחבר',
+    connect : 'התחבר',
+    'bank link' : 'קישור לבנק',
+    'to connect this user to Bank you have to register to Bank and identical username as this username' : 'על מנת לחבר את המשתמש לבנק עליך להירשם לבנק שבקישור עם שם משתמש זהה למשתמש הנוכחי'
+
 };
 export default translation_hebrew;

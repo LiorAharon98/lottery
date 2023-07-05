@@ -3,8 +3,10 @@ import { useRef } from "react";
 import { useDataProvider } from "../../context/Data";
 import CreateUserLotteryNumberComponent from "../../components/create_user_lottery_number_components/CreateUserLotteryNumberComponent";
 import { lotteryType } from "../../types/type";
+import { useSelector } from "react-redux";
 const CreateUserLotteryNumber = ({ navigation }: any) => {
-  const { user, addLotteryNumbersToUser } = useDataProvider();
+  const { addLotteryNumbersToUser } = useDataProvider();
+  const user = useSelector((state) => state.user);
   let selectedNumbers: lotteryType[] = [];
   let selectedSpecialNum: lotteryType = {} as lotteryType;
   let userLotteryNumArr: lotteryType[][] = [];
