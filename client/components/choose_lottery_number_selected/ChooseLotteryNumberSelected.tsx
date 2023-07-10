@@ -1,13 +1,13 @@
 import { Pressable, StyleSheet, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import * as Animatable from "react-native-animatable";
+import { useSelector } from "react-redux";
 interface props {
   number: number;
   onPress: (e: number) => boolean | void;
   numbers: number[];
-  toggleModal: boolean;
 }
-const ChooseLotteryNumberSelected = ({ number, onPress, toggleModal }: props) => {
+const ChooseLotteryNumberSelected = ({ number, onPress, test }: props) => {
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const pressHandler = (number: number) => {
     const func = onPress(number);
@@ -15,16 +15,12 @@ const ChooseLotteryNumberSelected = ({ number, onPress, toggleModal }: props) =>
     setIsSelected((prev) => !prev);
   };
   useEffect(() => {
-    setIsSelected(false);
-  }, [toggleModal]);
-
+    if (isSelected) setIsSelected(false);
+  }, [test]);
   return (
-    <Pressable
-      onPress={pressHandler.bind(this, number)}
-      style={{ width: 50, height: 50, margin: 4, justifyContent: "center", alignItems: "center" }}
-    >
+    <Pressable onPress={pressHandler.bind(this, number)} style={styles.container}>
       <Animatable.Text
-        delay={400}
+        delay={250}
         duration={400}
         transition={["color", "backgroundColor"]}
         style={[
@@ -45,6 +41,13 @@ const ChooseLotteryNumberSelected = ({ number, onPress, toggleModal }: props) =>
 export default ChooseLotteryNumberSelected;
 
 const styles = StyleSheet.create({
+  container: {
+    width: 50,
+    height: 50,
+    margin: 4,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   number_container: {
     borderRadius: 20,
     textAlign: "center",

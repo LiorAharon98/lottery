@@ -1,21 +1,19 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import React from "react";
 import Modal, { GestureResponderEvent } from "react-native-modal";
 import Button from "../button/Button";
 import { useDataProvider } from "../../context/Data";
 import { lotteryType } from "../../types/type";
-import ModalLotteryInfo from "../modal_lottery_info/ModalLotteryInfo";
+import { useSelector } from "react-redux";
 interface props {
-  toggle: boolean;
   pressHandler: (e: GestureResponderEvent) => void;
   userLotteryNumArr?: lotteryType[][];
   info: string;
   closeModal?: (e: GestureResponderEvent) => void;
 }
-const ModalInfo = ({ toggle, pressHandler, userLotteryNumArr, info, closeModal }: props) => {
+const ModalInfo = ({ pressHandler, userLotteryNumArr, info, closeModal }: props) => {
+  const { toggle } = useSelector((state) => state.modal);
   const { changeLanguage } = useDataProvider();
 
-  const lotteryInfo = [20, 200, 500, 5000, 100000, 1000000];
   return (
     <Modal isVisible={toggle}>
       <Pressable style={styles.container} onPress={closeModal}>

@@ -1,5 +1,4 @@
 import { View, StyleSheet, Text, Image, Pressable } from "react-native";
-import { useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { useDataProvider } from "../../context/Data";
 import * as Animatable from "react-native-animatable";
@@ -7,19 +6,14 @@ import UserOptionIcon from "../../components/user_option_icon/UserOptionIcon";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useSelector } from "react-redux";
 const Homepage = ({ navigation }: any) => {
-  const {changeLanguage, getItemFromStorage } = useDataProvider();
-  const user = useSelector(state=>state.user)
+  const { changeLanguage } = useDataProvider();
+  const user = useSelector((state) => state.user);
   const handlePress = (e: string) => {
     if (e === "sign-in" && user.username) return navigation.push("user-page");
     navigation.navigate(e);
   };
-  const handleEffect = async () => {
-    const item = await getItemFromStorage();
-    if (item) navigation.push("user-page");
-  };
-  useEffect(() => {
-    handleEffect();
-  }, []);
+
+
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -37,21 +31,23 @@ const Homepage = ({ navigation }: any) => {
                 <Image style={styles.image} source={{ uri: user.profilePicture }} />
               </Pressable>
             ) : (
-              <UserOptionIcon onPress={handlePress.bind(this, "sign-in")} text={user.username ? user.username : "sign in"}>
-                <Icon name="account" size={35} />
-              </UserOptionIcon>
-            )}
-          </Animatable.View>
-          {!user && (
-            <>
-              <Text style={{ textAlign: "center", fontSize: 20 }}>{changeLanguage("or")}</Text>
-              <Animatable.View delay={500} animation={"slideInDown"}>
-                <UserOptionIcon onPress={handlePress.bind(this, "sign-up")} text={"sign up"}>
+              <>
+                <UserOptionIcon
+                  onPress={handlePress.bind(this, "sign-in")}
+                  text={user.username ? user.username : "sign in"}
+                >
                   <Icon name="account" size={35} />
                 </UserOptionIcon>
-              </Animatable.View>
-            </>
-          )}
+                <Text style={styles.text}>{changeLanguage("or")}</Text>
+                <UserOptionIcon
+                  onPress={handlePress.bind(this, "sign-up")}
+                  text={user.username ? user.username : "sign up"}
+                >
+                  <Icon name="account" size={35} />
+                </UserOptionIcon>
+              </>
+            )}
+          </Animatable.View>
         </View>
       </View>
 
@@ -82,6 +78,11 @@ const styles = StyleSheet.create({
     height: 90,
     width: 90,
     borderRadius: 20,
+  },
+  text: {
+    textAlign: "center",
+    fontSize: 20,
+    margin: 15,
   },
 });
 export default Homepage;

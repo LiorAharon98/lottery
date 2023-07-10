@@ -20,9 +20,8 @@ export const DataContext = createContext<any>({});
 const DataProvider = ({ children }: props) => {
   const dispatch = useDispatch();
   const serverUrl =
-    process.env.NODE_ENV === "development"
-      ? process.env.CREATE_REACT_APP_LOCAL_URL
-      : process.env.CREATE_REACT_APP_HEROKU_URL;
+    process.env.NODE_ENV === "development" ? process.env.EXPO_PUBLIC_LOCAL_URL : process.env.EXPO_PUBLIC_HEROKU_URL;
+
   const { t } = useTranslation();
   const setItemFromStorage = async (user: userType) => {
     await AsyncStorage.setItem("key", JSON.stringify(user));
@@ -30,6 +29,7 @@ const DataProvider = ({ children }: props) => {
 
   const getItemFromStorage = async () => {
     const data = await AsyncStorage.getItem("key");
+
     if (data) {
       dispatch(userAction.signIn(JSON.parse(data)));
       return JSON.parse(data);

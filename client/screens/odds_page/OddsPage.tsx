@@ -28,7 +28,7 @@ const OddsPage = () => {
       howManyLoop++;
       if (founds.cnt === loopNum) isWon = true;
     }
-    setFoundNum({ foundCnt: howManyLoop, foundNumbers: founds.foundsNumbers });
+    setFoundNum({ foundCnt: howManyLoop, foundNumbers: founds?.foundsNumbers });
   };
   const changeLoopNum = (number: number) => {
     setLoopNum(number);

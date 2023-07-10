@@ -1,13 +1,14 @@
 import { StyleSheet, Text, View, ScrollView } from "react-native";
-import { useState, useRef, useMemo, useEffect } from "react";
+import { useRef, useMemo, useState } from "react";
 import { useDataProvider } from "../../context/Data";
 import ModalInfo from "../modal_info/ModalInfo";
 import Card from "../card/Card";
 import ChooseLotteryNumberSelected from "../choose_lottery_number_selected/ChooseLotteryNumberSelected";
 import Button from "../button/Button";
-import React from "react";
-import ChooseLotterySpecialNumber from "../choose_lottery_special_number/ChooseLotterySpecialNumber";
-import { lotteryType, propsCreateUserLottery, createdNumbers } from "../../types/type";
+import { propsCreateUserLottery, createdNumbers } from "../../types/type";
+import ChooseLotterySpecialNumberContainer from "../choose_lottery_special_number_container/ChooseLotterySpecialNumberContainer";
+import { modalAction, selectedNumbersAction, selectedSpecialNumberAction } from "../../store/Index";
+import { useDispatch } from "react-redux";
 
 const CreateUserLotteryNumberComponent = ({
   selectedNumbers,
@@ -18,9 +19,9 @@ const CreateUserLotteryNumberComponent = ({
   onSelectedSpecialNumber,
 }: propsCreateUserLottery) => {
   const { changeLanguage } = useDataProvider();
+  const dispatch = useDispatch();
   const scrollRef = useRef<ScrollView>(null);
-  const [toggleModal, setToggleModal] = useState<boolean>(false);
-  const [toggleSpecialNum, setToggleSpecialNum] = useState<lotteryType>({} as lotteryType);
+  const [test, setTest] = useState(false);
   const numbers: createdNumbers = useMemo(() => {
     let specialNum: number[] = [];
     let numbers: number[] = [];
@@ -36,28 +37,19 @@ const CreateUserLotteryNumberComponent = ({
   const onToggleModal = () => {
     if (selectedNumbers.length !== 6 || !selectedSpecialNum.number)
       return alert("must choose 6 numbers and 1 special number");
-    setToggleModal(true);
+    setTest((prev) => !prev);
+    dispatch(modalAction.toggleOn());
+    dispatch(selectedNumbersAction.resetNumbers());
+    dispatch(selectedSpecialNumberAction.resetNumbers());
   };
   const pressHandler2 = () => {
     pressHandler();
-    setToggleModal(false);
+    dispatch(modalAction.toggleOFF());
   };
 
-  const onSelectedSpecialNumber2 = (number: number) => {
-    setToggleSpecialNum({ number, special: true });
-    onSelectedSpecialNumber(number);
-  };
-  useEffect(() => {
-    setToggleSpecialNum({} as lotteryType);
-  }, [toggleModal]);
   return (
     <ScrollView ref={scrollRef}>
-      <ModalInfo
-        info="choose-lottery-info"
-        userLotteryNumArr={userLotteryNumArr}
-        pressHandler={pressHandler2}
-        toggle={toggleModal}
-      />
+      <ModalInfo info="choose-lottery-info" userLotteryNumArr={userLotteryNumArr} pressHandler={pressHandler2} />
       <Card>
         <View>
           <View style={styles.header_container}>
@@ -69,7 +61,7 @@ const CreateUserLotteryNumberComponent = ({
           <View style={styles.number_container}>
             {numbers.numbers.map((current) => (
               <ChooseLotteryNumberSelected
-                toggleModal={toggleModal}
+                test={test}
                 numbers={numbers.numbers}
                 key={current}
                 number={current}
@@ -83,14 +75,7 @@ const CreateUserLotteryNumberComponent = ({
           </View>
 
           <View style={styles.number_container}>
-            {numbers.specialNum.map((current, index) => (
-              <ChooseLotterySpecialNumber
-                key={index}
-                toggle={toggleSpecialNum}
-                number={current}
-                onPress={onSelectedSpecialNumber2}
-              />
-            ))}
+            <ChooseLotterySpecialNumberContainer test={test} numbers={numbers} pressHandler={onSelectedSpecialNumber} />
           </View>
         </View>
         <Button onPress={onToggleModal}>{changeLanguage(userLotteryNumArr.length < 1 ? "next" : "finish")}</Button>
@@ -119,8 +104,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
     textDecorationLine: "underline",
-  },
-  selected_numbers: {
-    fontSize: 24,
   },
 });

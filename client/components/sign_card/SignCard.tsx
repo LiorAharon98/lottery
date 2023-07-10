@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height * 0.87,
 
     justifyContent: "space-around",
-    backgroundColor: "rgb(0, 144, 239)",
   },
   transfer_link: {
     color: "white",

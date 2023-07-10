@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { useDataProvider } from "../../context/Data";
-const Timestamp = () => {
+const NextLotteryTimeStamp = () => {
   const [helpState, setHelpState] = useState<number>(0);
   const { changeLanguage } = useDataProvider();
 
@@ -77,7 +77,7 @@ const Timestamp = () => {
   );
 };
 
-export default Timestamp;
+export default NextLotteryTimeStamp;
 const styles = StyleSheet.create({
   text_container: {
     alignItems: "center",

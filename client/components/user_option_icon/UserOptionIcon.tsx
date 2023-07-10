@@ -13,7 +13,10 @@ interface props {
 const UserOptionIcon = ({ children, text, onPress, height, width }: props) => {
   const { changeLanguage } = useDataProvider();
   return (
-    <Pressable onPress={onPress} style={[styles.container, { height: height ? height : 100, width: width ? width : 100 }]}>
+    <Pressable
+      onPress={onPress}
+      style={[styles.container, { height: height ? height : 100, width: width ? width : 100 }]}
+    >
       {children}
       <Text style={styles.text}>{changeLanguage(text)}</Text>
     </Pressable>

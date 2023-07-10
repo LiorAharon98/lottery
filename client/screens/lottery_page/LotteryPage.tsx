@@ -4,7 +4,6 @@ import RandomLotteryNumbers from "../../components/random_lottery_numbers/Random
 import { useDataProvider } from "../../context/Data";
 import ModalLottery from "../../components/modal_lottery/ModalLottery";
 import UserLotteryNumbers from "../../components/user_lottery_numbers/UserLotteryNumbers";
-import Timestamp from "../../components/timestamp/Timestamp";
 import { currentLottery } from "../../types/type";
 import LotteryPageButtons from "../../components/lottery_page_buttons/LotteryPageButtons";
 import compareNumbers from "../../context/compareNumbers";
@@ -40,7 +39,6 @@ const LotteryPage = () => {
   return (
     <ScrollView>
       <ModalLottery randomLotteryNumbers={randomLotteryNumbers} countGuessAndPrizes={countGuessAndPrizes} />
-      <Timestamp />
       <View style={styles.main}>
         <Text style={styles.number}>
           {changeLanguage("lottery date")} : {randomLotteryNumbers?.lotteryDate}
@@ -62,7 +60,9 @@ export default LotteryPage;
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1,
+    height: 600,
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   user_number_container: {

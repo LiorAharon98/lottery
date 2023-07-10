@@ -1,26 +1,22 @@
 import { StyleSheet, Pressable } from "react-native";
-import React, { useEffect } from "react";
 import * as Animatable from "react-native-animatable";
+import { useSelector } from "react-redux";
 
 interface props {
   number: number;
-  onPress: (e: number) => void;
-  toggle: { number: number; special: boolean };
+  pressHandler: (e: number) => void;
 }
-const ChooseLotterySpecialNumber = ({ number, onPress, toggle }: props) => {
-  const handlePress = () => {
-    onPress(number);
-  };
-
+const ChooseLotterySpecialNumber = ({ number, pressHandler }: props) => {
+  const { specialNumber } = useSelector((state) => state.selectedSpecialNumber);
   return (
     <Pressable
-      onPress={handlePress.bind(this, number)}
-      style={toggle.number === number ? styles.number_container_selected : styles.number_container_unselected}
+      onPress={pressHandler.bind(this, number)}
+      style={specialNumber.number === number ? styles.number_container_selected : styles.number_container_unselected}
     >
       <Animatable.Text
         transition={"color"}
         duration={500}
-        style={[styles.number, { color: toggle.number === number ? "white" : "black" }]}
+        style={[styles.number, { color: specialNumber.number === number ? "white" : "black" }]}
       >
         {number}
       </Animatable.Text>

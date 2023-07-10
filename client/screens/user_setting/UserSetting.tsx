@@ -30,20 +30,25 @@ const UserSetting = ({ navigation }: any) => {
           <Text style={styles.text}>
             {profilePicture ? changeLanguage("change") : changeLanguage("upload")} {changeLanguage("picture")}
           </Text>
+          <Text style={styles.arrow}>{">"}</Text>
         </Pressable>
 
         <Pressable onPress={handleChangeNumbers} style={styles.text_container}>
           <Text style={styles.text}>{changeLanguage("change numbers")}</Text>
+          <Text style={styles.arrow}>{">"}</Text>
         </Pressable>
+    
 
         {togglePassword ? (
           <View style={{ height: 70, width: "100%", alignItems: "center" }}>
             <TextInput onChangeText={setInp} style={{ width: 200, height: 25, borderBottomWidth: 1 }} />
+
             <Button onPress={handlePasswordChange}>change</Button>
           </View>
         ) : (
           <Pressable onPress={setTogglePassword.bind(this, true)} style={styles.text_container}>
             <Text style={styles.text}>{changeLanguage("change password")}</Text>
+            <Text style={styles.arrow}>{">"}</Text>
           </Pressable>
         )}
       </View>
@@ -61,11 +66,15 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   text_container: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     height: 40,
-    width: "80%",
-    borderBottomWidth: 1,
+    width: "90%",
   },
   text: {
     fontSize: 20,
+  },
+  arrow: {
+    fontSize: 22,
   },
 });
