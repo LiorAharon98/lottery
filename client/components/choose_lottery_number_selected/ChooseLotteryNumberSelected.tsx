@@ -7,8 +7,9 @@ interface props {
   onPress: (e: number) => boolean | void;
   numbers: number[];
 }
-const ChooseLotteryNumberSelected = ({ number, onPress, test }: props) => {
+const ChooseLotteryNumberSelected = ({ number, onPress }: props) => {
   const [isSelected, setIsSelected] = useState<boolean>(false);
+  const {toggle} = useSelector(state=>state.modal)
   const pressHandler = (number: number) => {
     const func = onPress(number);
     if (func) return setIsSelected(false);
@@ -16,7 +17,7 @@ const ChooseLotteryNumberSelected = ({ number, onPress, test }: props) => {
   };
   useEffect(() => {
     if (isSelected) setIsSelected(false);
-  }, [test]);
+  }, [toggle]);
   return (
     <Pressable onPress={pressHandler.bind(this, number)} style={styles.container}>
       <Animatable.Text

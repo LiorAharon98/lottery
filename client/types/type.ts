@@ -30,7 +30,7 @@ export interface userType {
   pictureUrl: string;
   earned: number;
   latestWin: { number: number; date: string };
-  bank : boolean
+  bank: boolean;
 }
 export interface props {
   children: ReactNode;

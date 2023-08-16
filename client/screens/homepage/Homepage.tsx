@@ -13,7 +13,6 @@ const Homepage = ({ navigation }: any) => {
     navigation.navigate(e);
   };
 
-
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -31,13 +30,15 @@ const Homepage = ({ navigation }: any) => {
                 <Image style={styles.image} source={{ uri: user.profilePicture }} />
               </Pressable>
             ) : (
+              <UserOptionIcon
+                onPress={handlePress.bind(this, "sign-in")}
+                text={user.username ? user.username : "sign in"}
+              >
+                <Icon name="account" size={35} />
+              </UserOptionIcon>
+            )}
+            {!user && (
               <>
-                <UserOptionIcon
-                  onPress={handlePress.bind(this, "sign-in")}
-                  text={user.username ? user.username : "sign in"}
-                >
-                  <Icon name="account" size={35} />
-                </UserOptionIcon>
                 <Text style={styles.text}>{changeLanguage("or")}</Text>
                 <UserOptionIcon
                   onPress={handlePress.bind(this, "sign-up")}

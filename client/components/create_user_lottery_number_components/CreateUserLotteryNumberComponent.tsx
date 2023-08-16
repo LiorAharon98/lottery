@@ -21,7 +21,6 @@ const CreateUserLotteryNumberComponent = ({
   const { changeLanguage } = useDataProvider();
   const dispatch = useDispatch();
   const scrollRef = useRef<ScrollView>(null);
-  const [test, setTest] = useState(false);
   const numbers: createdNumbers = useMemo(() => {
     let specialNum: number[] = [];
     let numbers: number[] = [];
@@ -37,7 +36,6 @@ const CreateUserLotteryNumberComponent = ({
   const onToggleModal = () => {
     if (selectedNumbers.length !== 6 || !selectedSpecialNum.number)
       return alert("must choose 6 numbers and 1 special number");
-    setTest((prev) => !prev);
     dispatch(modalAction.toggleOn());
     dispatch(selectedNumbersAction.resetNumbers());
     dispatch(selectedSpecialNumberAction.resetNumbers());
@@ -61,7 +59,6 @@ const CreateUserLotteryNumberComponent = ({
           <View style={styles.number_container}>
             {numbers.numbers.map((current) => (
               <ChooseLotteryNumberSelected
-                test={test}
                 numbers={numbers.numbers}
                 key={current}
                 number={current}
@@ -75,7 +72,7 @@ const CreateUserLotteryNumberComponent = ({
           </View>
 
           <View style={styles.number_container}>
-            <ChooseLotterySpecialNumberContainer test={test} numbers={numbers} pressHandler={onSelectedSpecialNumber} />
+            <ChooseLotterySpecialNumberContainer  numbers={numbers} pressHandler={onSelectedSpecialNumber} />
           </View>
         </View>
         <Button onPress={onToggleModal}>{changeLanguage(userLotteryNumArr.length < 1 ? "next" : "finish")}</Button>

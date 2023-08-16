@@ -13,12 +13,18 @@
     "preview": {
       "channel": "preview",
       "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_HEROKU_URL": "https:lottery-node-js.herokuapp.com/lottery"
+      },
       "ios": {
         "resourceClass": "m1-medium"
       }
     },
     "production": {
       "channel": "production",
+      "env": {
+        "EXPO_PUBLIC_HEROKU_URL": "https:lottery-node-js.herokuapp.com/lottery"
+      },
 
       "ios": {
         "resourceClass": "m1-medium"

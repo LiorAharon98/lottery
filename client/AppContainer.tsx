@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
@@ -46,7 +46,7 @@ const AppContainer = () => {
   }, []);
   if (!initialRoute) return;
   return (
-    <>
+    <View style={{ flex: 1 }}>
       <StatusBar style="auto" />
       <NavigationContainer theme={MyTheme}>
         <Stack.Navigator
@@ -77,7 +77,7 @@ const AppContainer = () => {
         </Stack.Navigator>
         <Footer />
       </NavigationContainer>
-    </>
+    </View>
   );
 };
 
