@@ -1,4 +1,8 @@
 const LotteryModel = require("./models/LotteryModel");
+const mongoose = require("mongoose");
+require("dotenv").config();
+mongoose.set("strictQuery", false);
+mongoose.connect(process.env.MONGODB_URI);
 const currentDate = () => {
   const date = new Date();
   const day = date.getDate();
@@ -6,6 +10,7 @@ const currentDate = () => {
   const year = date.getFullYear();
   return `${day}-${month}-${year}`;
 };
+
 const createNumbers = () => {
   let tempArr = [];
   let randomNumber;
@@ -32,7 +37,6 @@ const createNumbers = () => {
 
 const createTime = async () => {
   const currentTime = currentDate();
-
   const currentDay = new Date().getDay();
   const findLottery = await LotteryModel.findOne({ lotteryDate: currentTime });
   if (findLottery) return;
@@ -42,5 +46,4 @@ const createTime = async () => {
     await LotteryModel.create(lotteryNumbers);
   }
 };
-
-module.exports = createTime;
+createTime();
