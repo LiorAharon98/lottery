@@ -46,4 +46,5 @@ const createTime = async () => {
     await LotteryModel.create(lotteryNumbers);
   }
 };
+console.log('success')
 createTime();
