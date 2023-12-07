@@ -41,10 +41,11 @@ const createTime = async () => {
   const findLottery = await LotteryModel.findOne({ lotteryDate: currentTime });
   if (findLottery) return;
   const allLottery = await LotteryModel.find({});
+  console.log('success2')
   if (currentDay === 0 || currentDay === 3) {
     const lotteryNumbers = { lotteryNumbers: createNumbers(), lotteryDate: currentTime, id: allLottery.length };
+    console.log('success1')
     await LotteryModel.create(lotteryNumbers);
   }
 };
-console.log('success')
 createTime();
