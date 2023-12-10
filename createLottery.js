@@ -36,16 +36,20 @@ const createNumbers = () => {
 };
 
 const createTime = async () => {
+  console.log("starting function");
   const currentTime = currentDate();
   const currentDay = new Date().getDay();
   const findLottery = await LotteryModel.findOne({ lotteryDate: currentTime });
   if (findLottery) return;
-  const allLottery = await LotteryModel.find({});
-  console.log('success2')
+  console.log('a')
   if (currentDay === 0 || currentDay === 3) {
+    console.log("starting day");
+    const allLottery = await LotteryModel.find({});
     const lotteryNumbers = { lotteryNumbers: createNumbers(), lotteryDate: currentTime, id: allLottery.length };
-    console.log('success1')
+    console.log(lotteryNumbers)
+     console.log("middle");
     await LotteryModel.create(lotteryNumbers);
+    console.log('finish create numbers')
   }
 };
 createTime();
