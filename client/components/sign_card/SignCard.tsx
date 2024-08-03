@@ -23,12 +23,9 @@ const SignCard = ({ text, handleFunc, error }: props) => {
   };
   return (
     <ScrollView>
-      <LinearGradient
-        style={styles.container}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        colors={["rgb(55, 103, 255)", "rgb(156, 220, 254)"]}
-      >
+      <View style={{flexDirection :'column' , alignItems :'center' , justifyContent :'space-around' , height :650}}>
+
+      <LinearGradient style={styles.container} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={["white", "white"]}>
         <Input onChange={setUserName} label={"username"} />
         <Input onChange={setPassword} label={"password"} />
         {text === "sign up" && <Input onChange={setConfirmPassword} label={"confirm password"} />}
@@ -42,6 +39,7 @@ const SignCard = ({ text, handleFunc, error }: props) => {
           </Link>
         </View>
       </LinearGradient>
+      </View>
     </ScrollView>
   );
 };
@@ -51,17 +49,15 @@ export default SignCard;
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    height: Dimensions.get("window").height * 0.87,
+    height: Dimensions.get("window").height * 0.7,
 
     justifyContent: "space-around",
   },
   transfer_link: {
-    color: "white",
     textDecorationLine: "underline",
   },
 
   error_text: {
-    color: "rgb(255, 19, 56)",
     fontSize: 22,
     textDecorationLine: "underline",
   },

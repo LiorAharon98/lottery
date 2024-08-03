@@ -7,7 +7,7 @@ interface props {
 }
 const Number = ({ children, isSpecial }: props) => {
   return (
-    <View style={[styles.container, { backgroundColor: isSpecial ? "rgb(255, 59, 59)" : "rgb(21, 165, 241)" }]}>
+    <View style={[styles.container, { backgroundColor: isSpecial ? "rgb(255, 79, 16)" : "rgb(55, 103, 255)" }]}>
       <Animatable.Text style={styles.number} duration={500} delay={500} animation={"slideInDown"}>
         {children}
       </Animatable.Text>
@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
-    height: 41,
-    width: 41,
+    height: 43,
+    width: 43,
     borderRadius: 20,
   },
   number: {

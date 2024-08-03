@@ -56,7 +56,7 @@ export default FooterTag;
 
 const styles = StyleSheet.create({
   active:{
-    color:'rgb(2, 136, 209)'
+    color:'rgb(55, 103, 255)'
   },
   inactive:{
     color :'black',

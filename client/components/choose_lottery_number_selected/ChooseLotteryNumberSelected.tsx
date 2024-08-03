@@ -28,7 +28,7 @@ const ChooseLotteryNumberSelected = ({ number, onPress }: props) => {
           styles.number_container,
           {
             color: isSelected ? "white" : "black",
-            backgroundColor: isSelected ? "rgb(21, 165, 241)" : "white",
+            backgroundColor: isSelected ? "rgb(55, 103, 255)" : "white",
             borderWidth: isSelected ? undefined : 0.7,
           },
         ]}

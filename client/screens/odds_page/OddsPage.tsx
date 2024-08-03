@@ -47,7 +47,7 @@ const OddsPage = () => {
           <>
             <Text style={styles.text}>{loopNum}</Text>
             <Animatable.View duration={700} animation={"slideInUp"} style={styles.button_container}>
-              <LoadingIndicator calculatorLoops={calculatorLoops} />
+              <LoadingIndicator  calculatorLoops={calculatorLoops} />
             </Animatable.View>
           </>
         )}

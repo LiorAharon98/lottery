@@ -2,7 +2,6 @@ import { StyleSheet,View} from "react-native";
 import React, { useState } from "react";
 import SignCard from "../../components/sign_card/SignCard";
 import { useDataProvider } from "../../context/Data";
-import LoadingScreen from "../../components/loading_screen/LoadingScreen";
 import SignCardModal from "../../components/sign_card_modal/SignCardModal";
 const SignIn = ({ navigation }: any) => {
   const { selectedUser } = useDataProvider();

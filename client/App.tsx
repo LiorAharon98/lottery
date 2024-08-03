@@ -39,13 +39,12 @@ export default function App() {
     return null;
   }
   return (
-    <View style={{flex:1}}>
-
-    <Provider store={store}>
-      <DataProvider>
-        <AppContainer />
-      </DataProvider>
-    </Provider>
+    <View style={{ flex: 1 }}>
+      <Provider store={store}>
+        <DataProvider>
+          <AppContainer />
+        </DataProvider>
+      </Provider>
     </View>
   );
 }

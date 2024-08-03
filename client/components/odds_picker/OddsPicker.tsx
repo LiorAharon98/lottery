@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
 import Modal from "react-native-modal";
 interface props {
   changeLoopNum: (e: number) => void;
@@ -13,16 +13,18 @@ const OddsPicker = ({ changeLoopNum, toggle, closeToggle }: props) => {
   };
   return (
     <>
-    <Modal isVisible={toggle}>
-      <View style={styles.container}>
-        {text.map((current) => (
-          <Text key={current} onPress={pressHandler.bind(this, current)} style={styles.text}>
-            {current}
-          </Text>
-        ))}
-      </View>
-    </Modal>
-        </>
+      <Modal backdropOpacity={0.95} backdropColor="white" isVisible={toggle}>
+        <View style={styles.container}>
+          <ScrollView style={styles.text_container}>
+            {text.map((current) => (
+              <Text key={current} onPress={pressHandler.bind(this, current)} style={styles.text}>
+                {current}
+              </Text>
+            ))}
+          </ScrollView>
+        </View>
+      </Modal>
+    </>
   );
 };
 
@@ -30,17 +32,15 @@ export default OddsPicker;
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    justifyContent: "space-around",
-    backgroundColor: "white",
-    height: 330,
-    borderRadius: 20,
+    height: 140,
   },
   text: {
     width: "100%",
-    height: 35,
     textAlign: "center",
-    fontSize: 20,
-    color: "rgb(21, 165, 241)",
+    fontSize: 24,
+    marginTop: 20,
+  },
+  text_container: {
+    width: "100%",
   },
 });

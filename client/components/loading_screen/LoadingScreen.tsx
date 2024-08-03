@@ -20,11 +20,10 @@ const LoadingScreen = () => {
   }
   return (
     <>
-      <Modal isVisible={toggleModal}>
+      <Modal backdropOpacity={0.9} backdropColor="white" isVisible={toggleModal}>
         <Pressable style={styles.pressable_container} onPress={onToggleModal}>
           <View style={styles.container}>
-            <Text style={styles.text}>{changeLanguage("Loading")}</Text>
-            <ActivityIndicator size={"large"} color="rgb(55, 185, 255)" />
+            <ActivityIndicator size={"large"} color="rgb(55, 103, 255)" />
           </View>
         </Pressable>
       </Modal>
@@ -46,7 +45,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     height: 120,
-    backgroundColor: "white",
   },
   text: {
     color: "rgb(55, 185, 255)",

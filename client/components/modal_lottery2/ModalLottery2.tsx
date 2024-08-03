@@ -41,7 +41,7 @@ const ModalLottery2 = ({ countGuessAndPrizes, activateModal,onModalToggle }: pro
                   style={styles.header}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 1 }}
-                  colors={["rgb(55, 103, 255)", "rgb(156, 220, 254)"]}
+                  colors={["rgb(55, 103, 255)", "rgb(55, 103, 255)"]}
                 ></LinearGradient>
                 <View style={styles.table_container}>
                   <Text style={{ textAlign: "center", marginBottom: 15 }}>{changeLanguage("congratulations")} !</Text>

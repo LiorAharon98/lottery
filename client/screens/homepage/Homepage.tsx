@@ -19,7 +19,7 @@ const Homepage = ({ navigation }: any) => {
         style={styles.header}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        colors={["rgb(55, 103, 255)", "rgb(156, 220, 254)"]}
+        colors={["rgb(55, 103, 255)", "rgb(55, 103, 255)"]}
       ></LinearGradient>
 
       <View style={styles.button_container}>

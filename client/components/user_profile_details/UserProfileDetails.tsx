@@ -12,7 +12,7 @@ const UserProfileDetails = () => {
     { label: "latest win", info: `${user.latestWin.number}₪` },
   ];
   return (
-    <LinearGradient colors={["rgb(55, 103, 255)", "rgb(156, 220, 254)"]} style={styles.header_container}>
+    <LinearGradient colors={["rgb(55, 103, 255)", "rgb(55, 103, 255)"]} style={styles.header_container}>
       <View style={styles.user_picture_container}>
         <Text style={[styles.text, { fontSize: 24 }]}>
           {changeLanguage("hello")} {user.username}
@@ -41,7 +41,7 @@ export default UserProfileDetails;
 const styles = StyleSheet.create({
   header_container: {
     justifyContent: "space-around",
-    height: 280,
+    height: 240,
     width: "100%",
     borderTopRightRadius :0,
     borderTopLeftRadius :0,

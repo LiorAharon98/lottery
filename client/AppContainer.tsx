@@ -23,7 +23,6 @@ const AppContainer = () => {
   const Stack = createNativeStackNavigator();
   const [initialRoute, setInitialRoute] = useState("");
   const { getItemFromStorage } = useDataProvider();
-
   const MyTheme = {
     ...DefaultTheme,
     colors: {
@@ -50,7 +49,7 @@ const AppContainer = () => {
       <StatusBar style="auto" />
       <NavigationContainer theme={MyTheme}>
         <Stack.Navigator
-          screenOptions={{ headerStyle: { backgroundColor: "white" }, headerTitle: "", headerBackVisible: false }}
+          screenOptions={{ headerStyle: { backgroundColor: "white"}, headerTitle: "", headerBackVisible: true  ,}}
         >
           {initialRoute === "user-page" ? (
             <>

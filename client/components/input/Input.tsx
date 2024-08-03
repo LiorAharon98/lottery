@@ -11,7 +11,7 @@ const Input = ({ label, onChange, color }: inputProps) => {
   };
   return (
     <View style={styles.container}>
-      <Text style={[styles.label, { color: color ? color : "white" }]}>{changeLanguage(label)}</Text>
+      <Text style={[styles.label, { color: color ? color : "black" }]}>{changeLanguage(label)}</Text>
 
       <View style={styles.input_container}>
         <TextInput style={styles.input} secureTextEntry={label !== "username" && !isVisible} onChangeText={onChange} />
@@ -36,20 +36,16 @@ const styles = StyleSheet.create({
   input: {
     width: "90%",
 
-    color: "white",
     fontSize: 20,
   },
   input_container: {
     flexDirection: "row",
     alignItems: "center",
-    borderBottomWidth: 2,
-    borderBottomColor: "white",
-    marginTop: 10,
-    width: 230,
-    height: 40,
+    borderBottomWidth: 1,
+    width: 220,
+    height: 50,
   },
   label: {
-    color: "white",
     fontSize: 17,
   },
 

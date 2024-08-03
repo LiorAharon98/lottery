@@ -15,7 +15,7 @@ const LoadingIndicator = ({ calculatorLoops }: any) => {
         <Button onPress={handlePress.bind(this, "firstColumn")}>first column</Button>
         <Button onPress={handlePress.bind(this, "secondColumn")}>second column</Button>
       </View>
-      {loading && <ActivityIndicator color={"rgb(55, 185, 255)"} size={30} />}
+      {loading && <ActivityIndicator color={"rgb(55, 103, 255)"} size={30} />}
     </View>
   );
 };

@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   number_container_selected: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgb(21, 165, 241)",
+    backgroundColor: "rgb(55, 103, 255)",
     borderRadius: 20,
     height: 50,
     width: 50,

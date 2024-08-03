@@ -13,11 +13,11 @@ const ModalNextLotteryTimeStamp = () => {
   return (
     <View>
       {!toggleModal && (
-        <UserOptionIcon onPress={handlePress} text="next lottery">
-          <Icon size={35} name="attach-money" />
+        <UserOptionIcon backgroundColor="rgb(116, 166, 247)" onPress={handlePress} text="next lottery">
+          <Icon color={'white'} size={35} name="attach-money" />
         </UserOptionIcon>
       )}
-      <Modal isVisible={toggleModal}>
+      <Modal backdropOpacity={0.95} backdropColor="white" isVisible={toggleModal}>
         <Pressable onPress={handlePress}>
           <NextLotteryTimeStamp />
         </Pressable>

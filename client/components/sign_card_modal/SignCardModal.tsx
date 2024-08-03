@@ -13,10 +13,9 @@ const SignCardModal = ({toggle,onToggleModal} : props) => {
  
   return (
     <>
-      <Modal isVisible={toggle}>
+      <Modal backdropColor="white" backdropOpacity={0.8} isVisible={toggle}>
         <Pressable style={styles.pressable_container} onPress={onToggleModal}>
           <View style={styles.container}>
-            <Text style={styles.text}>{changeLanguage("Loading")}</Text>
             <ActivityIndicator size={"large"} color="rgb(55, 185, 255)" />
           </View>
         </Pressable>

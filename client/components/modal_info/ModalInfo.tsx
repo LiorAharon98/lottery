@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 15,
     height: 40,
     width: "100%",
-    backgroundColor: "rgb(66, 159, 255)",
+    backgroundColor: "rgb(55, 103, 255)",
   },
   container: {
     height: "100%",

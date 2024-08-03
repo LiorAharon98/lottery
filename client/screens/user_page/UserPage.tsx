@@ -36,25 +36,25 @@ const UserPage = () => {
       <UserProfileDetails />
       <Animatable.View style={styles.container_box} delay={500} animation={"slideInUp"}>
         <View style={styles.row_container}>
-          <UserOptionIcon onPress={handlePress.bind(this, "setting-page")} text="setting">
-            <Icon2 size={35} name="setting" />
+          <UserOptionIcon  backgroundColor="rgb(0, 85, 241)" onPress={handlePress.bind(this, "setting-page")} text="setting">
+            <Icon2 color={'white'} size={35} name="setting" />
           </UserOptionIcon>
-          <UserOptionIcon onPress={handlePressLottery} text="lottery">
-            <Icon4 size={35} name="attach-money" />
+          <UserOptionIcon backgroundColor="rgb(0, 204, 0)" onPress={handlePressLottery} text="lottery">
+            <Icon4 color={'white'} size={35} name="attach-money" />
           </UserOptionIcon>
         </View>
         <View style={styles.row_container}>
-          <UserOptionIcon onPress={handlePress.bind(this, "odds-page")} text="odds">
-            <Icon2 size={35} name="question" />
+          <UserOptionIcon backgroundColor="rgb(255, 79, 16)" onPress={handlePress.bind(this, "odds-page")} text="odds">
+            <Icon2 color={'white'} size={35} name="question" />
           </UserOptionIcon>
-          <UserOptionIcon onPress={handlePress.bind(this, "bank-page")} text="bank">
-            <Icon5 size={35} name="bank" />
+          <UserOptionIcon backgroundColor="rgb(102, 206, 254)" onPress={handlePress.bind(this, "bank-page")} text="bank">
+            <Icon5 color={'white'} size={35} name="bank" />
           </UserOptionIcon>
         </View>
         <View style={styles.row_container}>
           <ModalNextLotteryTimeStamp />
-          <UserOptionIcon onPress={handlePress.bind(this, "log out")} text="log out">
-            <Icon size={35} name="log-out" />
+          <UserOptionIcon backgroundColor="rgb(206, 145, 120)" onPress={handlePress.bind(this, "log out")} text="log out">
+            <Icon color={'white'} size={35} name="log-out" />
           </UserOptionIcon>
         </View>
       </Animatable.View>
@@ -72,5 +72,6 @@ const styles = StyleSheet.create({
   row_container: {
     flexDirection: "row",
     justifyContent: "space-around",
+    
   },
 });

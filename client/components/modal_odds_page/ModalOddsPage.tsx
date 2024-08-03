@@ -17,7 +17,7 @@ export default ModalOddsPage;
 
 const styles = StyleSheet.create({
   icon: {
-    color: "rgb(21, 165, 241)",
+    color: "rgb(55, 103, 255)",
     padding: 20,
   },
 });

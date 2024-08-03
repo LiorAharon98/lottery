@@ -18,7 +18,7 @@ const LatestLotterySorted = () => {
           keyExtractor={(item) => item.id}
           renderItem={(item) => {
             return (
-              <Animatable.View duration={3000} delay={500} animation={"slideInDown"} style={styles.container}>
+              <Animatable.View  duration={2000} delay={500}  animation={"fadeIn"} style={styles.container}>
                 <Text style={styles.lottery_date}>{item.item.lotteryDate}</Text>
                 <View style={styles.number_container}>
                   {item.item.lotteryNumbers.map((currentNum: { number: number; special: boolean }, index: number) => (
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   number_container: {
     flexDirection: "row",
     justifyContent: "space-around",
-    width: "85%",
+    width: "90%",
   },
   lottery_date: {
     fontSize: 18,

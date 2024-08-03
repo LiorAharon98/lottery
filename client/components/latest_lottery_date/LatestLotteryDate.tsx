@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { currentLottery } from "../../types/type";
 import { useDataProvider } from "../../context/Data";
 import { allLotteryAction } from "../../store/Index";
-import CalenderIcon from "react-native-vector-icons/FontAwesome";
+import SearchIcon from "react-native-vector-icons/EvilIcons";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -28,7 +28,7 @@ const LatestLotteryDate = () => {
   };
   return (
     <>
-      <CalenderIcon onPress={handlePress} style={styles.icon} name="calendar" />
+      <SearchIcon onPress={handlePress} style={styles.icon} name="search" />
       {toggle && <DateTimePickerAndroid display="default" onChange={confirmDate} value={new Date()} />}
     </>
   );
@@ -38,10 +38,8 @@ export default LatestLotteryDate;
 
 const styles = StyleSheet.create({
   icon: {
-    fontSize: 30,
-    color: "rgb(21, 165, 241)",
-    height: 40,
-    width: 50,
+    fontSize: 40,
+
     marginTop: 10,
     marginLeft: 10,
   },
