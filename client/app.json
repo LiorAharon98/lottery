@@ -5,7 +5,6 @@
       "policy": "sdkVersion"
     },
     "plugins": [
-
       [
         "expo-image-picker",
         {
@@ -18,7 +17,7 @@
       "url": "https://u.expo.dev/292e68aa-3480-4c01-b697-6672a8d899fc"
     },
     "slug": "lottery",
-    "version": "1.0.23",
+    "version": "1.0.24",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -27,14 +26,16 @@
       "backgroundColor": "#FFFFFF",
       "resizeMode": "contain"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.liors.lottery.first.project"
     },
     "android": {
       "package": "com.liors.lottery.first.project",
-      "versionCode": 24,
-
+      "versionCode": 25,
       "adaptiveIcon": {
         "foregroundImage": "./assets/lotto-background.png",
         "backgroundColor": "#FFFFFF"
