@@ -4,6 +4,7 @@
     "runtimeVersion": {
       "policy": "sdkVersion"
     },
+    "newArchEnabled": true,
     "plugins": [
       [
         "expo-image-picker",
@@ -26,9 +27,7 @@
       "backgroundColor": "#FFFFFF",
       "resizeMode": "contain"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.liors.lottery.first.project"
@@ -44,6 +43,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
+
     "extra": {
       "eas": {
         "projectId": "292e68aa-3480-4c01-b697-6672a8d899fc"
