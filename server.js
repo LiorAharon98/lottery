@@ -12,5 +12,7 @@ mongoose.connect(
 serverConfig(app, express);
 app.use("/lottery", UserRoute);
 app.use("/lottery", LotteryRoute);
-app.listen(process.env.PORT);
+app.listen(process.env.PORT,()=>{
+  console.log('Server up!!!')
+});
 
