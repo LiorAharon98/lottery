@@ -4,6 +4,7 @@
     "runtimeVersion": {
       "policy": "sdkVersion"
     },
+ 
     "newArchEnabled": true,
     "plugins": [
       [
@@ -18,7 +19,7 @@
       "url": "https://u.expo.dev/292e68aa-3480-4c01-b697-6672a8d899fc"
     },
     "slug": "lottery",
-    "version": "1.0.27",
+    "version": "1.0.29",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -34,7 +35,7 @@
     },
     "android": {
       "package": "com.liors.lottery.first.project",
-      "versionCode": 28,
+      "versionCode": 30,
       "adaptiveIcon": {
         "foregroundImage": "./assets/lotto-background.png",
         "backgroundColor": "#FFFFFF"
