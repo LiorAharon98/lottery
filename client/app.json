@@ -31,7 +31,7 @@
       "url": "https://u.expo.dev/292e68aa-3480-4c01-b697-6672a8d899fc"
     },
     "slug": "lottery",
-    "version": "1.0.30",
+    "version": "1.0.31",
     "orientation": "portrait",
     "icon": "./assets/lotto-background.png",
     "userInterfaceStyle": "light",
@@ -43,7 +43,7 @@
     },
     "android": {
       "package": "com.liors.lottery.first.project",
-      "versionCode": 31,
+      "versionCode": 32,
       "adaptiveIcon": {
         "foregroundImage": "./assets/lotto-background.png",
         "backgroundColor": "#FFFFFF"

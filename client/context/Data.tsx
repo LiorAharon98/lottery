@@ -11,7 +11,6 @@ import { userAction, allLotteryAction } from "../store/Index";
 import currentDate from "./currentDate";
 
 const cTable = require("console.table");
-
 export const useDataProvider = () => {
   return useContext(DataContext);
 };
@@ -106,6 +105,7 @@ const DataProvider = ({ children }: props) => {
     dispatch(allLotteryAction.addAllLottery(response.data));
     return response.data;
   };
+  console.log(serverUrl)
   const logOut = async () => {
     dispatch(userAction.logOut());
     AsyncStorage.removeItem("key");
