@@ -4,7 +4,6 @@
     "runtimeVersion": {
       "policy": "sdkVersion"
     },
-
     "newArchEnabled": true,
     "plugins": [
       [
@@ -17,14 +16,15 @@
         "expo-splash-screen",
         {
           "backgroundColor": "#000000",
-          "image": "./assets/splash-icon.png",
+          "image": "./assets/splash.png",
           "dark": {
-            "image": "./assets/splash-icon.png",
+            "image": "./assets/splash.png",
             "backgroundColor": "#000000"
           },
           "imageWidth": 200
         }
-      ]
+      ],
+      "@react-native-community/datetimepicker"
     ],
     "updates": {
       "fallbackToCacheTimeout": 0,
@@ -35,13 +35,16 @@
     "orientation": "portrait",
     "icon": "./assets/lotto-background.png",
     "userInterfaceStyle": "light",
-
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.liors.lottery.first.project"
+      "bundleIdentifier": "com.liors.lottery.first.project",
+       "jsEngine" : "hermes"
     },
     "android": {
+      "jsEngine" : "hermes",
       "package": "com.liors.lottery.first.project",
       "versionCode": 32,
       "adaptiveIcon": {
@@ -52,7 +55,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-
     "extra": {
       "eas": {
         "projectId": "292e68aa-3480-4c01-b697-6672a8d899fc"
