@@ -24,7 +24,8 @@
           "imageWidth": 200
         }
       ],
-      "@react-native-community/datetimepicker"
+      "@react-native-community/datetimepicker",
+      "expo-font"
     ],
     "updates": {
       "fallbackToCacheTimeout": 0,
@@ -41,10 +42,10 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.liors.lottery.first.project",
-       "jsEngine" : "hermes"
+      "jsEngine": "hermes"
     },
     "android": {
-      "jsEngine" : "hermes",
+      "jsEngine": "hermes",
       "package": "com.liors.lottery.first.project",
       "versionCode": 32,
       "adaptiveIcon": {

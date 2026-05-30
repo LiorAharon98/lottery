@@ -21,6 +21,8 @@ const DataProvider = ({ children }: props) => {
   const serverUrl =
     process.env.NODE_ENV === "development" ? process.env.EXPO_PUBLIC_LOCAL_URL : process.env.EXPO_PUBLIC_AWS_URL;
 
+
+    console.log(serverUrl)
   const { t } = useTranslation();
   const setItemFromStorage = async (user: userType) => {
     await AsyncStorage.setItem("key", JSON.stringify(user));
