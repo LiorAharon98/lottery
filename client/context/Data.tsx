@@ -19,7 +19,7 @@ export const DataContext = createContext<any>({});
 const DataProvider = ({ children }: props) => {
   const dispatch = useDispatch();
   const serverUrl =
-    process.env.NODE_ENV === "development" ? process.env.EXPO_PUBLIC_LOCAL_URL : process.env.EXPO_PUBLIC_HEROKU_URL;
+    process.env.NODE_ENV === "development" ? process.env.EXPO_PUBLIC_LOCAL_URL : process.env.EXPO_PUBLIC_AWS_URL;
 
   const { t } = useTranslation();
   const setItemFromStorage = async (user: userType) => {
@@ -50,14 +50,14 @@ const DataProvider = ({ children }: props) => {
     if (user?.bank) {
       let fetchUser = { username, number };
 
-      await axios.put("https://nodejs-bank.herokuapp.com/bank/user/lottery-win", fetchUser);
+      await axios.put("https://no-dd01c6b37c5849ca89a4e7291146f0a7.ecs.us-east-1.on.aws/bank/user/lottery-win", fetchUser);
     }
   };
 
   const hasBankAccount = async (username: string) => {
     const user = { username };
 
-    const response = await axios.post("https://nodejs-bank.herokuapp.com/bank/user/lottery", user);
+    const response = await axios.post("https://no-dd01c6b37c5849ca89a4e7291146f0a7.ecs.us-east-1.on.aws/bank/user/lottery", user);
     if (response.data) {
       await axios.put(`${serverUrl}/user/bank`, user);
       dispatch(userAction.addBank());

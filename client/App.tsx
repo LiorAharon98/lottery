@@ -15,7 +15,7 @@ export default function App() {
     async function prepare() {
       try {
         if (process.env.NODE_ENV === "production") {
-          axios.get(`${process.env.EXPO_PUBLIC_HEROKU_URL}/latest-lottery`);
+          axios.get(`${process.env.EXPO_PUBLIC_AWS_URL}/latest-lottery`);
         }
 
         await new Promise((resolve) => setTimeout(resolve, 2500));
