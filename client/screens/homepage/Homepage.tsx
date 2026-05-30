@@ -30,19 +30,20 @@ const Homepage = ({ navigation }: any) => {
               </Pressable>
             ) : (
               <UserOptionIcon
-                backgroundColor="white"
+                textColor="black"
                 onPress={handlePress.bind(this, "sign-in")}
-                text={user.username ? user.username : "sign in"}
+                text={user.username ? user.username : "Sign in"}
               >
                 <Icon name="account" size={35} />
               </UserOptionIcon>
             )}
-            {!user && (
+            {!user.username && (
               <>
                 <Text style={styles.text}>{changeLanguage("or")}</Text>
                 <UserOptionIcon
+                  textColor="black"
                   onPress={handlePress.bind(this, "sign-up")}
-                  text={user.username ? user.username : "sign up"}
+                  text={user.username ? user.username : "Sign up"}
                 >
                   <Icon name="account" size={35} />
                 </UserOptionIcon>

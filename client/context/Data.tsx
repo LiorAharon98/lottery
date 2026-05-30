@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { userAction, allLotteryAction } from "../store/Index";
 import currentDate from "./currentDate";
 
-const cTable = require("console.table");
+require("console.table");
 export const useDataProvider = () => {
   return useContext(DataContext);
 };
@@ -21,8 +21,6 @@ const DataProvider = ({ children }: props) => {
   const serverUrl =
     process.env.NODE_ENV === "development" ? process.env.EXPO_PUBLIC_LOCAL_URL : process.env.EXPO_PUBLIC_AWS_URL;
 
-
-    console.log(serverUrl)
   const { t } = useTranslation();
   const setItemFromStorage = async (user: userType) => {
     await AsyncStorage.setItem("key", JSON.stringify(user));
@@ -52,14 +50,14 @@ const DataProvider = ({ children }: props) => {
     if (user?.bank) {
       let fetchUser = { username, number };
 
-      await axios.put("https://no-dd01c6b37c5849ca89a4e7291146f0a7.ecs.us-east-1.on.aws/bank/user/lottery-win", fetchUser);
+      await axios.put(`${process.env.EXPO_PUBLIC_AWS_BANK_URL}/user/lottery-win`, fetchUser);
     }
   };
 
   const hasBankAccount = async (username: string) => {
     const user = { username };
 
-    const response = await axios.post("https://no-dd01c6b37c5849ca89a4e7291146f0a7.ecs.us-east-1.on.aws/bank/user/lottery", user);
+    const response = await axios.post(`${process.env.EXPO_PUBLIC_AWS_BANK_URL}/user/lottery`, user);
     if (response.data) {
       await axios.put(`${serverUrl}/user/bank`, user);
       dispatch(userAction.addBank());
@@ -90,12 +88,16 @@ const DataProvider = ({ children }: props) => {
   };
   const selectedUser = async (username: userType, password: userType) => {
     const user = { username, password };
-    const userFetch = await axios.post(`${serverUrl}/sign-in`, user);
-    if (userFetch.data) {
-      dispatch(userAction.signIn(userFetch.data));
-      return userFetch.data;
+    try {
+      const userFetch = await axios.post(`${serverUrl}/sign-in`, user);
+      if (userFetch.data) {
+        dispatch(userAction.signIn(userFetch.data));
+        return userFetch.data;
+      }
+      return false;
+    } catch (e) {
+      console.log(e);
     }
-    return false;
   };
   const fetchLatestLottery = async () => {
     const response = await axios.get(`${serverUrl}/latest-lottery`);
@@ -107,19 +109,19 @@ const DataProvider = ({ children }: props) => {
     dispatch(allLotteryAction.addAllLottery(response.data));
     return response.data;
   };
-  console.log(serverUrl)
   const logOut = async () => {
     dispatch(userAction.logOut());
     AsyncStorage.removeItem("key");
   };
   const localImageUpload = async (username: string) => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ["images", "videos"],
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
     });
-    if (!result.canceled) {
+
+    if (!result.canceled && result.assets && result.assets.length > 0) {
       uploadImageToFirebase(username, result.assets[0].uri);
     }
   };

@@ -30,20 +30,20 @@ const FooterTag = ({ icon, to, onPress, text, toggleFooter, onToggleFooter }: pr
     }
     navigation.navigate(to || "");
   };
-
+const lowerCaseText = text.toLocaleLowerCase()
   return (
     <Pressable onPress={pressHandler}>
       <View style={styles.container}>
-        {text === "account" && (
+        {lowerCaseText === "account" && (
           <Icon style={toggleFooter === text ? styles.active : styles.inactive}  name={icon} size={25} />
         )}
-        {text === "lotterys" && (
+        {lowerCaseText === "lotterys" && (
           <Icon style={toggleFooter === text ? styles.active : styles.inactive} name={icon} size={25} />
         )}
-        {text === "home" && (
+        {lowerCaseText === "home" && (
           <Icon style={toggleFooter === text ? styles.active : styles.inactive} name={icon} size={25} />
         )}
-        {text === "language" && (
+        {lowerCaseText === "language" && (
           <Icon2 style={toggleFooter === text ? styles.active : styles.inactive} name={icon} size={25} />
         )}
         <Text style={toggleFooter === text ? styles.active : styles.inactive}>{changeLanguage(text)}</Text>

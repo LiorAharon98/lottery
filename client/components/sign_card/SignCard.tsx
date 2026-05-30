@@ -36,6 +36,7 @@ const SignCard = ({ text, handleFunc, error }: props) => {
             <Text style={styles.transfer_link}>
               {text === "sign in" ? changeLanguage("dont have an account") : changeLanguage("already have an account")}?
             </Text>
+           
           </Link>
         </View>
       </LinearGradient>
@@ -49,9 +50,9 @@ export default SignCard;
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    height: Dimensions.get("window").height * 0.7,
+    height: Dimensions.get("window").height * 0.55,
 
-    justifyContent: "space-around",
+    justifyContent: "space-between",
   },
   transfer_link: {
     textDecorationLine: "underline",

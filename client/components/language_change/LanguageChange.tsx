@@ -39,7 +39,7 @@ const LanguageChange = () => {
           ))}
         </View>
       </Modal>
-      <FooterTag text="language" onPress={onToggleModal} icon="language" />
+      <FooterTag text="Language" onPress={onToggleModal} icon="language" />
     </>
   );
 };

@@ -24,14 +24,14 @@ const Footer = () => {
         <FooterTag
           toggleFooter={toggleFooter}
           onToggleFooter={onToggleFooter}
-          text={"account"}
+          text={"Account"}
           to={user.username ? "user-page" : "sign-in"}
           icon={"account"}
         />
         <FooterTag
           toggleFooter={toggleFooter}
           onToggleFooter={onToggleFooter}
-          text={"lotterys"}
+          text={"Lotterys"}
           to="latest-lottery"
           icon={"history"}
         />
@@ -39,7 +39,7 @@ const Footer = () => {
         <FooterTag
           toggleFooter={toggleFooter}
           onToggleFooter={onToggleFooter}
-          text={"home"}
+          text={"Home"}
           to="home"
           icon={"home"}
         />

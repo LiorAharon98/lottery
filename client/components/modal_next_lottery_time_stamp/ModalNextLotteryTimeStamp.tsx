@@ -13,7 +13,7 @@ const ModalNextLotteryTimeStamp = () => {
   return (
     <View>
       {!toggleModal && (
-        <UserOptionIcon backgroundColor="rgb(116, 166, 247)" onPress={handlePress} text="next lottery">
+        <UserOptionIcon backgroundColor="rgb(116, 166, 247)" onPress={handlePress} text="Next lottery">
           <Icon color={'white'} size={35} name="attach-money" />
         </UserOptionIcon>
       )}

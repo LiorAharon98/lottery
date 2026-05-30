@@ -22,19 +22,20 @@ const UserSetting = ({ navigation }: any) => {
   const handleBank = async () => {
     await hasBankAccount(username);
   };
+
   return (
     <ScrollView>
       <UserProfileDetails />
       <View style={styles.container}>
         <Pressable style={styles.text_container} onPress={handlePress}>
           <Text style={styles.text}>
-            {profilePicture ? changeLanguage("change") : changeLanguage("upload")} {changeLanguage("picture")}
+            {profilePicture ? changeLanguage("change") : changeLanguage("Upload")} {changeLanguage("picture")}
           </Text>
           <Text style={styles.arrow}>{">"}</Text>
         </Pressable>
 
         <Pressable onPress={handleChangeNumbers} style={styles.text_container}>
-          <Text style={styles.text}>{changeLanguage("change numbers")}</Text>
+          <Text style={styles.text}>{changeLanguage("Change numbers")}</Text>
           <Text style={styles.arrow}>{">"}</Text>
         </Pressable>
     
@@ -47,7 +48,7 @@ const UserSetting = ({ navigation }: any) => {
           </View>
         ) : (
           <Pressable onPress={setTogglePassword.bind(this, true)} style={styles.text_container}>
-            <Text style={styles.text}>{changeLanguage("change password")}</Text>
+            <Text style={styles.text}>{changeLanguage("Change password")}</Text>
             <Text style={styles.arrow}>{">"}</Text>
           </Pressable>
         )}

@@ -1,6 +1,7 @@
 {
   "cli": {
-    "version": ">= 3.6.0"
+    "version": ">= 3.6.0",
+    "appVersionSource": "remote"
   },
   "build": {
     "development": {
@@ -13,18 +14,13 @@
     "preview": {
       "channel": "preview",
       "distribution": "internal",
-      "env": {
-        "EXPO_PUBLIC_AWS_URL": "https://no-1a039e77a0134fd589506700723009a1.ecs.us-east-1.on.aws/lottery"
-      },
+
       "ios": {
         "resourceClass": "m1-medium"
       }
     },
     "production": {
       "channel": "production",
-      "env": {
-        "EXPO_PUBLIC_AWS_URL": "https://no-1a039e77a0134fd589506700723009a1.ecs.us-east-1.on.aws/lottery"
-      },
 
       "ios": {
         "resourceClass": "m1-medium"

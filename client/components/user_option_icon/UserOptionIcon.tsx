@@ -5,13 +5,14 @@ import { useDataProvider } from "../../context/Data";
 
 interface props {
   children: React.ReactNode;
-  backgroundColor: string;
+  backgroundColor?: string;
   text: string;
   onPress: (e: GestureResponderEvent) => void;
   height?: number;
   width?: number;
+  textColor?: string
 }
-const UserOptionIcon = ({ children, text, onPress, height, width, backgroundColor }: props) => {
+const UserOptionIcon = ({ children, text, onPress, height, width, backgroundColor,textColor }: props) => {
   const { changeLanguage } = useDataProvider();
   return (
     <Pressable
@@ -22,7 +23,7 @@ const UserOptionIcon = ({ children, text, onPress, height, width, backgroundColo
       ]}
     >
       {children}
-      <Text style={styles.text}>{changeLanguage(text)}</Text>
+      <Text style={[styles.text, {color :textColor ==='black' ? 'black' : 'white'}]}>{changeLanguage(text)}</Text>
     </Pressable>
   );
 };

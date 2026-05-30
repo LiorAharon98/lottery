@@ -7,9 +7,9 @@ const UserProfileDetails = () => {
   const {changeLanguage } = useDataProvider();
   const user = useSelector<any>(state=>state.user)
   const userInfo = [
-    { label: "member since", info: user.memberSince },
-    { label: "you earn", info: `${user.earned}₪` },
-    { label: "latest win", info: `${user.latestWin.number}₪` },
+    { label: "Member since", info: user.memberSince },
+    { label: "You earn", info: `${user.earned}₪` },
+    { label: "Latest win", info: `${user.latestWin.number}₪` },
   ];
   return (
     <LinearGradient colors={["rgb(55, 103, 255)", "rgb(55, 103, 255)"]} style={styles.header_container}>

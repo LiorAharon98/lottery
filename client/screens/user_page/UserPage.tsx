@@ -36,24 +36,24 @@ const UserPage = () => {
       <UserProfileDetails />
       <Animatable.View style={styles.container_box} delay={500} animation={"slideInUp"}>
         <View style={styles.row_container}>
-          <UserOptionIcon  backgroundColor="rgb(0, 85, 241)" onPress={handlePress.bind(this, "setting-page")} text="setting">
+          <UserOptionIcon  backgroundColor="rgb(0, 85, 241)" onPress={handlePress.bind(this, "setting-page")} text="Setting">
             <Icon2 color={'white'} size={35} name="setting" />
           </UserOptionIcon>
-          <UserOptionIcon backgroundColor="rgb(0, 204, 0)" onPress={handlePressLottery} text="lottery">
+          <UserOptionIcon backgroundColor="rgb(0, 204, 0)" onPress={handlePressLottery} text="Lottery">
             <Icon4 color={'white'} size={35} name="attach-money" />
           </UserOptionIcon>
         </View>
         <View style={styles.row_container}>
-          <UserOptionIcon backgroundColor="rgb(255, 79, 16)" onPress={handlePress.bind(this, "odds-page")} text="odds">
+          <UserOptionIcon backgroundColor="rgb(255, 79, 16)" onPress={handlePress.bind(this, "odds-page")} text="Odds">
             <Icon2 color={'white'} size={35} name="question" />
           </UserOptionIcon>
-          <UserOptionIcon backgroundColor="rgb(102, 206, 254)" onPress={handlePress.bind(this, "bank-page")} text="bank">
+          <UserOptionIcon backgroundColor="rgb(102, 206, 254)" onPress={handlePress.bind(this, "bank-page")} text="Bank">
             <Icon5 color={'white'} size={35} name="bank" />
           </UserOptionIcon>
         </View>
         <View style={styles.row_container}>
           <ModalNextLotteryTimeStamp />
-          <UserOptionIcon backgroundColor="rgb(206, 145, 120)" onPress={handlePress.bind(this, "log out")} text="log out">
+          <UserOptionIcon backgroundColor="rgb(206, 145, 120)" onPress={handlePress.bind(this, "log out")} text="Log out">
             <Icon color={'white'} size={35} name="log-out" />
           </UserOptionIcon>
         </View>

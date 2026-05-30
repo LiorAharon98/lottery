@@ -3,7 +3,7 @@ const translation_hebrew = {
 
   "enter account": "כניסה לחשבון",
   "create new account": "יצירת חשבון",
-  home: "דף הבית",
+  Home: "דף הבית",
   latest: "אחרונים",
   "sign in": "התחבר",
   "sign up": "הרשם",
@@ -30,10 +30,11 @@ const translation_hebrew = {
   homepage: "דף הבית",
   "user not found": "משתמש לא נמצא",
   "user already exist": "משתמש קיים",
-  setting: "הגדרות",
+  Setting: "הגדרות",
   lottery: "הגרלה",
+  Lottery: "הגרלה",
   info: "מידע",
-  "log out": "יציאה",
+  "Log out": "יציאה",
   "you earn": "הרווחת",
   "member since": "הצטרפת",
   picture: "תמונה",
@@ -53,7 +54,7 @@ const translation_hebrew = {
   "choose numbers": "בחר מספרים",
   change: "שנה",
   upload: "העלה",
-  odds: "סיכויים",
+  Odds: "סיכויים",
   first: "ראשון",
   second: "שני",
   "latest win": "ניצחון אחרון ",
@@ -87,16 +88,16 @@ const translation_hebrew = {
     "לא בחרת מספרים על מנת לקבל חווית משתמש טובה אנא לחץ על הגרלה",
     'lotterys will be every sunday and wednesday': 'הגרלות יהיו בימי ראשון ורביעי',
     finish : 'סיים',
-    account : 'חשבון',
-    language : 'שפה',
-    lotterys : 'הגרלות',
+    Account : 'חשבון',
+    Language : 'שפה',
+    Lotterys : 'הגרלות',
     'bank connected' : 'בנק מחובר',
-    bank : 'בנק',
+    Bank : 'בנק',
     'would you like to connect' : 'האם תרצה להתחבר',
     connect : 'התחבר',
     'bank link' : 'קישור לבנק',
     'to connect this user to Bank you have to register to Bank and identical username as this username' : 'על מנת לחבר את המשתמש לבנק עליך להירשם לבנק שבקישור עם שם משתמש זהה למשתמש הנוכחי',
-    'next lottery' : 'ההגרלה הבאה'
+    'Next lottery' : 'ההגרלה הבאה'
 
 };
 export default translation_hebrew;
