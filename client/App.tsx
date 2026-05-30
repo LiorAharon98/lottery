@@ -6,28 +6,36 @@ import { LogBox, View } from "react-native";
 import axios from "axios";
 import DataProvider from "./context/Data";
 import AppContainer from "./AppContainer";
+import * as Font from "expo-font";
 import "./language/Data";
 LogBox.ignoreLogs([" Invalid prop `textStyle` of type `array` supplied to `Cell`, expected `object`"]);
 SplashScreen.preventAutoHideAsync();
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-  useEffect(() => {
-    async function prepare() {
-      try {
-        if (process.env.NODE_ENV === "production") {
-          axios.get(`${process.env.EXPO_PUBLIC_AWS_URL}/latest-lottery`);
-        }
+useEffect(() => {
+  async function prepare() {
+    try {
+      await Font.loadAsync({
+        MaterialCommunityIcons: require("react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"),
+        MaterialIcons: require("react-native-vector-icons/Fonts/MaterialIcons.ttf"),
+        AntDesign: require("react-native-vector-icons/Fonts/AntDesign.ttf"),
+      });
 
-        await new Promise((resolve) => setTimeout(resolve, 2500));
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        setAppIsReady(true);
+      if (process.env.NODE_ENV === "production") {
+        await axios.get(`${process.env.EXPO_PUBLIC_AWS_URL}/latest-lottery`);
       }
-    }
 
-    prepare();
-  }, []);
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+    } catch (e) {
+      console.warn(e);
+    } finally {
+      setAppIsReady(true);
+    }
+  }
+
+  prepare();
+}, []);
 
   const onLayoutRootView = useMemo(async () => {
     if (appIsReady) {

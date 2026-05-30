@@ -12,7 +12,6 @@ const Homepage = ({ navigation }: any) => {
     if (e === "sign-in" && user.username) return navigation.push("user-page");
     navigation.navigate(e);
   };
-
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -31,6 +30,7 @@ const Homepage = ({ navigation }: any) => {
               </Pressable>
             ) : (
               <UserOptionIcon
+                backgroundColor="white"
                 onPress={handlePress.bind(this, "sign-in")}
                 text={user.username ? user.username : "sign in"}
               >
