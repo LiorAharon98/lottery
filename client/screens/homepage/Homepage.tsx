@@ -3,7 +3,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useDataProvider } from "../../context/Data";
 import * as Animatable from "react-native-animatable";
 import UserOptionIcon from "../../components/user_option_icon/UserOptionIcon";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useSelector } from "react-redux";
 const Homepage = ({ navigation }: any) => {
   const { changeLanguage } = useDataProvider();
@@ -23,7 +23,7 @@ const Homepage = ({ navigation }: any) => {
 
       <View style={styles.button_container}>
         <View style={styles.button_container2}>
-          <Animatable.View delay={500} animation={"slideInDown"}>
+          <Animatable.View style={{ flexDirection: "row", alignItems:'center' }} delay={500} animation={"slideInDown"}>
             {user?.profilePicture ? (
               <Pressable onPress={handlePress.bind(this, "user-page")}>
                 <Image style={styles.image} source={{ uri: user.profilePicture }} />
@@ -32,9 +32,9 @@ const Homepage = ({ navigation }: any) => {
               <UserOptionIcon
                 textColor="black"
                 onPress={handlePress.bind(this, "sign-in")}
-                text={user.username ? user.username : "Sign in"}
+                text={user.username ? user.username : "sign in"}
               >
-                <Icon name="account" size={35} />
+                <MaterialIcons name="account-circle" size={40} color="#035efc" />
               </UserOptionIcon>
             )}
             {!user.username && (
@@ -43,9 +43,9 @@ const Homepage = ({ navigation }: any) => {
                 <UserOptionIcon
                   textColor="black"
                   onPress={handlePress.bind(this, "sign-up")}
-                  text={user.username ? user.username : "Sign up"}
+                  text={user.username ? user.username : "sign up"}
                 >
-                  <Icon name="account" size={35} />
+                  <MaterialIcons name="account-circle" size={40} color="#035efc" />
                 </UserOptionIcon>
               </>
             )}
@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
   },
   button_container: {
-    justifyContent: "space-between",
     alignItems: "center",
   },
   button_container2: {
@@ -84,7 +83,6 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "center",
     fontSize: 20,
-    margin: 15,
   },
 });
 export default Homepage;

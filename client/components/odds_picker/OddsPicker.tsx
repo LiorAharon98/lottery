@@ -32,7 +32,7 @@ export default OddsPicker;
 
 const styles = StyleSheet.create({
   container: {
-    height: 140,
+    height: 150,
   },
   text: {
     width: "100%",

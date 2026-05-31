@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import React, { useState } from "react";
 import { useDataProvider } from "../../context/Data";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { inputProps } from "../../types/type";
 const Input = ({ label, onChange, color }: inputProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -17,9 +17,9 @@ const Input = ({ label, onChange, color }: inputProps) => {
         <TextInput style={styles.input} secureTextEntry={label !== "username" && !isVisible} onChangeText={onChange} />
         {label !== "username" &&
           (isVisible ? (
-            <Icon onPress={pressHandler} style={styles.visible_icon} name="visibility-off" />
+            <MaterialIcons onPress={pressHandler} name="visibility-off" size={24} color="black" />
           ) : (
-            <Icon onPress={pressHandler} style={styles.visible_icon} name="visibility" />
+            <MaterialIcons onPress={pressHandler} name="visibility" size={24} color="black" />
           ))}
       </View>
     </View>

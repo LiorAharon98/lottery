@@ -2,7 +2,7 @@ import { StyleSheet, View,Pressable } from "react-native";
 import NextLotteryTimeStamp from "../next_lottery_time_stamp/NextLotteryTimeStamp";
 import Modal from "react-native-modal";
 import UserOptionIcon from "../user_option_icon/UserOptionIcon";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import React, { useState } from "react";
 
 const ModalNextLotteryTimeStamp = () => {
@@ -14,7 +14,7 @@ const ModalNextLotteryTimeStamp = () => {
     <View>
       {!toggleModal && (
         <UserOptionIcon backgroundColor="rgb(116, 166, 247)" onPress={handlePress} text="Next lottery">
-          <Icon color={'white'} size={35} name="attach-money" />
+              <FontAwesome name="dollar" size={30} color="white" />
         </UserOptionIcon>
       )}
       <Modal backdropOpacity={0.95} backdropColor="white" isVisible={toggleModal}>

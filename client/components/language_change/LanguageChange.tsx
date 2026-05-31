@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import FooterTag from "../footer_tag/FooterTag";
 import Modal from "react-native-modal";
-import CheckIcon from "react-native-vector-icons/AntDesign";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { useDataProvider } from "../../context/Data";
 import CountryFlag from "react-native-country-flag";
 const LanguageChange = () => {
@@ -31,10 +31,9 @@ const LanguageChange = () => {
               key={label.label}
               onPress={handleEvent.bind(this, label.label)}
             >
-              <Text>
-                {changeLanguage(label.label)} {currentLanguage === label.label && <CheckIcon name="check" size={16} />}
-                <CountryFlag size={15} isoCode={label.label === "english" ? "us" : "il"} />
-              </Text>
+              <Text>{changeLanguage(label.label)} </Text>
+              <CountryFlag size={15} isoCode={label.label === "english" ? "us" : "il"} />
+              {currentLanguage === label.label && <FontAwesome6 name="check" size={15} color="black" />}
             </Pressable>
           ))}
         </View>
@@ -55,6 +54,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   language_container: {
-    padding: 10,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: 100,
+    alignItems: "center",
   },
 });
