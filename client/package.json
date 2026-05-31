@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/vector-icons": "^15.0.3", 
     "@react-native-async-storage/async-storage": "^2.2.0",
     "@react-native-community/datetimepicker": "8.4.4",
     "@react-native-picker/picker": "2.11.1",
@@ -42,7 +43,6 @@
     "react-native-screens": "~4.16.0",
     "react-native-svg": "15.12.1",
     "react-native-table-component": "^1.2.2",
-    "react-native-vector-icons": "^10.3.0",
     "react-native-web": "^0.21.1",
     "react-redux": "^9.2.0"
   },
@@ -50,7 +50,6 @@
     "@babel/core": "^7.28.4",
     "@types/react": "~19.1.10",
     "@types/react-native-table-component": "^1.2.8",
-    "@types/react-native-vector-icons": "^6.4.18",
     "babel-preset-expo": "~54.0.10",
     "typescript": "~5.9.3"
   },

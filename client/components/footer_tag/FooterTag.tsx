@@ -1,13 +1,12 @@
 import { StyleSheet, Pressable, View, Text } from "react-native";
-import React, { ReactNode } from "react";
 import { GestureResponderEvent } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ParamListBase, useNavigation } from "@react-navigation/native";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import Icons from "react-native-vector-icons/Entypo";
-import Icon2 from "react-native-vector-icons/MaterialIcons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import { useDataProvider } from "../../context/Data";
 import { StackActions } from "@react-navigation/native";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 interface props {
   icon: string;
   to?: string;
@@ -30,21 +29,41 @@ const FooterTag = ({ icon, to, onPress, text, toggleFooter, onToggleFooter }: pr
     }
     navigation.navigate(to || "");
   };
-const lowerCaseText = text.toLocaleLowerCase()
+  const lowerCaseText = text.toLocaleLowerCase();
   return (
     <Pressable onPress={pressHandler}>
       <View style={styles.container}>
         {lowerCaseText === "account" && (
-          <Icon style={toggleFooter === text ? styles.active : styles.inactive}  name={icon} size={25} />
+          <MaterialIcons
+            style={toggleFooter === text ? styles.active : styles.inactive}
+            name="account-circle"
+            size={24}
+            color="black"
+          />
         )}
         {lowerCaseText === "lotterys" && (
-          <Icon style={toggleFooter === text ? styles.active : styles.inactive} name={icon} size={25} />
+          <AntDesign
+            style={toggleFooter === text ? styles.active : styles.inactive}
+            name="dollar-circle"
+            size={24}
+            color="black"
+          />
         )}
         {lowerCaseText === "home" && (
-          <Icon style={toggleFooter === text ? styles.active : styles.inactive} name={icon} size={25} />
+          <FontAwesome
+            style={toggleFooter === text ? styles.active : styles.inactive}
+            name="home"
+            size={24}
+            color="black"
+          />
         )}
         {lowerCaseText === "language" && (
-          <Icon2 style={toggleFooter === text ? styles.active : styles.inactive} name={icon} size={25} />
+          <MaterialIcons
+            style={toggleFooter === text ? styles.active : styles.inactive}
+            name="language"
+            size={24}
+            color="black"
+          />
         )}
         <Text style={toggleFooter === text ? styles.active : styles.inactive}>{changeLanguage(text)}</Text>
       </View>
@@ -55,13 +74,12 @@ const lowerCaseText = text.toLocaleLowerCase()
 export default FooterTag;
 
 const styles = StyleSheet.create({
-  active:{
-    color:'rgb(55, 103, 255)'
+  active: {
+    color: "rgb(55, 103, 255)",
   },
-  inactive:{
-    color :'black',
-    opacity :0.4
-    
+  inactive: {
+    color: "black",
+    opacity: 0.4,
   },
   container: {
     width: 70,
