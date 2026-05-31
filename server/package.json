@@ -14,8 +14,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
-    "node": "18.14.2",
-    "npm": "9.5.1"
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
   },
   "keywords": [],
   "author": "",
