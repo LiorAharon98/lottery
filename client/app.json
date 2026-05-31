@@ -25,14 +25,15 @@
         }
       ],
       "@react-native-community/datetimepicker",
-      "expo-font"
+      "expo-font",
+      "expo-status-bar"
     ],
     "updates": {
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/292e68aa-3480-4c01-b697-6672a8d899fc"
     },
     "slug": "lottery",
-    "version": "1.0.34",
+    "version": "1.0.35",
     "orientation": "portrait",
     "icon": "./assets/lotto-background.png",
     "userInterfaceStyle": "light",
