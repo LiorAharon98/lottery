@@ -6,7 +6,7 @@ const About = () => {
   const { changeLanguage } = useDataProvider();
   return (
     <Card height={true}>
-      <Image style={styles.image} source={require("../../assets/lotto-background.png")} />
+      <Image style={styles.image} source={require("../../assets/images/lotto-background.png")} />
       <View style={styles.main_container}>
         <Text style={styles.text}>{changeLanguage("lotto")}</Text>
         <View style={{ width: "90%" }}>
