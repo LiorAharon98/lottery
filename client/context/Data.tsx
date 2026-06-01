@@ -90,6 +90,7 @@ const DataProvider = ({ children }: props) => {
     const user = { username, password };
     try {
       const userFetch = await axios.post(`${serverUrl}/sign-in`, user);
+      if(userFetch.data ==='incorrect password') return 'incorrect password'
       if (userFetch.data) {
         dispatch(userAction.signIn(userFetch.data));
         return userFetch.data;

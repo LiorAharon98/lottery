@@ -19,8 +19,9 @@ router.post("/sign-in", async (req, res) => {
     if (auth) {
       const userWithoutPassword = await UserModal.findOne({ username }, "-password");
       return res.json(userWithoutPassword);
-    }
+    } else return res.json("incorrect password");
   }
+
   return res.json(null);
 });
 router.put("/create-user-lottery-numbers", async (req, res) => {
@@ -28,7 +29,7 @@ router.put("/create-user-lottery-numbers", async (req, res) => {
   const user = await UserModal.findOneAndUpdate(
     { username },
     { $set: { lotteryNumbers: { firstColumn: arr[0], secondColumn: arr[1] } } },
-    { new: true }
+    { new: true },
   );
   res.json(user.lotteryNumbers);
 });
@@ -37,7 +38,7 @@ router.put("/lottery-page", async (req, res) => {
   const user = await UserModal.findOneAndUpdate(
     { username },
     { $inc: { earned: number }, $set: { latestWin: { number, date } } },
-    { new: true }
+    { new: true },
   );
   res.json({ earned: user.earned, latestWin: user.latestWin });
 });
