@@ -16,8 +16,10 @@
         {
           "backgroundColor": "#000000",
           "image": "./assets/lotto-splash.png",
+          "resizeMode": "cover",
           "dark": {
             "image": "./assets/lotto-splash.png",
+            "resizeMode": "cover",
             "backgroundColor": "#000000"
           },
           "imageWidth": 350
