@@ -15,12 +15,12 @@
         "expo-splash-screen",
         {
           "backgroundColor": "#000000",
-          "image": "./assets/splash.png",
+          "image": "./assets/lotto-splash.png",
           "dark": {
-            "image": "./assets/splash.png",
+            "image": "./assets/lotto-splash.png",
             "backgroundColor": "#000000"
           },
-          "imageWidth": 200
+          "imageWidth": 350
         }
       ],
       "@react-native-community/datetimepicker",
@@ -32,9 +32,9 @@
       "url": "https://u.expo.dev/292e68aa-3480-4c01-b697-6672a8d899fc"
     },
     "slug": "lottery",
-    "version": "1.0.37",
+    "version": "1.0.38",
     "orientation": "portrait",
-    "icon": "./assets/lotto-background.png",
+    "icon": "./assets/lotto-icon.png",
     "userInterfaceStyle": "light",
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -43,14 +43,14 @@
     },
     "android": {
       "package": "com.liors.lottery.first.project",
-    
+
       "adaptiveIcon": {
-        "foregroundImage": "./assets/lotto-background.png",
+        "foregroundImage": "./assets/lotto-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/lotto-icon.png"
     },
     "extra": {
       "eas": {
