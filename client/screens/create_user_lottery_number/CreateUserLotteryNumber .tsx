@@ -4,10 +4,11 @@ import { useDataProvider } from "../../context/Data";
 import CreateUserLotteryNumberComponent from "../../components/create_user_lottery_number_components/CreateUserLotteryNumberComponent";
 import { lotteryType } from "../../types/type";
 import { useSelector,useDispatch } from "react-redux";
-import { selectedNumbersAction } from "../../store/Index";
+import { RootState, selectedNumbersAction } from "../../store/Index";
 const CreateUserLotteryNumber = ({ navigation }: any) => {
   const { addLotteryNumbersToUser } = useDataProvider();
-  const user = useSelector((state) => state.user);
+  
+  const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch()
   let selectedNumbers: lotteryType[] = [];
   let selectedSpecialNum: lotteryType = {} as lotteryType;

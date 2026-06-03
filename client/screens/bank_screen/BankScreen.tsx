@@ -1,20 +1,17 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
 import { useDataProvider } from "../../context/Data";
 import UserProfileDetails from "../../components/user_profile_details/UserProfileDetails";
 import ConnectBank from "../../components/connect_bank/ConnectBank";
 import { useSelector } from "react-redux";
+import { RootState } from "../../store/Index";
 const BankScreen = () => {
-  const {changeLanguage } = useDataProvider();
-  const {bank} = useSelector(state=>state.user)
+  const { changeLanguage } = useDataProvider();
+  const user = useSelector((state: RootState) => state.user);
   return (
     <>
       <UserProfileDetails />
       <View style={styles.container}>
-
-
-        {bank ? <Text>{changeLanguage('bank connected')}</Text> : <ConnectBank />}
-
+        {user.bank ? <Text>{changeLanguage("Bank connected")}</Text> : <ConnectBank />}
       </View>
     </>
   );
@@ -28,14 +25,14 @@ const styles = StyleSheet.create({
     height: 300,
     justifyContent: "space-around",
   },
-  left:{
-    width :'30%',
-    height :'100%'
+  left: {
+    width: "30%",
+    height: "100%",
   },
-  right:{
-    justifyContent :'space-around',
-    alignItems :'center',
-    height :'100%',
-    width :'70%'
-  }
+  right: {
+    justifyContent: "space-around",
+    alignItems: "center",
+    height: "100%",
+    width: "70%",
+  },
 });

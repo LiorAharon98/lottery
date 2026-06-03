@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, View } from "react-native";
 import React, { useEffect, useState, memo } from "react";
 import * as Animatable from "react-native-animatable";
 import { useSelector } from "react-redux";
+import { RootState } from "../../store/Index";
 interface props {
   number: number;
   onPress: (e: number) => boolean | void;
@@ -9,7 +10,7 @@ interface props {
 }
 const ChooseLotteryNumberSelected = ({ number, onPress }: props) => {
   const [isSelected, setIsSelected] = useState<boolean>(false);
-  const {toggle} = useSelector(state=>state.modal)
+    const {toggle} = useSelector((state: RootState) => state.modal);
   const pressHandler = (number: number) => {
     const func = onPress(number);
     if (func) return setIsSelected(false);

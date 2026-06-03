@@ -5,9 +5,10 @@ import { useDataProvider } from "../../context/Data";
 import { currentLottery, columType } from "../../types/type";
 import { LinearGradient } from "expo-linear-gradient";
 interface props {
-  randomLotteryNumbers: currentLottery;
+  randomLotteryNumbers?: currentLottery;
   countGuessAndPrizes: { firstColumn: columType; secondColumn: columType };
   activateModal : string
+  onModalToggle : (value : string)=>void
 }
 const ModalLottery2 = ({ countGuessAndPrizes, activateModal,onModalToggle }: props) => {
   const { changeLanguage} = useDataProvider();

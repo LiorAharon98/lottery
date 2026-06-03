@@ -1,11 +1,12 @@
 import { StyleSheet, View } from "react-native";
-import React, { useState } from "react";
+import { useState } from "react";
 import Button from "../button/Button";
-import ModalLottery from "../modal_lottery/ModalLottery";
 import ModalLotteryInfo from "../modal_lottery_info/ModalLotteryInfo";
 import ModalLottery2 from "../modal_lottery2/ModalLottery2";
+import { useDataProvider } from "../../context/Data";
 const LotteryPageButtons = ({ countGuessAndPrizes }: any) => {
   const [toggleModal, setToggleModal] = useState<string>("");
+  const { changeLanguage } = useDataProvider();
   const onModalToggle = (value: string) => {
     setToggleModal(value);
   };
@@ -14,16 +15,20 @@ const LotteryPageButtons = ({ countGuessAndPrizes }: any) => {
       {toggleModal === "info" && (
         <ModalLotteryInfo onModalToggle={onModalToggle} toggle={toggleModal} lotteryInfo={[1, 2, 3, 4, 5, 6]} />
       )}
-       
+
       {toggleModal === "compare" && (
-       <ModalLottery2 onModalToggle={onModalToggle}  activateModal={toggleModal} countGuessAndPrizes={countGuessAndPrizes}/>
+        <ModalLottery2
+          onModalToggle={onModalToggle}
+          activateModal={toggleModal}
+          countGuessAndPrizes={countGuessAndPrizes}
+        />
       )}
       <View style={styles.button_container}>
-        <Button width={170} onPress={onModalToggle.bind(this, "compare")}>
-          compare
+        <Button width={170} onPress={onModalToggle.bind(this, "Compare")}>
+          {changeLanguage('Compare')}
         </Button>
-        <Button width={170} onPress={onModalToggle.bind(this, "info")}>
-          info
+        <Button width={170} onPress={onModalToggle.bind(this, "Info")}>
+           {changeLanguage('Info')}
         </Button>
       </View>
     </>

@@ -13,9 +13,10 @@ import Entypo from "@expo/vector-icons/Entypo";
 import UserOptionIcon from "../../components/user_option_icon/UserOptionIcon";
 import ModalNextLotteryTimeStamp from "../../components/modal_next_lottery_time_stamp/ModalNextLotteryTimeStamp";
 import { useSelector } from "react-redux";
+import { RootState } from "../../store/Index";
 const UserPage = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-  const user = useSelector<any>((state) => state.user);
+  const user = useSelector((state: RootState) => state.user);
   const { logOut, setItemFromStorage } = useDataProvider();
   const handlePressLottery = () => {
     if (!user.lotteryNumbers) navigation.navigate("create-user-lottery-numbers");

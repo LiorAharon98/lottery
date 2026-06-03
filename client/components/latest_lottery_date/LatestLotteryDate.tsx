@@ -3,13 +3,13 @@ import DateTimePickerAndroid from "@react-native-community/datetimepicker";
 import React, { useState } from "react";
 import { currentLottery } from "../../types/type";
 import { useDataProvider } from "../../context/Data";
-import { allLotteryAction } from "../../store/Index";
+import { allLotteryAction, RootState } from "../../store/Index";
 import Feather from "@expo/vector-icons/Feather";
 import { useDispatch, useSelector } from "react-redux";
 
 const LatestLotteryDate = () => {
   const [toggle, setToggle] = useState<boolean>(false);
-  const { allLottery } = useSelector((state) => state.allLottery);
+    const {allLottery} = useSelector((state: RootState) => state.allLottery);
   const dispatch = useDispatch();
   const { currentDate } = useDataProvider();
   const handleDate = (date: number) => {

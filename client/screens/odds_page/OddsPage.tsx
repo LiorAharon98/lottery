@@ -11,11 +11,12 @@ import ModalOddsPage from "../../components/modal_odds_page/ModalOddsPage";
 import { useSelector } from "react-redux";
 import compareNumbers from "../../context/compareNumbers";
 import createNumbers from "../../context/createNumbers"
+import { RootState } from "../../store/Index";
 const OddsPage = () => {
   const [loopNum, setLoopNum] = useState<number>(0);
   const [foundNum, setFoundNum] = useState<foundsNumbersType>({} as foundsNumbersType);
   const { changeLanguage } = useDataProvider();
-  const user = useSelector((state) => state.user);
+    const user = useSelector((state: RootState) => state.user);
   const calculatorLoops = async (column: string) => {
     await fetch("https://www.google.co.il/");
     let howManyLoop = 0;

@@ -3,6 +3,7 @@ import React from "react";
 import { useDataProvider } from "../../context/Data";
 import Number from "../number/Number";
 import { useSelector } from "react-redux";
+import { RootState } from "../../store/Index";
 
 interface columnProps {
   column: string;
@@ -10,7 +11,7 @@ interface columnProps {
 
 const UserLotteryNumbers = ({ column }: columnProps) => {
   const {changeLanguage } = useDataProvider();
-  const user = useSelector(state=>state.user)
+    const user = useSelector((state: RootState) => state.user);
   return (
     <>
       <Text>{column === 'firstColumn' ? changeLanguage("first") : changeLanguage("second")}</Text>

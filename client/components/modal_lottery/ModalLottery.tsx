@@ -6,6 +6,7 @@ import { currentLottery, columType, userType } from "../../types/type";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { RootState } from "../../store/Index";
 interface props {
   randomLotteryNumbers: currentLottery;
   countGuessAndPrizes: { firstColumn: columType; secondColumn: columType };
@@ -13,18 +14,18 @@ interface props {
 const ModalLottery = ({ countGuessAndPrizes, randomLotteryNumbers }: props) => {
   const { changeLanguage, userEarnedLottery } = useDataProvider();
   const [isWon, setIsWon] = useState<boolean>(false);
-  const userSelector = useSelector<any>(state =>state.user)
+    const userSelector = useSelector((state: RootState) => state.user);
 
-  const rows = [changeLanguage("column"), changeLanguage("guess"), changeLanguage("prize"), changeLanguage("special")];
+  const rows = [changeLanguage("Column"), changeLanguage("Guess"), changeLanguage("Prize"), changeLanguage("Special")];
   const columns = [
     [
-      changeLanguage("first"),
+      changeLanguage("First"),
       countGuessAndPrizes.firstColumn.cnt,
       countGuessAndPrizes.firstColumn.prize + "₪",
       changeLanguage(countGuessAndPrizes.firstColumn.special ? "yes" : "no"),
     ],
     [
-      changeLanguage("second"),
+      changeLanguage("Second"),
       countGuessAndPrizes.secondColumn.cnt,
       countGuessAndPrizes.secondColumn.prize + "₪",
       changeLanguage(countGuessAndPrizes.secondColumn.special ? "yes" : "no"),
@@ -60,7 +61,7 @@ const ModalLottery = ({ countGuessAndPrizes, randomLotteryNumbers }: props) => {
                   colors={["rgb(55, 103, 255)", "rgb(55, 103, 255)"]}
                 ></LinearGradient>
                 <View style={styles.table_container}>
-                  <Text style={{ textAlign: "center", marginBottom: 15 }}>{changeLanguage("congratulations")} !</Text>
+                  <Text style={{ textAlign: "center", marginBottom: 15 }}>{changeLanguage("Congratulations")} !</Text>
                   <Table style={{ height: 150 }} borderStyle={{ borderWidth: 1, borderColor: "black" }}>
                     <Row textStyle={styles.text_style} style={{ height: 50 }} data={rows} />
                     <Rows textStyle={styles.text_style} style={{ height: 50 }} data={columns} />
@@ -68,7 +69,7 @@ const ModalLottery = ({ countGuessAndPrizes, randomLotteryNumbers }: props) => {
                 </View>
 
                 <Text>
-                  {changeLanguage("total")} :{" "}
+                  {changeLanguage("Total")} :{" "}
                   {countGuessAndPrizes.firstColumn.prize + countGuessAndPrizes.secondColumn.prize}₪
                 </Text>
               </>

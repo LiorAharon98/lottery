@@ -5,9 +5,10 @@ import * as Animatable from "react-native-animatable";
 import UserOptionIcon from "../../components/user_option_icon/UserOptionIcon";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useSelector } from "react-redux";
+import { RootState } from "../../store/Index";
 const Homepage = ({ navigation }: any) => {
   const { changeLanguage } = useDataProvider();
-  const user = useSelector((state) => state.user);
+    const user = useSelector((state: RootState) => state.user);
   const handlePress = (e: string) => {
     if (e === "sign-in" && user.username) return navigation.push("user-page");
     navigation.navigate(e);

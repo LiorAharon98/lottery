@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
 import { useDataProvider } from "../../context/Data";
 import { useSelector } from "react-redux";
+import { RootState } from "../../store/Index";
 const UserProfileDetails = () => {
-  const {changeLanguage } = useDataProvider();
-  const user = useSelector<any>(state=>state.user)
+  const { changeLanguage } = useDataProvider();
+  const user = useSelector((state: RootState) => state.user);
   const userInfo = [
     { label: "Member since", info: user.memberSince },
     { label: "You earn", info: `${user.earned}₪` },
@@ -29,7 +29,7 @@ const UserProfileDetails = () => {
       </View>
       {!user.lotteryNumbers && (
         <Text style={{ textAlign: "center", color: "red", fontSize: 19 }}>
-          {changeLanguage('you didnt choose numbers for best experience please press on lottery')}
+          {changeLanguage("you didnt choose numbers for best experience please press on lottery")}
         </Text>
       )}
     </LinearGradient>
@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     height: 240,
     width: "100%",
-    borderTopRightRadius :0,
-    borderTopLeftRadius :0,
+    borderTopRightRadius: 0,
+    borderTopLeftRadius: 0,
     borderRadius: 5,
   },
   user_info_container: {

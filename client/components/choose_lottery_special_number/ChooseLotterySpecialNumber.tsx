@@ -1,13 +1,14 @@
 import { StyleSheet, Pressable } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { useSelector } from "react-redux";
+import { RootState } from "../../store/Index";
 
 interface props {
   number: number;
   pressHandler: (e: number) => void;
 }
 const ChooseLotterySpecialNumber = ({ number, pressHandler }: props) => {
-  const { specialNumber } = useSelector((state) => state.selectedSpecialNumber);
+    const {specialNumber} = useSelector((state: RootState) => state.selectedSpecialNumber);
   return (
     <Pressable
       onPress={pressHandler.bind(this, number)}

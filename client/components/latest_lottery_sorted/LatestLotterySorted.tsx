@@ -2,8 +2,10 @@ import { StyleSheet, Text, View, FlatList } from "react-native";
 import Number from "../number/Number";
 import * as Animatable from "react-native-animatable";
 import { useSelector } from "react-redux";
+import { RootState } from "../../store/Index";
 const LatestLotterySorted = () => {
-  const { allLottery, sortedLottery } = useSelector((state) => state.allLottery);
+      const {allLottery,sortedLottery} = useSelector((state: RootState) => state.allLottery);
+  
   const data = () => {
     if (!Object.keys(sortedLottery).length) return allLottery;
     return [sortedLottery];

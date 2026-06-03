@@ -5,9 +5,10 @@ import { LinearGradient } from "expo-linear-gradient";
 import LanguageChange from "../language_change/LanguageChange";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { RootState } from "../../store/Index";
 const Footer = () => {
   const [toggleFooter, setToggleFooter] = useState<string>("");
-  const user = useSelector(state=>state.user)
+    const user = useSelector((state: RootState) => state.user);
   const onToggleFooter = (value: string) => {
     setToggleFooter(value);
   };

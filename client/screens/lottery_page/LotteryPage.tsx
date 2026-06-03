@@ -8,6 +8,7 @@ import { currentLottery } from "../../types/type";
 import LotteryPageButtons from "../../components/lottery_page_buttons/LotteryPageButtons";
 import compareNumbers from "../../context/compareNumbers";
 import { useSelector } from "react-redux";
+import { RootState } from "../../store/Index";
 interface columnType {
   cnt: number;
   prize: number;
@@ -17,7 +18,7 @@ interface columnType {
 const LotteryPage = () => {
   const { fetchLatestLottery, changeLanguage } = useDataProvider();
   const [randomLotteryNumbers, setRandomLotteryNumbers] = useState<currentLottery>({} as currentLottery);
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state: RootState) => state.user);
   const countGuessAndPrizes: { firstColumn: columnType; secondColumn: columnType } = useMemo(() => {
     let temp = {
       firstColumn: compareNumbers(user.lotteryNumbers.firstColumn, randomLotteryNumbers),
@@ -41,11 +42,11 @@ const LotteryPage = () => {
       <ModalLottery randomLotteryNumbers={randomLotteryNumbers} countGuessAndPrizes={countGuessAndPrizes} />
       <View style={styles.main}>
         <Text style={styles.number}>
-          {changeLanguage("lottery date")} : {randomLotteryNumbers?.lotteryDate}
+          {changeLanguage("Lottery date")} : {randomLotteryNumbers?.lotteryDate}
         </Text>
         <RandomLotteryNumbers arr={randomLotteryNumbers} />
         <View style={styles.user_number_container}>
-          <Text style={styles.number}>{changeLanguage("your numbers")}!</Text>
+          <Text style={styles.number}>{changeLanguage("Your numbers")}!</Text>
           <UserLotteryNumbers column={"firstColumn"} />
 
           <UserLotteryNumbers column={"secondColumn"} />

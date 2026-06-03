@@ -4,10 +4,12 @@ import UserProfileDetails from "../../components/user_profile_details/UserProfil
 import { useDataProvider } from "../../context/Data";
 import Button from "../../components/button/Button";
 import { useSelector } from "react-redux";
+import { RootState } from "../../store/Index";
 const UserSetting = ({ navigation }: any) => {
-  const { localImageUpload, changeLanguage, changePassword, hasBankAccount } = useDataProvider();
+  const { localImageUpload, changeLanguage, changePassword } = useDataProvider();
   const [togglePassword, setTogglePassword] = useState<boolean>(false);
-  const { username, profilePicture } = useSelector<any>((state) => state.user);
+  const user = useSelector((state: RootState) => state.user);
+  const { username, profilePicture } = user;
   const [inp, setInp] = useState<string>("");
   const handlePress = async () => {
     await localImageUpload(username);
@@ -18,9 +20,6 @@ const UserSetting = ({ navigation }: any) => {
   const handlePasswordChange = () => {
     changePassword(username, inp);
     setTogglePassword(false);
-  };
-  const handleBank = async () => {
-    await hasBankAccount(username);
   };
 
   return (
@@ -38,7 +37,6 @@ const UserSetting = ({ navigation }: any) => {
           <Text style={styles.text}>{changeLanguage("Change numbers")}</Text>
           <Text style={styles.arrow}>{">"}</Text>
         </Pressable>
-    
 
         {togglePassword ? (
           <View style={{ height: 70, width: "100%", alignItems: "center" }}>

@@ -4,10 +4,11 @@ import Modal from "react-native-modal";
 import Button from "../button/Button";
 import { useDataProvider } from "../../context/Data";
 import { useSelector } from "react-redux";
+import { RootState } from "../../store/Index";
 const ConnectBank = () => {
   const [toggleModal, setToggleModal] = useState(false);
   const {hasBankAccount,changeLanguage } = useDataProvider();
-  const user = useSelector(state=>state.user)
+    const user = useSelector((state: RootState) => state.user);
   const handlePress = async() => {
      await hasBankAccount(user.username);
     setToggleModal(false)
