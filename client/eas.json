@@ -24,6 +24,10 @@
 
       "ios": {
         "resourceClass": "m1-medium"
+      },
+      "android": {
+        "submitMappingFiles": true,
+        "autoIncrement": true
       }
     }
   },
