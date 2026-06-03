@@ -26,7 +26,6 @@
         "resourceClass": "m1-medium"
       },
       "android": {
-        "submitMappingFiles": true,
         "autoIncrement": true
       }
     }
@@ -34,7 +33,7 @@
   "submit": {
     "production": {
       "android": {
-        "serviceAccountKeyPath": "./pc-api-6072545435332246251-983-234c780767a4.json"
+        "serviceAccountKeyPath": "./google-play-console-api.json"
       }
     }
   }
